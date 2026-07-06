@@ -9,3 +9,16 @@
 .vscode/
 
 .DS_Store
+
+# Competitive Programming Helper
+.cph/
+**/.cph/
+
+# macOS
+.DS_Store
+
+# Compiled binaries
+*.out
+*.exe
+*.o
+*.obj
