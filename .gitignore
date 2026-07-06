@@ -1,24 +1,58 @@
-*.bin
-*.out
-*.exe
-*.class
-*.o
-*.obj
-*.log
+# ==========================================
+# Operating System Files
+# ==========================================
+
+.DS_Store
+Thumbs.db
+
+# ==========================================
+# IDEs and Editors
+# ==========================================
 
 .vscode/
+.idea/
 
-.DS_Store
+# ==========================================
+# Competitive Programming Helper (CPH)
+# ==========================================
 
-# Competitive Programming Helper
 .cph/
 **/.cph/
+*.prob
 
-# macOS
-.DS_Store
+# ==========================================
+# Compiled Binaries and Build Artifacts
+# ==========================================
 
-# Compiled binaries
 *.out
 *.exe
 *.o
 *.obj
+*.class
+*.bin
+
+# ==========================================
+# Logs and Temporary Files
+# ==========================================
+
+*.log
+*.tmp
+*.temp
+
+# ==========================================
+# Language-Specific
+# ==========================================
+
+# Java
+*.jar
+
+# Python
+__pycache__/
+*.py[cod]
+
+# ==========================================
+# Miscellaneous
+# ==========================================
+
+*.swp
+*.swo
