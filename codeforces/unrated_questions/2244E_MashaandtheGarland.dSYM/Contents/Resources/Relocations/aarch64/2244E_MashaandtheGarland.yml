@@ -1,0 +1,9 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/prathamkashyap/Documents/Coding.nosync/github/competitive-programming/codeforces/unrated_questions/2244E_MashaandtheGarland'
+relocations:
+  - { offset: 0x178C1, size: 0x8, addend: 0x0, symName: __ZStL8__ioinit, symObjAddr: 0x6F3A8, symBinAddr: 0x10000C088, symSize: 0x0 }
+  - { offset: 0x17BB9, size: 0x8, addend: 0x0, symName: __GLOBAL__sub_I_2244E_MashaandtheGarland.cpp, symObjAddr: 0x620, symBinAddr: 0x100007760, symSize: 0x38 }
+  - { offset: 0x17BD0, size: 0x8, addend: 0x0, symName: __GLOBAL__sub_I_2244E_MashaandtheGarland.cpp, symObjAddr: 0x620, symBinAddr: 0x100007760, symSize: 0x38 }
+  - { offset: 0x18559, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x80, symBinAddr: 0x1000077A0, symSize: 0x558 }
+...
