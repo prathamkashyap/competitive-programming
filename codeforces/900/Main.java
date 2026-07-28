@@ -12,7 +12,7 @@ public class Main {
             String best = s;
             int bestFreq = 0;
 
-            // Try replacing every position with every possible letter
+            // Try replaing every position with every possible letter
             for (int i = 0; i < n; ++i) {
                 for (char repl = 'a'; repl <= 'z'; ++repl) {
                     if (x[i] == repl) continue;
