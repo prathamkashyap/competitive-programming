@@ -1,5 +1,7 @@
 #include <iostream>
-#include <bits/stdc++.h>
+#include <string>
+#include <vector>
+
 using namespace std;
 
 int main() {
@@ -14,8 +16,9 @@ int main() {
 
     for (int i = 1; i < n; i++) {
         prefix[i] = prefix[i - 1];
-        if (s[i] == s[i - 1])
+        if (s[i] == s[i - 1]) {
             prefix[i]++;
+        }
     }
     prefix[n] = prefix[n - 1];
 
