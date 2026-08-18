@@ -3,43 +3,54 @@
 # 🚀 Competitive Programming & Algorithmic Problem Solving
 
 [![GitHub repo size](https://img.shields.io/github/repo-size/prathamkashyap/competitive-programming?style=for-the-badge&logo=github&color=blue)](https://github.com/prathamkashyap/competitive-programming)
-[![GitHub last commit](https://img.shields.io/github/last-commit/prathamkashyap/competitive-programming?style=for-the-badge&logo=git&color=green)](https://github.com/prathamkashyap/competitive-programming/commits/main)
+[![Total Solved Across Platforms](https://img.shields.io/badge/Total%20Solved-900%2B%20Problems-brightgreen?style=for-the-badge&logo=codeforces&logoColor=white)](https://github.com/prathamkashyap/competitive-programming)
 [![Language: C++](https://img.shields.io/badge/Language-C++20-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white)](https://github.com/prathamkashyap/competitive-programming)
 [![Language: Python](https://img.shields.io/badge/Language-Python%203-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://github.com/prathamkashyap/competitive-programming)
 [![Language: Java](https://img.shields.io/badge/Language-Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://github.com/prathamkashyap/competitive-programming)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
 <p align="center">
-  <b>A curated, structured collection of 250+ competitive programming solutions, algorithmic blueprints, reusable C++/Python/Java templates, and foundational theory notes.</b>
+  <b>A comprehensive repository containing 900+ competitive programming & algorithmic solutions, verified CP templates, and theoretical cheat sheets by <a href="https://github.com/prathamkashyap">Pratham Kashyap</a>.</b>
 </p>
 
-[Codeforces](codeforces/) • [LeetCode](leetcode/) • [CSES](cses/) • [AtCoder](atcoder/) • [CodeChef](codechef/) • [HackerEarth](hackerearth/) • [Templates](templates/) • [Notes](notes/)
+[👤 Profiles](#-competitive-programming-profiles--standings) • [Codeforces](codeforces/) • [LeetCode](leetcode/) • [CSES](cses/) • [CodeChef](codechef/) • [HackerEarth](hackerearth/) • [HackerRank](hackerrank/) • [AtCoder](atcoder/) • [Templates](templates/) • [Notes](notes/)
 
 </div>
 
 ---
 
-## 📌 Table of Contents
+## 👤 Competitive Programming Profiles & Standings
 
-- [✨ Overview](#-overview)
-- [📂 Repository Structure](#-repository-structure)
-- [📊 Platforms & Problem Tracker](#-platforms--problem-tracker)
-- [⚡ Quick Start & Development Setup](#-quick-start--development-setup)
-- [🧠 Topics & Algorithmic Patterns](#-topics--algorithmic-patterns)
-- [🛠️ CP Templates](#️-cp-templates)
-- [📖 Theory & Cheat Sheets](#-theory--cheat-sheets)
-- [🤝 Contributing & License](#-contributing--license)
+<div align="center">
+
+| Platform | Profile Link | Handle / Username | Key Rating / Standing | Solved Count | Prestigious Badges & Honors |
+| :--- | :--- | :---: | :---: | :---: | :--- |
+| <img src="https://assets.leetcode.com/static_assets/public/favicon.ico" width="18"/> **LeetCode** | [prathamkashyap](https://leetcode.com/u/prathamkashyap/) | `@prathamkashyap` | Top Active Users | **401+ Solved** <br/> *(141 Easy • 206 Med • 54 Hard)* | 🎖️ High Accuracy (~85% AC Rate)<br/>🔥 Consistent Daily Streaks |
+| <img src="https://codeforces.org/s/0/favicon.ico" width="18"/> **Codeforces** | [prathamkashyap](https://codeforces.com/profile/prathamkashyap) | `@prathamkashyap` | **Rating: 1184** <br/> *(Newbie)* | **250+ Solved** <br/> *(Rating 800 – 2000+)* | 🏆 Active Contestant<br/>⚡ Div. 2 / Div. 3 Regular |
+| <img src="https://cdn.codechef.com/favicon.ico" width="18"/> **CodeChef** | [prathamkashyap](https://www.codechef.com/users/prathamkashyap) | `@prathamkashyap` | **1★ (Div 4)** <br/> *(DSA Rating: 1067)* | **217+ Solved** | 🥈 **Silver League Member**<br/>🎯 Starters & DSA Munch Finisher |
+| <img src="https://cdn.hackerearth.com/community/production/static/img/favicon/favicon-16x16.png" width="18"/> **HackerEarth** | [prathamkashyap](https://www.hackerearth.com/@prathamkashyap/) | `@prathamkashyap` | Global Explorer | Practice Tracks | 🏆 **Top 2% in Basic Programming**<br/>🎖️ **Novice**, **Amateur**, **Explorer** |
+| <img src="https://hrcdn.net/fcore/assets/favicon-ddc852f75a.png" width="18"/> **HackerRank** | [prathamkashyap](https://www.hackerrank.com/profile/prathamkashyap) | `@prathamkashyap` | Certified Developer | Domain Tracks | ⭐ Problem Solving & Language Stars |
+
+</div>
 
 ---
 
-## ✨ Overview
+## 📊 Solved Problems Matrix
 
-This repository documents my competitive programming journey and serves as an algorithmic reference library. It includes:
-
-- 🎯 **Platform Solutions**: Systematically organized solutions from Codeforces, LeetCode, CSES Problem Set, AtCoder, CodeChef, and HackerEarth.
-- 🧱 **Reusable Templates**: Modular implementations of common data structures and algorithms (DSU, Segment Trees, Fenwick Trees, Sieve, Fast I/O).
-- 📝 **Concise Notes**: Quick-revision cheat sheets covering time complexity, number theory, bit manipulation, graphs, and dynamic programming.
-- ⚡ **Optimized Code**: Clean, well-structured, fast C++ solutions adhering to modern CP standards (Fast I/O, 64-bit integer safety, standard macro definitions).
+```
+┌─────────────────┬──────────┬─────────────────────────────────────────────────┐
+│ Platform        │  Solved  │ Difficulty Distribution / Progress               │
+├─────────────────┼──────────┼─────────────────────────────────────────────────┤
+│ LeetCode        │   401+   │ 🟢 141 Easy  🟡 206 Medium  🔴 54 Hard           │
+│ Codeforces      │   257+   │ 800: 83 │ 900: 37 │ 1000: 32 │ 1100: 19 │ 1200: 31│
+│                 │          │ 1300: 30│ 1400: 5  │ 1500: 7  │ 1700+: 3 │ Contests: 30│
+│ CodeChef        │   217+   │ Starters 197, 242, 250, DSA Challenges, Practice│
+│ HackerEarth     │   Top 2% │ Basic Programming, Algorithms, Data Structures  │
+│ HackerRank      │  Active  │ C++, Java, Python, Problem Solving Tracks       │
+├─────────────────┼──────────┼─────────────────────────────────────────────────┤
+│ TOTAL SOLVED    │   900+   │ Solutions across all platforms & repositories   │
+└─────────────────┴──────────┴─────────────────────────────────────────────────┘
+```
 
 ---
 
@@ -48,24 +59,25 @@ This repository documents my competitive programming journey and serves as an al
 ```tree
 competitive-programming/
 ├── codeforces/          # Solutions categorized by difficulty rating (800 - 2000+)
-│   ├── 800/             # Fundamental implementation & greedy problems
-│   ├── 900/             # Basic math, string manipulation, brute force
-│   ├── 1000/            # Constructive algorithms, sorting, two pointers
-│   ├── 1100/            # Number theory, prefix sums, binary search
-│   ├── 1200/            # DP basics, greedy, combinatorics
-│   ├── 1300/            # Graph basics, modulo arithmetic, bitmasks
-│   ├── 1400/            # Medium DP, tree traversals, two pointers
-│   ├── 1500/            # Graphs (BFS/DFS), data structures, constructive
+│   ├── 800/             # Fundamental implementation & greedy (83 solutions)
+│   ├── 900/             # Math, string manipulation, brute force (37 solutions)
+│   ├── 1000/            # Constructive algorithms, sorting, two pointers (32 solutions)
+│   ├── 1100/            # Number theory, prefix sums, binary search (19 solutions)
+│   ├── 1200/            # DP basics, greedy, combinatorics (31 solutions)
+│   ├── 1300/            # Graph basics, modulo arithmetic, bitmasks (30 solutions)
+│   ├── 1400/            # Medium DP, tree traversals, two pointers (5 solutions)
+│   ├── 1500/            # Graphs (BFS/DFS), data structures (7 solutions)
 │   ├── 1600/            # Advanced greedy, dynamic programming
-│   ├── 1700/            # Range queries, graph algorithms
-│   ├── 1800/            # Advanced data structures, game theory
+│   ├── 1700/            # Range queries, segment trees
+│   ├── 1800/            # Disjoint Set Union, game theory
 │   ├── 2000/            # Complex DP, segment trees, mathematical proofs
-│   └── unrated_questions/# Contest problems & post-contest virtual submissions
-├── leetcode/            # LeetCode solutions categorized by topic & difficulty
+│   └── unrated_questions/# Contest problems & live virtual submissions (30 solutions)
+├── leetcode/            # LeetCode solutions categorized by topic & pattern
 ├── cses/                # Solutions to the CSES Problem Set
-├── atcoder/             # Solutions to AtCoder Beginner & Regular Contests
+├── atcoder/             # Solutions to AtCoder Beginner (ABC) & Regular (ARC) Contests
 ├── codechef/            # Solutions to CodeChef Starters & Cook-Offs
 ├── hackerearth/         # Solutions to HackerEarth practice tracks & circuits
+├── hackerrank/          # Solutions to HackerRank domain & certification tracks
 ├── templates/           # Production-ready CP boilerplate & data structure templates
 │   ├── cpp/             # C++ Fast I/O, DSU, Segment Tree, Sieve, Fenwick Tree
 │   ├── python/          # Python fast I/O & math utility templates
@@ -75,130 +87,43 @@ competitive-programming/
 
 ---
 
-## 📊 Platforms & Problem Tracker
+## ⚡ Quick Start & Compilation
 
-| Platform | Directory | Solved / Status | Primary Focus |
-| :--- | :--- | :---: | :--- |
-| **Codeforces** | [`/codeforces`](codeforces/) | **250+ Solved** | Div. 2 / Div. 3 Contests, Ratings 800 - 2000+ |
-| **LeetCode** | [`/leetcode`](leetcode/) | In Progress | Data Structures, Algorithms & Interview Patterns |
-| **CSES** | [`/cses`](cses/) | In Progress | Standard Algorithmic Problem Set & Intuition |
-| **AtCoder** | [`/atcoder`](atcoder/) | In Progress | AtCoder Beginner Contest (ABC) & Math-Heavy Tasks |
-| **CodeChef** | [`/codechef`](codechef/) | In Progress | Starters & Division-based Contests |
-| **HackerEarth** | [`/hackerearth`](hackerearth/) | In Progress | Practice Tracks & Data Structure Challenges |
-
-### 📈 Codeforces Difficulty Breakdown
-
-```
- 800  [████████████████████████████████████████] 83 problems
- 900  [██████████████████] 37 problems
-1000  [████████████████] 32 problems
-1100  [██████████] 19 problems
-1200  [███████████████] 31 problems
-1300  [███████████████] 30 problems
-1400  [███] 5 problems
-1500  [████] 7 problems
-1700+ [██] 3 problems
-Contest/Unrated [███████████████] 30 problems
-```
-
----
-
-## ⚡ Quick Start & Development Setup
-
-### Compilation Flags (C++20 Recommended)
-
-For local compilation with strict warnings, memory safety, and optimization:
+### C++20 Standard Build Flag
 
 ```bash
 g++ -std=c++20 -O2 -Wall -Wextra -Wshadow -DLOCAL solution.cpp -o solution
 ./solution < input.txt
 ```
 
-### VS Code & Competitive Companion Setup
+### Fast I/O Snippet
 
-1. Install the **Competitive Programming Helper (cph)** extension in VS Code.
-2. Install **Competitive Companion** in your browser (Chrome/Firefox).
-3. Clicking the green parsing button on any problem page will automatically generate test cases in VS Code.
+```cpp
+#include <iostream>
+using namespace std;
 
----
-
-## 🧠 Topics & Algorithmic Patterns
-
-<details>
-<summary><b>🔍 1. Data Structures</b></summary>
-
-- Vectors, Pairs, Tuples, Deques
-- Stacks, Queues, Monotonic Queue/Stack
-- Sets, Multisets, Unordered Sets (Custom Hash)
-- Priority Queues & Heaps
-- Disjoint Set Union (DSU) with Path Compression & Union by Rank/Size
-- Fenwick Trees (Binary Indexed Trees)
-- Segment Trees (Point Updates, Range Queries, Lazy Propagation)
-</details>
-
-<details>
-<summary><b>🔢 2. Mathematics & Number Theory</b></summary>
-
-- Euclidean Algorithm & Extended Euclidean Algorithm (GCD / LCM)
-- Modular Arithmetic & Modular Inverse ($O(\log M)$ using Fermat's Little Theorem)
-- Sieve of Eratosthenes & Linear Sieve for Prime Factorization ($O(N)$)
-- Binary Exponentiation ($O(\log N)$)
-- Combinatorics ($nCr \pmod p$ with precomputed factorials)
-- Matrix Exponentiation
-- Inclusion-Exclusion Principle
-</details>
-
-<details>
-<summary><b>🎯 3. Dynamic Programming</b></summary>
-
-- 1D DP (Fibonacci, Frog Jump, House Robber)
-- 2D & Grid DP (Unique Paths, Min Cost Path, Knapsack 0/1 & Unbounded)
-- Longest Increasing Subsequence (LIS) in $O(N \log N)$
-- Longest Common Subsequence (LCS) & Edit Distance
-- Bitmask DP (Traveling Salesperson Problem, Assignment Problems)
-- Tree DP & Subtree Aggregations
-</details>
-
-<details>
-<summary><b>🌐 4. Graph Theory & Trees</b></summary>
-
-- Graph Representations (Adjacency Lists, Edge Lists)
-- Breadth-First Search (BFS) - Shortest Path in Unweighted Graphs
-- Depth-First Search (DFS) - Connected Components, Cycle Detection
-- Dijkstra's Algorithm - Shortest Path in Weighted Graphs with Non-Negative Weights ($O((V+E)\log V)$)
-- Bellman-Ford & Floyd-Warshall Algorithms
-- Minimum Spanning Tree (Kruskal with DSU, Prim's)
-- Tree Traversals, Diameter, Center, and Lowest Common Ancestor (LCA with Binary Lifting)
-- Topological Sorting (Kahn's Algorithm & DFS)
-</details>
-
-<details>
-<summary><b>⚡ 5. General Paradigms & Techniques</b></summary>
-
-- Two Pointers & Sliding Window
-- Binary Search (on Answer / Monotonic Predicates)
-- Ternary Search (Unimodal Functions)
-- Greedy Algorithms & Exchange Arguments
-- Prefix Sums, Difference Arrays & 2D Prefix Sums
-- Coordinate Compression
-- Bit Manipulation & Bitwise Operations
-</details>
+void fast_io() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+}
+```
 
 ---
 
-## 🛠️ CP Templates
+## 🛠️ Production-Ready CP Templates
 
-Production-ready, battle-tested templates located in [`/templates`](templates/):
+Located in [`/templates`](templates/):
 
-| Template | Language | Description | Link |
-| :--- | :--- | :--- | :--- |
-| **Fast I/O & CP Template** | C++ | Base boilerplate with fast I/O, typedefs, macros, and debug tools | [`template.cpp`](templates/cpp/template.cpp) |
-| **Disjoint Set Union (DSU)** | C++ | Disjoint Set Union with rank/size optimization and path compression | [`dsu.cpp`](templates/cpp/dsu.cpp) |
-| **Segment Tree** | C++ | Point update and range sum/min/max query tree | [`segment_tree.cpp`](templates/cpp/segment_tree.cpp) |
-| **Fenwick Tree (BIT)** | C++ | 1D prefix sum and point update data structure | [`fenwick_tree.cpp`](templates/cpp/fenwick_tree.cpp) |
-| **Sieve & Prime Utilities** | C++ | Sieve of Eratosthenes, SPF (Smallest Prime Factor), prime factor decomposition | [`sieve_prime.cpp`](templates/cpp/sieve_prime.cpp) |
-| **Python CP Template** | Python | High-performance Python template with fast I/O and recursion limit boost | [`template.py`](templates/python/template.py) |
-| **Java CP Template** | Java | FastScanner and FastWriter boilerplate for competitive programming in Java | [`Template.java`](templates/java/Template.java) |
+| Template | Language | Complexity | Direct Link |
+| :--- | :--- | :---: | :--- |
+| **Fast I/O & Universal CP Boilerplate** | C++20 | $O(1)$ | [`template.cpp`](templates/cpp/template.cpp) |
+| **Disjoint Set Union (DSU)** | C++20 | $O(\alpha(N)) \approx O(1)$ | [`dsu.cpp`](templates/cpp/dsu.cpp) |
+| **Segment Tree (Point Update, Range Query)** | C++20 | $O(\log N)$ | [`segment_tree.cpp`](templates/cpp/segment_tree.cpp) |
+| **Fenwick Tree (Binary Indexed Tree)** | C++20 | $O(\log N)$ | [`fenwick_tree.cpp`](templates/cpp/fenwick_tree.cpp) |
+| **Linear Sieve & Prime Factorization (SPF)** | C++20 | $O(N)$ build, $O(\log K)$ factor | [`sieve_prime.cpp`](templates/cpp/sieve_prime.cpp) |
+| **Python CP Template** | Python 3 | Optimized Fast I/O | [`template.py`](templates/python/template.py) |
+| **Java CP Template** | Java | Custom FastScanner & FastWriter | [`Template.java`](templates/java/Template.java) |
 
 ---
 
@@ -206,20 +131,26 @@ Production-ready, battle-tested templates located in [`/templates`](templates/):
 
 Explore quick revision guides in [`/notes`](notes/):
 
-- ⏱️ [**Time Complexity & Resource Limits**](notes/complexity_and_limits.md) - Constant factors, memory limits, and operation counters.
-- 🔢 [**Number Theory & Modular Arithmetic**](notes/number_theory.md) - Prime generation, modular inverse, and combinatorial formulas.
+- ⏱️ [**Time Complexity & Resource Limits**](notes/complexity_and_limits.md) - Operations per second ($10^8$), integer boundaries, and memory limits.
+- 🔢 [**Number Theory & Modular Arithmetic**](notes/number_theory.md) - Fermat's Little Theorem, modular inverse, and $nCr \pmod p$.
 - 💻 [**Bit Manipulation Hacks**](notes/bit_manipulation.md) - Bitmask operations, subset generation, and GCC builtins (`__builtin_popcount`, `__builtin_clz`).
-- 🌲 [**Graph Theory & Tree Algorithms**](notes/graphs_and_trees.md) - Graph traversal templates, shortest path algorithms, and DSU.
-- 💡 [**Dynamic Programming Patterns**](notes/dynamic_programming.md) - Classical DP states, transitions, and space-optimization tricks.
+- 🌲 [**Graph Theory & Tree Algorithms**](notes/graphs_and_trees.md) - BFS, DFS, Dijkstra, Bellman-Ford, Floyd-Warshall, Kruskal, and LCA.
+- 💡 [**Dynamic Programming Patterns**](notes/dynamic_programming.md) - 0/1 Knapsack, LIS ($O(N \log N)$), LCS, Grid DP, and Space Optimization.
 
 ---
 
-## 🤝 Contributing & License
+## 🤝 Connect & License
 
-Feel free to fork this repository, submit issues for alternative solutions or optimizations, or open pull requests with cleaner implementations.
+- **GitHub**: [@prathamkashyap](https://github.com/prathamkashyap)
+- **LinkedIn**: [Pratham Kashyap](https://www.linkedin.com/in/prathamkashyap5)
+- **LeetCode**: [prathamkashyap](https://leetcode.com/u/prathamkashyap/)
+- **Codeforces**: [prathamkashyap](https://codeforces.com/profile/prathamkashyap)
+- **CodeChef**: [prathamkashyap](https://www.codechef.com/users/prathamkashyap)
+- **HackerEarth**: [prathamkashyap](https://www.hackerearth.com/@prathamkashyap/)
+- **HackerRank**: [prathamkashyap](https://www.hackerrank.com/profile/prathamkashyap)
 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
 <div align="center">
-  <sub>Built with 💻 and ☕ by <a href="https://github.com/prathamkashyap">Pratham Kashyap</a>. Happy Coding!</sub>
+  <sub>Designed & Maintained with 💻 and ☕ by <a href="https://github.com/prathamkashyap">Pratham Kashyap</a>.</sub>
 </div>

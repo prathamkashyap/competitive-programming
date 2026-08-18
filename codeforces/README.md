@@ -1,10 +1,21 @@
 # 🏆 Codeforces Problem Solutions
 
-[![Codeforces](https://img.shields.io/badge/Platform-Codeforces-1F8ACB?style=for-the-badge&logo=codeforces&logoColor=white)](https://codeforces.com)
+[![Codeforces](https://img.shields.io/badge/Platform-Codeforces-1F8ACB?style=for-the-badge&logo=codeforces&logoColor=white)](https://codeforces.com/profile/prathamkashyap)
+[![Profile](https://img.shields.io/badge/Profile-prathamkashyap-blue?style=for-the-badge)](https://codeforces.com/profile/prathamkashyap)
+[![Rating](https://img.shields.io/badge/Max%20Rating-1184%20(Newbie)-lightgrey?style=for-the-badge)](https://codeforces.com/profile/prathamkashyap)
 [![Total Solved](https://img.shields.io/badge/Total%20Solved-250+-brightgreen?style=for-the-badge)](https://github.com/prathamkashyap/competitive-programming/tree/main/codeforces)
 [![Language](https://img.shields.io/badge/Language-C++20-blue?style=for-the-badge&logo=c%2B%2B)](https://github.com/prathamkashyap/competitive-programming/tree/main/codeforces)
 
 This directory houses categorized solutions to problems from **Codeforces** contests (Div. 1, Div. 2, Div. 3, Div. 4, Educational Rounds, and Global Rounds), structured systematically by problem difficulty rating.
+
+---
+
+## 👤 Profile Details
+
+- **Handle**: [@prathamkashyap](https://codeforces.com/profile/prathamkashyap)
+- **Current Rating**: `1184` (Newbie)
+- **Max Rating**: `1184`
+- **Total Solutions in Repo**: `257+`
 
 ---
 

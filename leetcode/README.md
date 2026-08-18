@@ -1,9 +1,22 @@
 # 💡 LeetCode Solutions & Algorithmic Patterns
 
-[![LeetCode](https://img.shields.io/badge/Platform-LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=black)](https://leetcode.com)
+[![LeetCode](https://img.shields.io/badge/Platform-LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=black)](https://leetcode.com/u/prathamkashyap/)
+[![Profile](https://img.shields.io/badge/Profile-prathamkashyap-blue?style=for-the-badge)](https://leetcode.com/u/prathamkashyap/)
+[![Total Solved](https://img.shields.io/badge/Solved-401+-brightgreen?style=for-the-badge)](https://leetcode.com/u/prathamkashyap/)
 [![Language](https://img.shields.io/badge/Language-C++%20%7C%20Python-blue?style=for-the-badge)](https://github.com/prathamkashyap/competitive-programming)
 
 A curated collection of solutions to **LeetCode** problems, mapped systematically against core algorithmic patterns and classic interview roadmaps (such as NeetCode 150, Blind 75, and Striver's SDE Sheet).
+
+---
+
+## 👤 Profile & Problem Stats
+
+- **LeetCode Profile**: [prathamkashyap](https://leetcode.com/u/prathamkashyap/)
+- **Total Problems Solved**: **401+**
+  - 🟢 **Easy**: `141`
+  - 🟡 **Medium**: `206`
+  - 🔴 **Hard**: `54`
+- **Total Submissions**: `646` (Accepted: `551`, **>85% Acceptance Rate**)
 
 ---
 
@@ -29,7 +42,7 @@ A curated collection of solutions to **LeetCode** problems, mapped systematicall
 
 ---
 
-## 📁 Recommended Structure
+## 📁 Organization Structure
 
 ```tree
 leetcode/
