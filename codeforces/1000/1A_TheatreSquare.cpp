@@ -1,14 +1,15 @@
-#include <bits/stdc++.h>
+#include <iostream>
+
 using namespace std;
 
 int main() {
     long long n, m, a;
     cin >> n >> m >> a;
-    
-    long long rows = (long long)ceil((double)n / a);
-    long long cols = (long long)ceil((double)m / a);
-    
-    cout << rows * cols << endl;
-    
+
+    long long rows = (n + a - 1) / a;
+    long long columns = (m + a - 1) / a;
+
+    cout << rows * columns << '\n';
+
     return 0;
 }
