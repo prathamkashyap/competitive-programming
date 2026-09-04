@@ -1,11 +1,12 @@
 # 🛠️ Competitive Programming Code Templates
 
-[![Templates](https://img.shields.io/badge/Templates-Production%20Ready-green?style=for-the-badge)](https://github.com/prathamkashyap/competitive-programming/tree/main/templates)
+[![Templates](https://img.shields.io/badge/Templates-Reusable-green?style=for-the-badge)](https://github.com/prathamkashyap/competitive-programming/tree/main/templates)
 [![C++](https://img.shields.io/badge/C++-20-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white)](cpp/)
 [![Python](https://img.shields.io/badge/Python-3-3776AB?style=for-the-badge&logo=python&logoColor=white)](python/)
 [![Java](https://img.shields.io/badge/Java-17+-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](java/)
 
-A robust, well-tested collection of competitive programming snippets, data structures, and algorithmic templates designed for fast copy-pasting, maximum efficiency, and zero runtime overhead.
+A small collection of reusable competitive programming snippets, data structures,
+and language boilerplate. Each template is syntax-checked in this repository.
 
 ---
 
@@ -20,12 +21,23 @@ A robust, well-tested collection of competitive programming snippets, data struc
 | [`segment_tree.cpp`](cpp/segment_tree.cpp) | **Segment Tree** | $O(\log N)$ query / update | $O(4N)$ | Point update, range sum/min/max query engine |
 | [`fenwick_tree.cpp`](cpp/fenwick_tree.cpp) | **Binary Indexed Tree** | $O(\log N)$ query / update | $O(N)$ | Compact 1D prefix sum & point update structure |
 | [`sieve_prime.cpp`](cpp/sieve_prime.cpp) | **Linear Sieve & SPF** | $O(N)$ build, $O(\log K)$ factor | $O(N)$ | Sieve of Eratosthenes, Smallest Prime Factor array, fast prime factoring |
+| [`modular_arithmetic.cpp`](cpp/modular_arithmetic.cpp) | **Modular Arithmetic** | $O(\log MOD)$ power / inverse | $O(N)$ for combinations | Fast power, Fermat inverse, factorials, and $nCr$ |
+| [`graph_traversal.cpp`](cpp/graph_traversal.cpp) | **Graph Traversal Toolkit** | $O(V + E)$ BFS/topological sort; $O((V+E)\log V)$ Dijkstra | $O(V + E)$ | BFS distances, Kahn topological sort, and weighted shortest paths |
 
 ### 🐍 Python Templates (`python/`)
 
 | Template File | Description | Features |
 | :--- | :--- | :--- |
 | [`template.py`](python/template.py) | **Python CP Boilerplate** | `sys.stdin.readline`, boosted recursion limit (`sys.setrecursionlimit`), modular arithmetic helpers |
+
+### 🧰 C++ Additions
+
+The expanded toolkit now includes reusable modular arithmetic and graph
+algorithms, both written as standalone, copy-ready programs:
+
+- `modular_arithmetic.cpp`: binary exponentiation, prime-modulus inverse,
+  factorial precomputation, and combinations.
+- `graph_traversal.cpp`: unweighted BFS, Kahn topological sort, and Dijkstra.
 
 ### ☕ Java Templates (`java/`)
 

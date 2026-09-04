@@ -3,10 +3,15 @@
 [![CodeChef](https://img.shields.io/badge/Platform-CodeChef-5B4638?style=for-the-badge&logo=codechef&logoColor=white)](https://www.codechef.com/users/prathamkashyap)
 [![Profile](https://img.shields.io/badge/Profile-prathamkashyap-blue?style=for-the-badge)](https://www.codechef.com/users/prathamkashyap)
 [![Rating](https://img.shields.io/badge/Rating-1★%20(922)-lightgrey?style=for-the-badge)](https://www.codechef.com/users/prathamkashyap)
-[![DSA Rating](https://img.shields.io/badge/DSA%20Rating-1067-yellow?style=for-the-badge)](https://www.codechef.com/users/prathamkashyap)
-[![League](https://img.shields.io/badge/League-Silver%20League-silver?style=for-the-badge)](https://www.codechef.com/users/prathamkashyap)
-[![Total Solved](https://img.shields.io/badge/Solved-217+-brightgreen?style=for-the-badge)](https://www.codechef.com/users/prathamkashyap)
+[![DSA Rating](https://img.shields.io/badge/DSA%20Rating-1067-yellow?style=for-the-badge)](https://www.codechef.com/users/prathamkashyap?rating=dsa-monday)
+[![Global Rank](https://img.shields.io/badge/Global%20Rank-162360-blue?style=for-the-badge)](https://www.codechef.com/users/prathamkashyap)
+[![Total Solved](https://img.shields.io/badge/Solved-422-brightgreen?style=for-the-badge)](https://www.codechef.com/users/prathamkashyap)
 [![Language](https://img.shields.io/badge/Language-C++20-blue?style=for-the-badge&logo=c%2B%2B)](https://github.com/prathamkashyap/competitive-programming)
+
+[![DSA Contests](https://img.shields.io/badge/DSA%20Rating-1067-F4B400?style=flat-square&logo=codechef&logoColor=white)](https://www.codechef.com/users/prathamkashyap?rating=dsa-monday)
+[![Contests](https://img.shields.io/badge/Contests-3-2E7D32?style=flat-square&logo=codechef&logoColor=white)](https://www.codechef.com/users/prathamkashyap)
+[![Daily Challenge](https://img.shields.io/badge/Daily%20Challenge-66%2F100-E67E22?style=flat-square&logo=codechef&logoColor=white)](https://www.codechef.com/users/prathamkashyap)
+[![Diamond League](https://img.shields.io/badge/League-Diamond%20Level%205-6C63FF?style=flat-square&logo=codechef&logoColor=white)](https://www.codechef.com/users/prathamkashyap)
 
 Solutions to competitive programming challenges and contests hosted on **CodeChef**, including **Starters**, **Cook-Off**, and **Lunchtime** rounds.
 
@@ -17,9 +22,13 @@ Solutions to competitive programming challenges and contests hosted on **CodeChe
 - **CodeChef Handle**: [@prathamkashyap](https://www.codechef.com/users/prathamkashyap)
 - **Current Star Rating**: `1★` (Division 4)
 - **Overall Rating**: `922`
-- **DSA Contest Rating**: `1067`
-- **League**: 🥈 **Silver League**
-- **Total Problems Solved**: `217+`
+- **Highest Rating**: `922` (1★, Division 4)
+- **DSA Rating**: `1067`; DSA global rank `24,085`, country rank `23,727`
+- **Global Rank**: `162,360`; **Country Rank**: `157,029`
+- **Contests shown on profile**: `3`
+- **Daily coding challenge**: `66/100` days toward the silver milestone
+- **League**: **Diamond League**, Level 5; profile rank `13`
+- **Total Problems Solved**: `422` (checked 2026-09-04)
 
 ---
 
@@ -34,14 +43,19 @@ Solutions to competitive programming challenges and contests hosted on **CodeChe
 
 ---
 
-## 📂 Organization Structure
+## 📈 Current Progress
 
-```tree
-codechef/
-├── starters/         # Weekly Starters Contests (e.g. Starters 197, 242, 250)
-├── dsa_challenges/   # Monday Munch DSA Challenges
-└── practice/         # Topic-wise Practice Problems & Learning Paths
-```
+| Area | Current snapshot |
+| :--- | :--- |
+| Overall rating | `922` · highest `922` |
+| DSA rating | `1067` · highest `1067` |
+| Contest participation | `3` overall contests · `2` DSA contests shown |
+| Practice paths | 7 active paths, including C++, Java, Python, SQL, LLD, and 500-1000 difficulty |
+| Learning path | C++ |
+
+The profile is being used across Starters, Monday Munch DSA challenges, and
+topic-wise practice. This directory is the natural home for future CodeChef
+solutions and contest write-ups.
 
 ---
 

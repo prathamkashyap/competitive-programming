@@ -3,7 +3,8 @@
 [![AtCoder](https://img.shields.io/badge/Platform-AtCoder-black?style=for-the-badge&logo=atcoder&logoColor=white)](https://atcoder.jp)
 [![Language](https://img.shields.io/badge/Language-C++20-blue?style=for-the-badge&logo=c%2B%2B)](https://github.com/prathamkashyap/competitive-programming)
 
-Solutions to contests on **AtCoder**, including **AtCoder Beginner Contests (ABC)**, **AtCoder Regular Contests (ARC)**, and the classic **Educational DP Contest (EDPC)**.
+This directory is reserved for AtCoder solutions. No AtCoder source files are
+currently checked into the repository.
 
 ---
 
@@ -22,15 +23,10 @@ Solutions to contests on **AtCoder**, including **AtCoder Beginner Contests (ABC
 
 ---
 
-## 📂 Subdirectories & Contest Types
+## 📂 Current Contents
 
-```tree
-atcoder/
-├── abc/              # AtCoder Beginner Contest (Tasks A - G)
-├── arc/              # AtCoder Regular Contest (Tasks A - F)
-├── edpc/             # Educational DP Contest (26 Classic Tasks A - Z)
-└── ahc/              # AtCoder Heuristic Contest
-```
+Only this README is present at the moment. Add contest files as they are
+solved, then update this section with the actual layout.
 
 ---
 
