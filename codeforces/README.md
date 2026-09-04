@@ -61,6 +61,26 @@ Files are named following standard Codeforces problem identifiers for easy searc
 - `1300/230B_T-primes.cpp` $\rightarrow$ Problem 230B (T-primes)
 - `1500/580C_KefaandPark.cpp` $\rightarrow$ Problem 580C (Kefa and Park)
 
+## 🧭 Solved-Problem Category Profile
+
+The repository's 322 C++ files were matched against the Codeforces problemset
+on 2026-09-04. The 315 matched files contain overlapping official tags; the
+counts below are tag occurrences rather than exclusive problem totals.
+
+| Category | Occurrences | Category | Occurrences |
+| :--- | ---: | :--- | ---: |
+| Implementation | 145 | Math | 113 |
+| Greedy | 96 | Brute Force | 53 |
+| Sortings | 43 | Constructive Algorithms | 41 |
+| DP | 38 | Strings | 36 |
+| Number Theory | 31 | Binary Search | 28 |
+| Data Structures | 27 | Two Pointers | 22 |
+| DFS / Similar | 13 | Combinatorics | 12 |
+| Bitmasks | 10 | Graphs | 7 |
+
+See the full analysis and revision sequence in
+[the Codeforces practice profile note](../notes/codeforces_profile.md).
+
 ---
 
 ## 🧠 Strategic Tips for Codeforces

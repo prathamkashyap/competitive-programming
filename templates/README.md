@@ -23,6 +23,8 @@ and language boilerplate. Each template is syntax-checked in this repository.
 | [`sieve_prime.cpp`](cpp/sieve_prime.cpp) | **Linear Sieve & SPF** | $O(N)$ build, $O(\log K)$ factor | $O(N)$ | Sieve of Eratosthenes, Smallest Prime Factor array, fast prime factoring |
 | [`modular_arithmetic.cpp`](cpp/modular_arithmetic.cpp) | **Modular Arithmetic** | $O(\log MOD)$ power / inverse | $O(N)$ for combinations | Fast power, Fermat inverse, factorials, and $nCr$ |
 | [`graph_traversal.cpp`](cpp/graph_traversal.cpp) | **Graph Traversal Toolkit** | $O(V + E)$ BFS/topological sort; $O((V+E)\log V)$ Dijkstra | $O(V + E)$ | BFS distances, Kahn topological sort, and weighted shortest paths |
+| [`prefix_sums.cpp`](cpp/prefix_sums.cpp) | **Prefix & Difference Arrays** | $O(1)$ query/update, $O(N)$ build | $O(N)$ | Range sums, range additions, and reconstruction |
+| [`sliding_window.cpp`](cpp/sliding_window.cpp) | **Sliding Window Toolkit** | $O(N)$ amortized | $O(N)$ | At-most-$K$ distinct, bounded sums, and prefix-frequency counting |
 
 ### 🐍 Python Templates (`python/`)
 

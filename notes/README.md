@@ -19,6 +19,7 @@ Codeforces solutions in this repository.
 | [🌲 **Graphs & Trees**](graphs_and_trees.md) | Graph traversals, shortest paths, spanning trees, and tree queries | BFS, DFS, Dijkstra, Bellman-Ford, Floyd-Warshall, Kruskal, LCA |
 | [💡 **Dynamic Programming**](dynamic_programming.md) | Classic DP states, transitions, optimizations, and patterns | 0/1 Knapsack, LIS ($O(N \log N)$), LCS, Grid DP, Bitmask DP, Space Optimization |
 | [🎯 **Greedy & Binary Search**](greedy_and_search.md) | Proof patterns and monotonic search techniques | Exchange arguments, interval scheduling, two pointers, answer-space search |
+| [📊 **Codeforces Practice Profile**](codeforces_profile.md) | Evidence-based analysis of the solved corpus | 315 tagged files, category distribution, rating-band signals, revision order |
 
 ---
 

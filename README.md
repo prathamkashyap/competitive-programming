@@ -12,12 +12,13 @@
 [![CodeChef Solved](https://img.shields.io/badge/CodeChef-422%20Solved-5B4638?style=flat-square&logo=codechef&logoColor=white)](https://www.codechef.com/users/prathamkashyap)
 [![Codeforces Solved](https://img.shields.io/badge/Codeforces-306%20Solved-1F8ACB?style=flat-square&logo=codeforces&logoColor=white)](https://codeforces.com/profile/prathamkashyap)
 [![HackerEarth Rank](https://img.shields.io/badge/HackerEarth-Top%201%25-2C3454?style=flat-square&logo=hackerearth&logoColor=white)](https://www.hackerearth.com/@prathamkashyap/)
+[![GeeksforGeeks](https://img.shields.io/badge/GeeksforGeeks-New%20Profile-2F8D46?style=flat-square&logo=geeksforgeeks&logoColor=white)](https://www.geeksforgeeks.org/profile/prathamkashyap)
 
 <p align="center">
   <b>A growing multi-platform problem-solving archive with 455+ LeetCode solves, 422 CodeChef solves, 306 Codeforces solves, reusable templates, and focused algorithm notes.</b>
 </p>
 
-[👤 Profiles](#-competitive-programming-profiles--standings) • [Codeforces](codeforces/) • [LeetCode](leetcode/) • [CSES](cses/) • [CodeChef](codechef/) • [HackerEarth](hackerearth/) • [HackerRank](hackerrank/) • [AtCoder](atcoder/) • [Templates](templates/) • [Notes](notes/)
+[👤 Profiles](#-competitive-programming-profiles--standings) • [Codeforces](codeforces/) • [LeetCode](leetcode/) • [CSES](cses/) • [CodeChef](codechef/) • [HackerEarth](hackerearth/) • [HackerRank](hackerrank/) • [GeeksforGeeks](geeksforgeeks/) • [AtCoder](atcoder/) • [Templates](templates/) • [Notes](notes/)
 
 </div>
 
@@ -53,6 +54,7 @@
 | <img src="https://cdn.codechef.com/favicon.ico" width="18"/> **CodeChef** | [prathamkashyap](https://www.codechef.com/users/prathamkashyap) | `@prathamkashyap` | **922** overall · **1067** DSA | **422 solved** | 3 contests · Diamond League Level 5 |
 | <img src="https://cdn.hackerearth.com/community/production/static/img/favicon/favicon-16x16.png" width="18"/> **HackerEarth** | [prathamkashyap](https://www.hackerearth.com/@prathamkashyap/) | `@prathamkashyap` | **2,000 points** | **83 solved / 103 submitted** | **Top 1%** Basic Programming |
 | <img src="https://hrcdn.net/fcore/assets/favicon-ddc852f75a.png" width="18"/> **HackerRank** | [prathamkashyap](https://www.hackerrank.com/profile/prathamkashyap) | `@prathamkashyap` | Problem Solving badge | Recent accepted C++ submissions | C++, Java, Python, SQL badges |
+| <img src="https://media.geeksforgeeks.org/gfg-gg-logo.svg" width="18"/> **GeeksforGeeks** | [prathamkashyap](https://www.geeksforgeeks.org/profile/prathamkashyap) | `@prathamkashyap` | New profile | Starting point | Ready for future practice |
 
 </div>
 
@@ -60,19 +62,15 @@
 
 ## 📊 Solved Problems Matrix
 
-```
-┌─────────────────┬──────────┬─────────────────────────────────────────────────┐
-│ Platform        │  Solved  │ Difficulty Distribution / Progress               │
-├─────────────────┼──────────┼─────────────────────────────────────────────────┤
-│ LeetCode        │ 455      │ 160 Easy │ 232 Medium │ 63 Hard │ Rating 1550   │
-│ Codeforces      │ 306 API  │ 280 last year │ 100 last month │ max streak 68  │
-│ CodeChef        │ 422      │ Rating 922 │ DSA 1067 │ 3 contests │ 66/100 days │
-│ HackerEarth     │ 83       │ 103 submissions; 2,000 points; Top 1% Basic     │
-│ HackerRank      │ Active   │ Problem Solving, C++, Java, Python, SQL badges   │
-├─────────────────┼──────────┼─────────────────────────────────────────────────┤
-│ REPOSITORY      │   322    │ C++ solutions currently checked into this repo   │
-└─────────────────┴──────────┴─────────────────────────────────────────────────┘
-```
+| Platform | Solved / Activity | Progress Snapshot |
+| :--- | ---: | :--- |
+| **LeetCode** | **455** | 160 Easy · 232 Medium · 63 Hard · Rating 1550 |
+| **Codeforces** | **306** | 280 last year · 100 last month · 68-day max streak |
+| **CodeChef** | **422** | Rating 922 · DSA 1067 · 3 contests · 66/100 days |
+| **HackerEarth** | **83** | 103 submissions · 2,000 points · Top 1% Basic Programming |
+| **HackerRank** | Active | Problem Solving, C++, Java, Python, SQL badges |
+| **GeeksforGeeks** | Starting point | Profile created; practice roadmap ready |
+| **Repository** | **322** | C++ solutions currently checked into this repository |
 
 ---
 
@@ -98,6 +96,7 @@ competitive-programming/
 ├── codechef/            # CodeChef profile, ratings, and contest progress
 ├── hackerearth/         # Practice tracks and profile achievements
 ├── hackerrank/          # Skills, badges, and submission highlights
+├── geeksforgeeks/       # GeeksforGeeks profile and practice roadmap
 ├── templates/           # Reusable CP boilerplate & data structure templates
 │   ├── cpp/             # C++ Fast I/O, DSU, Segment Tree, Sieve, Fenwick Tree
 │   ├── python/          # Python fast I/O & math utility templates
@@ -144,6 +143,8 @@ Located in [`/templates`](templates/):
 | **Linear Sieve & Prime Factorization (SPF)** | C++20 | $O(N)$ build, $O(\log K)$ factor | [`sieve_prime.cpp`](templates/cpp/sieve_prime.cpp) |
 | **Modular Arithmetic & Combinations** | C++20 | $O(\log MOD)$ power / inverse | [`modular_arithmetic.cpp`](templates/cpp/modular_arithmetic.cpp) |
 | **BFS, Topological Sort & Dijkstra** | C++20 | $O(V + E)$ to $O((V+E)\log V)$ | [`graph_traversal.cpp`](templates/cpp/graph_traversal.cpp) |
+| **Prefix & Difference Arrays** | C++20 | $O(1)$ query/update after $O(N)$ build | [`prefix_sums.cpp`](templates/cpp/prefix_sums.cpp) |
+| **Sliding Window & Prefix Frequency** | C++20 | $O(N)$ amortized | [`sliding_window.cpp`](templates/cpp/sliding_window.cpp) |
 | **Python CP Template** | Python 3 | Optimized Fast I/O | [`template.py`](templates/python/template.py) |
 | **Java CP Template** | Java | Custom FastScanner & FastWriter | [`Template.java`](templates/java/Template.java) |
 
@@ -171,6 +172,7 @@ Explore quick revision guides in [`/notes`](notes/):
 - **CodeChef**: [prathamkashyap](https://www.codechef.com/users/prathamkashyap)
 - **HackerEarth**: [prathamkashyap](https://www.hackerearth.com/@prathamkashyap/)
 - **HackerRank**: [prathamkashyap](https://www.hackerrank.com/profile/prathamkashyap)
+- **GeeksforGeeks**: [prathamkashyap](https://www.geeksforgeeks.org/profile/prathamkashyap)
 
 ### Snapshot
 
