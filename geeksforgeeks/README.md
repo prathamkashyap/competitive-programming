@@ -17,7 +17,7 @@ parallel with the existing LeetCode, Codeforces, and CodeChef work.
 | Coding score | Not started |
 | Problem progress | Not started |
 | Followers / following | 0 / 0 |
-| Profile refresh | 2026-09-04 |
+| Profile status | New profile |
 
 The profile is intentionally recorded as a starting point. Future activity can
 be added here as problem counts, coding score, badges, and topic progress grow.

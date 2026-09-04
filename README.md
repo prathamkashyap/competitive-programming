@@ -38,7 +38,7 @@
 </tr>
 </table>
 
-<sub>Profile snapshot refreshed from public profiles and supplied screenshots on 2026-09-04.</sub>
+<sub>Profile statistics and repository metrics in this overview are kept aligned with the linked profiles and this codebase.</sub>
 </div>
 
 ---
@@ -173,13 +173,6 @@ Explore quick revision guides in [`/notes`](notes/):
 - **HackerEarth**: [prathamkashyap](https://www.hackerearth.com/@prathamkashyap/)
 - **HackerRank**: [prathamkashyap](https://www.hackerrank.com/profile/prathamkashyap)
 - **GeeksforGeeks**: [prathamkashyap](https://www.geeksforgeeks.org/profile/prathamkashyap)
-
-### Snapshot
-
-Profile figures above were refreshed from the linked public profiles and the
-provided profile screenshots on **2026-09-04**. Platform counters change over
-time; the repository file count is measured locally and currently includes
-`322` Codeforces C++ solutions.
 
 <div align="center">
   <sub>Designed & Maintained with 💻 and ☕ by <a href="https://github.com/prathamkashyap">Pratham Kashyap</a>.</sub>

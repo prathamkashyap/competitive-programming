@@ -20,7 +20,7 @@ This directory houses categorized solutions to problems from **Codeforces** cont
 - **Handle**: [@prathamkashyap](https://codeforces.com/profile/prathamkashyap)
 - **Current Rating**: `815` (Newbie)
 - **Max Rating**: `815`
-- **Unique accepted problems in Codeforces API**: `306` (checked 2026-09-04)
+- **Unique accepted problems in Codeforces API**: `306`
 - **C++ solutions in this repository**: `322`, including `30` unrated-question files
 - **Recent activity**: `280` problems solved in the last year, `100` in the last month
 - **Longest active streak**: `68` days
@@ -63,9 +63,9 @@ Files are named following standard Codeforces problem identifiers for easy searc
 
 ## 🧭 Solved-Problem Category Profile
 
-The repository's 322 C++ files were matched against the Codeforces problemset
-on 2026-09-04. The 315 matched files contain overlapping official tags; the
-counts below are tag occurrences rather than exclusive problem totals.
+The repository's 322 C++ files were matched against the Codeforces problemset.
+The 315 matched files contain overlapping official tags; the counts below are
+tag occurrences rather than exclusive problem totals.
 
 | Category | Occurrences | Category | Occurrences |
 | :--- | ---: | :--- | ---: |

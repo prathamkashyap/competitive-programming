@@ -28,7 +28,7 @@ Solutions to competitive programming challenges and contests hosted on **CodeChe
 - **Contests shown on profile**: `3`
 - **Daily coding challenge**: `66/100` days toward the silver milestone
 - **League**: **Diamond League**, Level 5; profile rank `13`
-- **Total Problems Solved**: `422` (checked 2026-09-04)
+- **Total Problems Solved**: `422`
 
 ---
 
@@ -45,7 +45,7 @@ Solutions to competitive programming challenges and contests hosted on **CodeChe
 
 ## 📈 Current Progress
 
-| Area | Current snapshot |
+| Area | Current profile |
 | :--- | :--- |
 | Overall rating | `922` · highest `922` |
 | DSA rating | `1067` · highest `1067` |

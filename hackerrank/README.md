@@ -14,7 +14,7 @@ Solutions to domain tracks, skill certifications, and coding challenges on **Hac
 
 ---
 
-## 👤 Profile & Achievements (checked 2026-09-04)
+## 👤 Profile & Achievements
 
 - **HackerRank Profile**: [prathamkashyap](https://www.hackerrank.com/profile/prathamkashyap)
 - The profile shows five active skill badges: **Problem Solving, C++, Java,
