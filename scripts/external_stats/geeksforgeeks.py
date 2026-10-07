@@ -1,212 +1,188 @@
 """
-GeeksforGeeks statistics provider using browser-rendered profile retrieval.
+GeeksforGeeks statistics provider using embedded page state, public practice API, and browser fallback.
 """
 
 import json
 import re
 import urllib.request
 import urllib.error
-from typing import Dict, Any, Optional
-from datetime import datetime
+from typing import Dict, Any, Optional, List
+from datetime import datetime, timezone
 from .models import PlatformStats, RetrievalStatus
+
+
+GFG_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Referer": "https://www.geeksforgeeks.org/",
+    "Origin": "https://www.geeksforgeeks.org",
+}
 
 
 def fetch_geeksforgeeks_stats(username: str, profile_url: str) -> PlatformStats:
     """
-    Fetch GeeksforGeeks statistics using browser-rendered profile page.
-
-    Attempts:
-    1. Browser rendering if Playwright is available
-    2. Simple scrape as fallback
+    Fetch GeeksforGeeks statistics using public endpoints and embedded Next.js state.
     """
-    # Try browser rendering first
+    metrics: Dict[str, Any] = {}
+    errors: List[str] = []
+
+    # 1. Fetch practice submissions & difficulty breakdown from practiceapi
+    _fetch_gfg_practice_api(username, metrics, errors)
+
+    # 2. Fetch user profile page HTML to extract embedded state (coding score, streaks, POTD)
+    _fetch_gfg_embedded_state(username, metrics, errors)
+
+    # 3. If primary metrics missing, use browser rendering fallback
+    if "coding_score" not in metrics or "solved" not in metrics:
+        try:
+            from .browser_renderer import is_playwright_available
+            if is_playwright_available():
+                _fetch_gfg_browser(username, profile_url, metrics)
+        except Exception as e:
+            errors.append(f"Browser fallback error: {str(e)}")
+
+    # Determine status
+    if "coding_score" in metrics and "solved" in metrics:
+        status = RetrievalStatus.SUCCESS
+        error = None
+    elif metrics:
+        status = RetrievalStatus.PARTIAL
+        error = "; ".join(errors) if errors else "Retrieved partial GeeksforGeeks statistics"
+    else:
+        status = RetrievalStatus.UNAVAILABLE
+        error = "; ".join(errors) if errors else "Could not retrieve statistics from GeeksforGeeks"
+
+    return PlatformStats(
+        platform="GeeksforGeeks",
+        username=username,
+        profile_url=profile_url,
+        metrics=metrics,
+        status=status,
+        source="public_profile",
+        source_type="live",
+        retrieval_method="embedded_state_and_api",
+        retrieved_at=datetime.now(timezone.utc).isoformat(),
+        error=error,
+    )
+
+
+def _fetch_gfg_practice_api(username: str, metrics: Dict[str, Any], errors: List[str]):
+    """Fetch problem submissions breakdown and yearwise activity from practiceapi."""
+    api_url = "https://practiceapi.geeksforgeeks.org/api/v1/user/problems/submissions/"
+    headers = dict(GFG_HEADERS)
+    headers["Content-Type"] = "application/json"
+    headers["Referer"] = f"https://www.geeksforgeeks.org/profile/{username}?tab=activity"
+
+    # A. Difficulty breakdown
     try:
-        from .browser_renderer import is_playwright_available, fetch_rendered_page, extract_from_text
+        payload = {"handle": username, "requestType": "", "year": "", "month": ""}
+        req = urllib.request.Request(api_url, data=json.dumps(payload).encode("utf-8"), headers=headers, method="POST")
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+            if data.get("status") == "success" and "result" in data:
+                result = data["result"]
+                difficulty_counts = {}
+                total_solved = 0
+                for diff, problems in result.items():
+                    diff_name = diff.lower()
+                    cnt = len(problems) if isinstance(problems, dict) else len(problems)
+                    difficulty_counts[diff_name] = cnt
+                    total_solved += cnt
 
-        if is_playwright_available():
-            return fetch_geeksforgeeks_with_browser(username, profile_url)
-    except ImportError:
-        pass
+                for diff, count in difficulty_counts.items():
+                    metrics[f"{diff}_solved"] = count
+                metrics["solved"] = total_solved
     except Exception as e:
-        # Browser rendering failed, fall back to simple scrape
-        pass
+        errors.append(f"Practice API submissions error: {str(e)}")
 
-    # Fall back to simple scrape
-    return fetch_geeksforgeeks_simple(username, profile_url)
+    # B. Yearwise submissions (for current year 2026)
+    try:
+        current_year = str(datetime.now().year)
+        payload = {"handle": username, "requestType": "getYearwiseUserSubmissions", "year": current_year, "month": ""}
+        req = urllib.request.Request(api_url, data=json.dumps(payload).encode("utf-8"), headers=headers, method="POST")
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+            if data.get("status") == "success" and "result" in data:
+                year_map = data["result"]
+                if isinstance(year_map, dict):
+                    metrics[f"submissions_{current_year}"] = sum(year_map.values())
+                    metrics[f"active_days_{current_year}"] = len(year_map)
+    except Exception as e:
+        errors.append(f"Practice API yearwise error: {str(e)}")
 
 
-def fetch_geeksforgeeks_with_browser(username: str, profile_url: str) -> PlatformStats:
-    """
-    Fetch GeeksforGeeks statistics using browser rendering with network inspection.
-    """
+def _fetch_gfg_embedded_state(username: str, metrics: Dict[str, Any], errors: List[str]):
+    """Fetch user profile HTML and parse embedded mentor/user stats object."""
+    urls = [
+        f"https://www.geeksforgeeks.org/user/{username}/",
+        f"https://www.geeksforgeeks.org/profile/{username}?tab=activity",
+    ]
+
+    for url in urls:
+        try:
+            req = urllib.request.Request(url, headers=GFG_HEADERS)
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                html = resp.read().decode("utf-8", errors="ignore")
+
+            # Look for score and POTD streak in HTML embedded state
+            score_m = re.search(r'\\"score\\":\s*(\d+)', html)
+            if score_m:
+                metrics["coding_score"] = int(score_m.group(1))
+
+            longest_streak_m = re.search(r'\\"pod_solved_longest_streak\\":\s*(\d+)', html)
+            if longest_streak_m:
+                metrics["longest_streak_days"] = int(longest_streak_m.group(1))
+
+            current_streak_m = re.search(r'\\"pod_solved_current_streak\\":\s*(\d+)', html)
+            if current_streak_m:
+                metrics["current_streak_days"] = int(current_streak_m.group(1))
+
+            potd_solved_m = re.search(r'\\"pod_correct_submissions_count\\":\s*(\d+)', html)
+            if potd_solved_m:
+                metrics["potd_solved"] = int(potd_solved_m.group(1))
+
+            monthly_score_m = re.search(r'\\"monthly_score\\":\s*(\d+)', html)
+            if monthly_score_m:
+                metrics["monthly_score"] = int(monthly_score_m.group(1))
+
+            total_problems_m = re.search(r'\\"total_problems_solved\\":\s*(\d+)', html)
+            if total_problems_m and "solved" not in metrics:
+                metrics["solved"] = int(total_problems_m.group(1))
+
+            if "coding_score" in metrics:
+                break
+        except Exception as e:
+            errors.append(f"Embedded state error ({url}): {str(e)}")
+
+
+def _fetch_gfg_browser(username: str, profile_url: str, metrics: Dict[str, Any]):
+    """Browser rendering fallback via Playwright."""
     import asyncio
-    from .browser_renderer import fetch_rendered_page, extract_from_text
+    from .browser_renderer import fetch_rendered_page
 
     async def _fetch():
-        # Try the practice tab URL instead of overview
-        practice_url = f"https://www.geeksforgeeks.org/profile/{username}/practice"
+        activity_url = f"https://www.geeksforgeeks.org/profile/{username}?tab=activity"
+        page_data = await fetch_rendered_page(activity_url, wait_timeout=20000, capture_network=False)
+        text = page_data.get("text", "")
+        if not text:
+            return
 
-        page_data = await fetch_rendered_page(
-            practice_url,
-            wait_selector=None,
-            wait_timeout=30000,
-            capture_network=True,
-        )
+        score_m = re.search(r"Coding Score\s*(\d+)", text)
+        if score_m:
+            metrics["coding_score"] = int(score_m.group(1))
 
-        metrics = {}
+        solved_m = re.search(r"Problems Solved\s*(\d+)", text)
+        if solved_m and "solved" not in metrics:
+            metrics["solved"] = int(solved_m.group(1))
 
-        # First, try to extract from network requests (JSON/GraphQL)
-        for request in page_data.get("network_requests", []):
-            try:
-                if "response_body" in request:
-                    response_data = json.loads(request["response_body"])
-                    # Try to find user/profile data
-                    if isinstance(response_data, dict):
-                        # Look for common profile data keys
-                        if "user" in response_data:
-                            user_data = response_data["user"]
-                            if "coding_score" in user_data:
-                                metrics["coding_score"] = user_data["coding_score"]
-                            if "solved" in user_data:
-                                metrics["solved"] = user_data["solved"]
-                            if "streak" in user_data:
-                                metrics["streak"] = user_data["streak"]
-                        # Also check top-level keys
-                        if "coding_score" in response_data:
-                            metrics["coding_score"] = response_data["coding_score"]
-                        if "solved" in response_data:
-                            metrics["solved"] = response_data["solved"]
-                        if "streak" in response_data:
-                            metrics["streak"] = response_data["streak"]
-            except (json.JSONDecodeError, KeyError, TypeError):
-                continue
+        streak_m = re.search(r"Longest Streak:\s*(\d+)\s*Days", text)
+        if streak_m:
+            metrics["longest_streak_days"] = int(streak_m.group(1))
 
-        # Second, extract from rendered text with improved patterns based on screenshot
-        if not metrics or len(metrics) < 2:
-            text_patterns = {
-                "coding_score": r"Coding\s*Score[:\s]*(\d+)",
-                "solved": r"Problems\s*Solved[:\s]*(\d+)",
-                "streak": r"Longest\s*Streak[:\s]*(\d+)\s*Days",
-                "potd_solved": r"POTDs\s*Solved[:\s]*(\d+)",
-                "basic": r"Basic[:\s]*(\d+)",
-                "easy": r"Easy[:\s]*(\d+)",
-                "medium": r"Medium[:\s]*(\d+)",
-                "hard": r"Hard[:\s]*(\d+)",
-            }
-
-            text_metrics = extract_from_text(page_data["text"], text_patterns)
-            metrics.update(text_metrics)
-
-            # Try more generic patterns if specific ones fail
-            if not metrics or "coding_score" not in metrics:
-                generic_patterns = {
-                    "coding_score": r"(\d{3})\s*(?:coding|practice)\s*score",  # Match 3-digit numbers like 424
-                    "solved": r"(\d{2,3})\s*(?:problems?|questions)\s*solved",  # Match 2-3 digit numbers like 98
-                    "streak": r"(\d+)\s*(?:day|streak)",
-                }
-                generic_metrics = extract_from_text(page_data["text"], generic_patterns)
-                metrics.update(generic_metrics)
-
-        # Determine status
-        if metrics:
-            status = RetrievalStatus.SUCCESS if len(metrics) >= 2 else RetrievalStatus.PARTIAL
-        else:
-            status = RetrievalStatus.UNAVAILABLE
-            metrics = {}
-
-        return PlatformStats(
-            platform="GeeksforGeeks",
-            username=username,
-            profile_url=profile_url,
-            metrics=metrics,
-            status=status,
-            source="public_profile",
-            retrieval_method="rendered_profile",
-            retrieved_at=datetime.utcnow().isoformat(),
-            error=None if metrics else "Could not extract statistics from rendered profile or network requests",
-        )
+        potd_m = re.search(r"POTDs Solved:\s*(\d+)", text)
+        if potd_m:
+            metrics["potd_solved"] = int(potd_m.group(1))
 
     try:
-        return asyncio.run(_fetch())
-    except Exception as e:
-        return PlatformStats(
-            platform="GeeksforGeeks",
-            username=username,
-            profile_url=profile_url,
-            status=RetrievalStatus.FAILED,
-            error=f"Browser rendering error: {str(e)}",
-            source="public_profile",
-            retrieval_method="rendered_profile",
-            retrieved_at=datetime.utcnow().isoformat(),
-        )
-
-
-def fetch_geeksforgeeks_simple(username: str, profile_url: str) -> PlatformStats:
-    """
-    Fallback: simple HTTP scrape without browser rendering.
-    """
-    try:
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-        }
-        req = urllib.request.Request(profile_url, headers=headers)
-
-        with urllib.request.urlopen(req, timeout=10) as response:
-            html = response.read().decode('utf-8')
-
-        metrics = {}
-
-        # Extract from HTML
-        score_match = re.search(r'(\d+)\s*coding\s*score', html, re.IGNORECASE)
-        if score_match:
-            metrics["coding_score"] = int(score_match.group(1))
-
-        solved_match = re.search(r'(\d+)\s*problems?\s*solved', html, re.IGNORECASE)
-        if solved_match:
-            metrics["solved"] = int(solved_match.group(1))
-
-        streak_match = re.search(r'(\d+)\s*day\s*streak', html, re.IGNORECASE)
-        if streak_match:
-            metrics["streak"] = int(streak_match.group(1))
-
-        # Determine status
-        if metrics:
-            status = RetrievalStatus.SUCCESS
-        else:
-            status = RetrievalStatus.UNAVAILABLE
-            metrics = {}
-
-        return PlatformStats(
-            platform="GeeksforGeeks",
-            username=username,
-            profile_url=profile_url,
-            metrics=metrics,
-            status=status,
-            source="public_profile",
-            retrieval_method="scrape",
-            retrieved_at=datetime.utcnow().isoformat(),
-            error=None if metrics else "Could not extract statistics from profile page",
-        )
-
-    except urllib.error.URLError as e:
-        return PlatformStats(
-            platform="GeeksforGeeks",
-            username=username,
-            profile_url=profile_url,
-            status=RetrievalStatus.FAILED,
-            error=f"Network error: {str(e)}",
-            source="public_profile",
-            retrieval_method="scrape",
-            retrieved_at=datetime.utcnow().isoformat(),
-        )
-    except Exception as e:
-        return PlatformStats(
-            platform="GeeksforGeeks",
-            username=username,
-            profile_url=profile_url,
-            status=RetrievalStatus.FAILED,
-            error=f"Unexpected error: {str(e)}",
-            source="public_profile",
-            retrieval_method="scrape",
-            retrieved_at=datetime.utcnow().isoformat(),
-        )
+        asyncio.run(_fetch())
+    except Exception:
+        pass

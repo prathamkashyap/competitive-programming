@@ -6,7 +6,7 @@ import json
 import urllib.request
 import urllib.error
 from typing import Dict, Any, Optional
-from datetime import datetime
+from datetime import datetime, timezone
 from .models import PlatformStats, RetrievalStatus
 
 
@@ -36,7 +36,7 @@ def fetch_codeforces_stats(username: str, profile_url: str) -> PlatformStats:
                 error=f"API error: {error_msg}",
                 source="official_api",
                 retrieval_method="api",
-                retrieved_at=datetime.utcnow().isoformat(),
+                retrieved_at=datetime.now(timezone.utc).isoformat(),
             )
 
         user_info = data["result"][0]
@@ -77,7 +77,7 @@ def fetch_codeforces_stats(username: str, profile_url: str) -> PlatformStats:
             status=RetrievalStatus.SUCCESS,
             source="official_api",
             retrieval_method="api",
-            retrieved_at=datetime.utcnow().isoformat(),
+            retrieved_at=datetime.now(timezone.utc).isoformat(),
         )
 
     except urllib.error.URLError as e:
@@ -89,7 +89,7 @@ def fetch_codeforces_stats(username: str, profile_url: str) -> PlatformStats:
             error=f"Network error: {str(e)}",
             source="official_api",
             retrieval_method="api",
-            retrieved_at=datetime.utcnow().isoformat(),
+            retrieved_at=datetime.now(timezone.utc).isoformat(),
         )
     except Exception as e:
         return PlatformStats(
@@ -100,5 +100,5 @@ def fetch_codeforces_stats(username: str, profile_url: str) -> PlatformStats:
             error=f"Unexpected error: {str(e)}",
             source="official_api",
             retrieval_method="api",
-            retrieved_at=datetime.utcnow().isoformat(),
+            retrieved_at=datetime.now(timezone.utc).isoformat(),
         )

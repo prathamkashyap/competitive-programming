@@ -25,6 +25,7 @@ class PlatformStats:
     profile_url: str
     metrics: Dict[str, Any] = field(default_factory=dict)
     source: str = ""
+    source_type: str = "live"  # "live" or "snapshot"
     retrieval_method: str = ""
     retrieved_at: str = ""
     status: RetrievalStatus = RetrievalStatus.UNCONFIGURED
@@ -38,6 +39,7 @@ class PlatformStats:
             "profile_url": self.profile_url,
             "metrics": self.metrics,
             "source": self.source,
+            "source_type": self.source_type,
             "retrieval_method": self.retrieval_method,
             "retrieved_at": self.retrieved_at,
             "status": self.status.value,

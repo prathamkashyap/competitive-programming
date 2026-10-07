@@ -1,226 +1,178 @@
 """
-CodeChef statistics provider using browser-rendered profile retrieval.
+CodeChef statistics provider using embedded structured Drupal state and browser fallback.
 """
 
 import json
 import re
 import urllib.request
 import urllib.error
-from typing import Dict, Any, Optional
-from datetime import datetime
+from typing import Dict, Any, Optional, List
+from datetime import datetime, timezone
 from .models import PlatformStats, RetrievalStatus
+
+
+CODECHEF_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+}
 
 
 def fetch_codechef_stats(username: str, profile_url: str) -> PlatformStats:
     """
-    Fetch CodeChef statistics using browser-rendered profile page.
-
-    Attempts:
-    1. Browser rendering if Playwright is available
-    2. Simple scrape as fallback
+    Fetch CodeChef statistics using embedded structured data (Drupal.settings) and HTML parsing,
+    with browser rendering fallback.
     """
-    # Try browser rendering first
+    metrics: Dict[str, Any] = {}
+    errors: List[str] = []
+
+    # 1. Primary: Direct fetch of HTML with embedded Drupal.settings JSON
+    _fetch_codechef_html(profile_url, metrics, errors)
+
+    # 2. Browser fallback if rating or solved is missing
+    if "rating" not in metrics or "solved" not in metrics:
+        try:
+            from .browser_renderer import is_playwright_available
+            if is_playwright_available():
+                _fetch_codechef_browser(profile_url, metrics)
+        except Exception as e:
+            errors.append(f"Browser fallback error: {str(e)}")
+
+    # Determine status
+    if "rating" in metrics:
+        status = RetrievalStatus.SUCCESS
+        error = None
+    elif metrics:
+        status = RetrievalStatus.PARTIAL
+        error = "; ".join(errors) if errors else "Retrieved partial CodeChef statistics"
+    else:
+        status = RetrievalStatus.UNAVAILABLE
+        error = "; ".join(errors) if errors else "Could not retrieve statistics from CodeChef"
+
+    return PlatformStats(
+        platform="CodeChef",
+        username=username,
+        profile_url=profile_url,
+        metrics=metrics,
+        status=status,
+        source="public_profile",
+        source_type="live",
+        retrieval_method="embedded_state",
+        retrieved_at=datetime.now(timezone.utc).isoformat(),
+        error=error,
+    )
+
+
+def _fetch_codechef_html(profile_url: str, metrics: Dict[str, Any], errors: List[str]):
+    """Fetch HTML and parse Drupal.settings JSON and semantic markup."""
     try:
-        from .browser_renderer import is_playwright_available, fetch_rendered_page, extract_from_json
+        req = urllib.request.Request(profile_url, headers=CODECHEF_HEADERS)
+        with urllib.request.urlopen(req, timeout=12) as resp:
+            html = resp.read().decode("utf-8", errors="ignore")
 
-        if is_playwright_available():
-            return fetch_codechef_with_browser(username, profile_url)
-    except ImportError:
-        pass
+        # 1. Parse embedded Drupal.settings JSON
+        m_drupal = re.search(r"jQuery\.extend\(Drupal\.settings,\s*({.+?})\);", html, re.DOTALL)
+        if m_drupal:
+            try:
+                drupal_data = json.loads(m_drupal.group(1))
+                dvr = drupal_data.get("date_versus_rating", {})
+
+                # Contest rating history
+                all_ratings = dvr.get("all", [])
+                if all_ratings:
+                    latest_all = all_ratings[-1]
+                    try:
+                        metrics["rating"] = int(latest_all.get("rating"))
+                    except (ValueError, TypeError):
+                        pass
+                    try:
+                        metrics["global_rank"] = int(latest_all.get("rank"))
+                    except (ValueError, TypeError):
+                        pass
+
+                    # Calculate max rating from history
+                    max_r = 0
+                    for entry in all_ratings:
+                        try:
+                            r_val = int(entry.get("rating"))
+                            if r_val > max_r:
+                                max_r = r_val
+                        except (ValueError, TypeError):
+                            pass
+                    if max_r > 0:
+                        metrics["max_rating"] = max_r
+
+                # DSA Monday contest ratings
+                dsa_ratings = dvr.get("dsa_monday", [])
+                if dsa_ratings:
+                    latest_dsa = dsa_ratings[-1]
+                    try:
+                        metrics["dsa_rating"] = int(latest_dsa.get("rating"))
+                    except (ValueError, TypeError):
+                        pass
+                    try:
+                        metrics["dsa_global_rank"] = int(latest_dsa.get("rank"))
+                    except (ValueError, TypeError):
+                        pass
+            except Exception as e:
+                errors.append(f"Drupal settings JSON parse error: {str(e)}")
+
+        # 2. Total problems solved
+        m_solved = re.search(r"Total Problems Solved:\s*(\d+)", html, re.IGNORECASE)
+        if m_solved:
+            metrics["solved"] = int(m_solved.group(1))
+
+        # 3. Stars / Division
+        m_stars = re.search(r"(\d+)&#9733;", html)
+        if m_stars:
+            metrics["stars"] = int(m_stars.group(1))
+        else:
+            m_star_text = re.search(r"(\d+)\s*★", html)
+            if m_star_text:
+                metrics["stars"] = int(m_star_text.group(1))
+
+        # 4. League (Silver, Diamond, Gold, etc.)
+        m_league = re.search(r"alt=[\"']([^\"']*League)[\"']", html, re.IGNORECASE)
+        if m_league:
+            metrics["league"] = m_league.group(1)
+
+        # 5. Fallback for rating if Drupal.settings didn't yield it
+        if "rating" not in metrics:
+            m_rating = re.search(r'class="rating"[^>]*>(\d+)', html)
+            if m_rating:
+                metrics["rating"] = int(m_rating.group(1))
+
+        # 6. Fallback for highest rating
+        if "max_rating" not in metrics:
+            m_max = re.search(r"Highest Rating\s*(\d+)", html, re.IGNORECASE)
+            if m_max:
+                metrics["max_rating"] = int(m_max.group(1))
+
     except Exception as e:
-        # Browser rendering failed, fall back to simple scrape
-        pass
-
-    # Fall back to simple scrape
-    return fetch_codechef_simple(username, profile_url)
+        errors.append(f"HTTP fetch error: {str(e)}")
 
 
-def fetch_codechef_with_browser(username: str, profile_url: str) -> PlatformStats:
-    """
-    Fetch CodeChef statistics using browser rendering.
-    """
+def _fetch_codechef_browser(profile_url: str, metrics: Dict[str, Any]):
+    """Browser rendering fallback via Playwright."""
     import asyncio
-    from .browser_renderer import fetch_rendered_page, extract_from_json, extract_from_text
+    from .browser_renderer import fetch_rendered_page
 
     async def _fetch():
-        page_data = await fetch_rendered_page(
-            profile_url,
-            wait_selector=None,
-            wait_timeout=30000,
-            capture_network=True,
-        )
+        page_data = await fetch_rendered_page(profile_url, wait_timeout=20000, capture_network=False)
+        text = page_data.get("text", "")
+        if not text:
+            return
 
-        metrics = {}
+        if "rating" not in metrics:
+            m_r = re.search(r"(\d{3,4})\s*rating", text, re.IGNORECASE)
+            if m_r:
+                metrics["rating"] = int(m_r.group(1))
 
-        # First, try to extract from network requests (JSON/GraphQL)
-        for request in page_data.get("network_requests", []):
-            try:
-                if "response_body" in request:
-                    response_data = json.loads(request["response_body"])
-                    # Try to find user/profile data
-                    if isinstance(response_data, dict):
-                        # Look for common profile data keys
-                        if "user" in response_data:
-                            user_data = response_data["user"]
-                            if "rating" in user_data:
-                                metrics["rating"] = user_data["rating"]
-                            if "maxRating" in user_data:
-                                metrics["max_rating"] = user_data["maxRating"]
-                            if "stars" in user_data:
-                                metrics["stars"] = user_data["stars"]
-                            if "solved" in user_data:
-                                metrics["solved"] = user_data["solved"]
-                            if "globalRank" in user_data:
-                                metrics["global_rank"] = user_data["globalRank"]
-                            if "countryRank" in user_data:
-                                metrics["country_rank"] = user_data["countryRank"]
-                        # Also check top-level keys
-                        if "rating" in response_data:
-                            metrics["rating"] = response_data["rating"]
-                        if "solved" in response_data:
-                            metrics["solved"] = response_data["solved"]
-            except (json.JSONDecodeError, KeyError, TypeError):
-                continue
-
-        # Second, try to extract from embedded JSON
-        if page_data.get("json_data"):
-            json_paths = {
-                "rating": [["user", "rating"]],
-                "max_rating": [["user", "maxRating"]],
-                "stars": [["user", "stars"]],
-                "solved": [["user", "solved"]],
-                "global_rank": [["user", "globalRank"]],
-                "country_rank": [["user", "countryRank"]],
-            }
-
-            json_metrics = extract_from_json(page_data["json_data"], json_paths)
-            metrics.update(json_metrics)
-
-        # Extract from rendered text as fallback
-        if not metrics or len(metrics) < 3:
-            text_patterns = {
-                "rating": r"(\d{3})\s*rating",  # Match 3-digit rating like 922
-                "max_rating": r"highest rating[:\s]*(\d+)",
-                "stars": r"(\d+)\s*stars?",
-                "solved": r"(\d+)\s*solved",
-                "global_rank": r"global rank[:\s]*(\d+)",
-                "country_rank": r"country rank[:\s]*(\d+)",
-            }
-
-            text_metrics = extract_from_text(page_data["text"], text_patterns)
-            metrics.update(text_metrics)
-
-            # If still no rating, try without label
-            if "rating" not in metrics:
-                rating_match = re.search(r"(\d{3})\s*\*", page_data["text"])  # Match "922 *" pattern
-                if rating_match:
-                    metrics["rating"] = int(rating_match.group(1))
-
-        # Determine status
-        if metrics:
-            status = RetrievalStatus.SUCCESS
-        else:
-            status = RetrievalStatus.UNAVAILABLE
-            metrics = {}
-
-        return PlatformStats(
-            platform="CodeChef",
-            username=username,
-            profile_url=profile_url,
-            metrics=metrics,
-            status=status,
-            source="public_profile",
-            retrieval_method="rendered_profile",
-            retrieved_at=datetime.utcnow().isoformat(),
-            error=None if metrics else "Could not extract statistics from rendered profile",
-        )
+        if "solved" not in metrics:
+            m_s = re.search(r"Total Problems Solved:\s*(\d+)", text, re.IGNORECASE)
+            if m_s:
+                metrics["solved"] = int(m_s.group(1))
 
     try:
-        return asyncio.run(_fetch())
-    except Exception as e:
-        return PlatformStats(
-            platform="CodeChef",
-            username=username,
-            profile_url=profile_url,
-            status=RetrievalStatus.FAILED,
-            error=f"Browser rendering error: {str(e)}",
-            source="public_profile",
-            retrieval_method="rendered_profile",
-            retrieved_at=datetime.utcnow().isoformat(),
-        )
-
-
-def fetch_codechef_simple(username: str, profile_url: str) -> PlatformStats:
-    """
-    Fallback: simple HTTP scrape without browser rendering.
-    """
-    try:
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-        }
-        req = urllib.request.Request(profile_url, headers=headers)
-
-        with urllib.request.urlopen(req, timeout=10) as response:
-            html = response.read().decode('utf-8')
-
-        metrics = {}
-
-        # Try to extract from embedded JSON
-        json_match = re.search(r'window\.INITIAL_STATE\s*=\s*({.+?});', html, re.DOTALL)
-        if json_match:
-            try:
-                json_data = json.loads(json_match.group(1))
-                try:
-                    user_data = json_data.get("user", {})
-                    metrics["rating"] = user_data.get("rating")
-                    metrics["max_rating"] = user_data.get("maxRating")
-                    metrics["stars"] = user_data.get("stars")
-                    metrics["solved"] = user_data.get("solved")
-                    metrics["global_rank"] = user_data.get("globalRank")
-                    metrics["country_rank"] = user_data.get("countryRank")
-                except (KeyError, TypeError, AttributeError):
-                    pass
-            except (json.JSONDecodeError, ValueError):
-                pass
-
-        # Determine status
-        if metrics:
-            status = RetrievalStatus.SUCCESS
-        else:
-            status = RetrievalStatus.UNAVAILABLE
-            metrics = {}
-
-        return PlatformStats(
-            platform="CodeChef",
-            username=username,
-            profile_url=profile_url,
-            metrics=metrics,
-            status=status,
-            source="public_profile",
-            retrieval_method="scrape",
-            retrieved_at=datetime.utcnow().isoformat(),
-            error=None if metrics else "Could not extract statistics from profile page",
-        )
-
-    except urllib.error.URLError as e:
-        return PlatformStats(
-            platform="CodeChef",
-            username=username,
-            profile_url=profile_url,
-            status=RetrievalStatus.FAILED,
-            error=f"Network error: {str(e)}",
-            source="public_profile",
-            retrieval_method="scrape",
-            retrieved_at=datetime.utcnow().isoformat(),
-        )
-    except Exception as e:
-        return PlatformStats(
-            platform="CodeChef",
-            username=username,
-            profile_url=profile_url,
-            status=RetrievalStatus.FAILED,
-            error=f"Unexpected error: {str(e)}",
-            source="public_profile",
-            retrieval_method="scrape",
-            retrieved_at=datetime.utcnow().isoformat(),
-        )
+        asyncio.run(_fetch())
+    except Exception:
+        pass

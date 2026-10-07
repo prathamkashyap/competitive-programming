@@ -1,184 +1,180 @@
 """
-HackerRank statistics provider using public profile page scraping.
+HackerRank statistics provider using official public REST endpoints.
 """
 
-import re
+import json
 import urllib.request
 import urllib.error
-from typing import Dict, Any, Optional
-from datetime import datetime
+from typing import Dict, Any, Optional, List
+from datetime import datetime, timezone
 from .models import PlatformStats, RetrievalStatus
+
+
+HACKERRANK_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Accept": "application/json",
+}
 
 
 def fetch_hackerrank_stats(username: str, profile_url: str) -> PlatformStats:
     """
-    Fetch HackerRank statistics from the public profile page.
-
-    Try simple scrape first (was working), browser rendering as fallback.
+    Fetch HackerRank statistics using official public REST endpoints.
     """
-    # Try simple scrape first
-    try:
-        return fetch_hackerrank_simple(username, profile_url)
-    except Exception:
-        pass
+    metrics: Dict[str, Any] = {}
+    errors: List[str] = []
 
-    # Fallback to browser rendering
-    try:
-        from .browser_renderer import is_playwright_available, fetch_rendered_page, extract_from_text
+    # 1. Fetch skill badges & stars
+    _fetch_hackerrank_badges(username, metrics, errors)
 
-        if is_playwright_available():
-            return fetch_hackerrank_with_browser(username, profile_url)
-    except ImportError:
-        pass
-    except Exception as e:
-        pass
+    # 2. Fetch verified skills & certificates
+    _fetch_hackerrank_skills(username, metrics, errors)
 
-    # If all else fails, return unavailable
+    # 3. Fetch track rankings & scores
+    _fetch_hackerrank_scores(username, metrics, errors)
+
+    # 4. Fetch profile details
+    _fetch_hackerrank_profile(username, metrics, errors)
+
+    # Determine status
+    if "skill_badges" in metrics or "problem_solving_stars" in metrics:
+        status = RetrievalStatus.SUCCESS
+        error = None
+    elif metrics:
+        status = RetrievalStatus.PARTIAL
+        error = "; ".join(errors) if errors else "Retrieved partial HackerRank statistics"
+    else:
+        status = RetrievalStatus.UNAVAILABLE
+        error = "; ".join(errors) if errors else "Could not retrieve statistics from HackerRank REST API"
+
     return PlatformStats(
         platform="HackerRank",
         username=username,
         profile_url=profile_url,
-        metrics={},
-        status=RetrievalStatus.UNAVAILABLE,
-        error="Could not extract statistics from profile page",
-        source="public_profile",
-        retrieval_method="none",
-        retrieved_at=datetime.utcnow().isoformat(),
+        metrics=metrics,
+        status=status,
+        source="official_rest_api",
+        source_type="live",
+        retrieval_method="rest_api",
+        retrieved_at=datetime.now(timezone.utc).isoformat(),
+        error=error,
     )
 
 
-def fetch_hackerrank_simple(username: str, profile_url: str) -> PlatformStats:
-    """
-    Fallback: simple HTTP scrape without browser rendering.
-    """
-    try:
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-        }
-        req = urllib.request.Request(profile_url, headers=headers)
-
-        with urllib.request.urlopen(req, timeout=10) as response:
-            html = response.read().decode('utf-8')
-
-        metrics = {}
-
-        # Extract certifications
-        cert_match = re.search(r'(\d+)\s*certifications?', html, re.IGNORECASE)
-        if cert_match:
-            count = int(cert_match.group(1))
-            if count < 100:  # Sanity check
-                metrics["certifications"] = count
-
-        # Extract profile completion percentage
-        completion_match = re.search(r'(\d+)%\s*complete', html, re.IGNORECASE)
-        if completion_match:
-            metrics["profile_completion"] = int(completion_match.group(1))
-
-        # Determine status
-        if metrics:
-            status = RetrievalStatus.SUCCESS
-        else:
-            status = RetrievalStatus.UNAVAILABLE
-            metrics = {}
-
-        return PlatformStats(
-            platform="HackerRank",
-            username=username,
-            profile_url=profile_url,
-            metrics=metrics,
-            status=status,
-            source="public_profile",
-            retrieval_method="scrape",
-            retrieved_at=datetime.utcnow().isoformat(),
-            error=None if metrics else "Could not extract statistics from profile page",
-        )
-
-    except urllib.error.URLError as e:
-        return PlatformStats(
-            platform="HackerRank",
-            username=username,
-            profile_url=profile_url,
-            status=RetrievalStatus.FAILED,
-            error=f"Network error: {str(e)}",
-            source="public_profile",
-            retrieval_method="scrape",
-            retrieved_at=datetime.utcnow().isoformat(),
-        )
-    except Exception as e:
-        return PlatformStats(
-            platform="HackerRank",
-            username=username,
-            profile_url=profile_url,
-            status=RetrievalStatus.FAILED,
-            error=f"Unexpected error: {str(e)}",
-            source="public_profile",
-            retrieval_method="scrape",
-            retrieved_at=datetime.utcnow().isoformat(),
-        )
-
-
-def fetch_hackerrank_with_browser(username: str, profile_url: str) -> PlatformStats:
-    """
-    Fetch HackerRank statistics using browser rendering with CSS selectors.
-    """
-    import asyncio
-    from .browser_renderer import fetch_rendered_page, extract_from_text
-
-    async def _fetch():
-        page_data = await fetch_rendered_page(
-            profile_url,
-            wait_selector=None,
-            wait_timeout=30000,
-            capture_network=False,
-        )
-
-        metrics = {}
-
-        # Extract from rendered text with improved patterns
-        text_patterns = {
-            "certifications": r"(\d+)\s*certifications?",
-            "profile_completion": r"(\d+)%\s*complete",
-        }
-
-        text_metrics = extract_from_text(page_data["text"], text_patterns)
-        metrics.update(text_metrics)
-
-        # Try to extract skill badges by looking for 5-star patterns
-        # Based on screenshot: badges show skill names with 5 stars
-        star_5_matches = re.findall(r"([A-Za-z]+(?:\s+[A-Za-z]+)*)\s*(?:★|⭐){5}", page_data["text"])
-        if star_5_matches:
-            metrics["skill_badges"] = len(star_5_matches)
-            metrics["skills"] = [skill.strip() for skill in star_5_matches]
-
-        # Determine status
-        if metrics:
-            status = RetrievalStatus.SUCCESS
-        else:
-            status = RetrievalStatus.UNAVAILABLE
-            metrics = {}
-
-        return PlatformStats(
-            platform="HackerRank",
-            username=username,
-            profile_url=profile_url,
-            metrics=metrics,
-            status=status,
-            source="public_profile",
-            retrieval_method="rendered_profile",
-            retrieved_at=datetime.utcnow().isoformat(),
-            error=None if metrics else "Could not extract statistics from rendered profile",
-        )
+def _fetch_hackerrank_badges(username: str, metrics: Dict[str, Any], errors: List[str]):
+    """Fetch domain skill badges, star ratings, and challenge counts."""
+    url = f"https://www.hackerrank.com/rest/hackers/{username}/badges"
+    headers = dict(HACKERRANK_HEADERS)
+    headers["Referer"] = f"https://www.hackerrank.com/profile/{username}"
 
     try:
-        return asyncio.run(_fetch())
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+            models = data.get("models", [])
+            skill_badges: Dict[str, Any] = {}
+            total_solved = 0
+            total_stars = 0
+
+            for b in models:
+                badge_name = b.get("badge_name")
+                stars = b.get("stars", 0)
+                solved = b.get("solved", 0)
+                points = b.get("current_points")
+                rank = b.get("hacker_rank")
+
+                if badge_name:
+                    badge_info = {
+                        "stars": stars,
+                        "solved": solved,
+                    }
+                    if points is not None:
+                        badge_info["points"] = points
+                    if rank is not None:
+                        badge_info["rank"] = rank
+
+                    skill_badges[badge_name] = badge_info
+                    total_solved += solved
+                    total_stars += stars
+
+                    # Specific field mappings
+                    norm_name = badge_name.lower().replace(" ", "_").replace("++", "pp")
+                    if norm_name in ["problem_solving", "cpp", "java", "python", "sql"]:
+                        metrics[f"{norm_name}_stars"] = stars
+
+            if skill_badges:
+                metrics["skill_badges"] = skill_badges
+                metrics["badges_count"] = len(skill_badges)
+                metrics["total_stars"] = total_stars
+                metrics["total_challenges_solved"] = total_solved
+
+            # Extract specific high-value ranks
+            if "Sql" in skill_badges and skill_badges["Sql"].get("rank"):
+                metrics["sql_rank"] = skill_badges["Sql"]["rank"]
+            if "Problem Solving" in skill_badges and skill_badges["Problem Solving"].get("rank"):
+                metrics["problem_solving_rank"] = skill_badges["Problem Solving"]["rank"]
+
     except Exception as e:
-        return PlatformStats(
-            platform="HackerRank",
-            username=username,
-            profile_url=profile_url,
-            status=RetrievalStatus.FAILED,
-            error=f"Browser rendering error: {str(e)}",
-            source="public_profile",
-            retrieval_method="rendered_profile",
-            retrieved_at=datetime.utcnow().isoformat(),
-        )
+        errors.append(f"Badges REST API error: {str(e)}")
+
+
+def _fetch_hackerrank_skills(username: str, metrics: Dict[str, Any], errors: List[str]):
+    """Fetch verified skills list."""
+    url = f"https://www.hackerrank.com/rest/hackers/{username}/skills"
+    headers = dict(HACKERRANK_HEADERS)
+    headers["Referer"] = f"https://www.hackerrank.com/profile/{username}"
+
+    try:
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            skills = json.loads(resp.read().decode("utf-8"))
+            if isinstance(skills, list) and skills:
+                metrics["verified_skills"] = skills
+                metrics["verified_skills_count"] = len(skills)
+    except Exception as e:
+        errors.append(f"Skills REST API error: {str(e)}")
+
+
+def _fetch_hackerrank_scores(username: str, metrics: Dict[str, Any], errors: List[str]):
+    """Fetch track scores and ranks from scores_elo."""
+    url = f"https://www.hackerrank.com/rest/hackers/{username}/scores_elo"
+    headers = dict(HACKERRANK_HEADERS)
+    headers["Referer"] = f"https://www.hackerrank.com/profile/{username}"
+
+    try:
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            tracks = json.loads(resp.read().decode("utf-8"))
+            if isinstance(tracks, list):
+                track_ranks = {}
+                for t in tracks:
+                    name = t.get("name")
+                    practice = t.get("practice") or {}
+                    rank = practice.get("rank")
+                    score = practice.get("score")
+                    if name and rank and rank != "N/A" and score and score > 0:
+                        track_ranks[name] = {"rank": rank, "score": score}
+                if track_ranks:
+                    metrics["track_ranks"] = track_ranks
+    except Exception as e:
+        errors.append(f"Scores ELO API error: {str(e)}")
+
+
+def _fetch_hackerrank_profile(username: str, metrics: Dict[str, Any], errors: List[str]):
+    """Fetch user profile metadata."""
+    url = f"https://www.hackerrank.com/rest/contests/master/hackers/{username}/profile"
+    headers = dict(HACKERRANK_HEADERS)
+    headers["Referer"] = f"https://www.hackerrank.com/profile/{username}"
+
+    try:
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+            model = data.get("model") or {}
+            if model.get("country"):
+                metrics["country"] = model["country"]
+            if model.get("level") is not None:
+                metrics["level"] = model["level"]
+            if model.get("created_at"):
+                metrics["member_since"] = model["created_at"][:10]
+    except Exception as e:
+        errors.append(f"Profile API error: {str(e)}")

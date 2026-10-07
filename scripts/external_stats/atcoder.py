@@ -6,7 +6,7 @@ import re
 import urllib.request
 import urllib.error
 from typing import Dict, Any, Optional
-from datetime import datetime
+from datetime import datetime, timezone
 from .models import PlatformStats, RetrievalStatus
 
 
@@ -57,7 +57,7 @@ def fetch_atcoder_stats(username: str, profile_url: str) -> PlatformStats:
             status=status,
             source="public_profile",
             retrieval_method="scrape",
-            retrieved_at=datetime.utcnow().isoformat(),
+            retrieved_at=datetime.now(timezone.utc).isoformat(),
             error=None if metrics else "Could not extract statistics from profile page",
         )
 
@@ -70,7 +70,7 @@ def fetch_atcoder_stats(username: str, profile_url: str) -> PlatformStats:
             error=f"Network error: {str(e)}",
             source="public_profile",
             retrieval_method="scrape",
-            retrieved_at=datetime.utcnow().isoformat(),
+            retrieved_at=datetime.now(timezone.utc).isoformat(),
         )
     except Exception as e:
         return PlatformStats(
@@ -81,5 +81,5 @@ def fetch_atcoder_stats(username: str, profile_url: str) -> PlatformStats:
             error=f"Unexpected error: {str(e)}",
             source="public_profile",
             retrieval_method="scrape",
-            retrieved_at=datetime.utcnow().isoformat(),
+            retrieved_at=datetime.now(timezone.utc).isoformat(),
         )

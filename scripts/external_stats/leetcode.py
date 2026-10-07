@@ -1,154 +1,303 @@
 """
-LeetCode statistics provider using browser-rendered profile retrieval.
+LeetCode statistics provider using public GraphQL API with browser fallback.
 """
 
 import json
-import re
 import urllib.request
 import urllib.error
-from typing import Dict, Any, Optional
-from datetime import datetime
+from typing import Dict, Any, Optional, List
+from datetime import datetime, timezone
 from .models import PlatformStats, RetrievalStatus
+
+
+LEETCODE_GRAPHQL_URL = "https://leetcode.com/graphql"
+
+GRAPHQL_HEADERS = {
+    "Content-Type": "application/json",
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Referer": "https://leetcode.com/",
+    "Origin": "https://leetcode.com",
+}
 
 
 def fetch_leetcode_stats(username: str, profile_url: str) -> PlatformStats:
     """
-    Fetch LeetCode statistics using browser-rendered profile page.
-
-    Attempts:
-    1. Simple scrape (for backward compatibility)
-    2. Browser rendering if Playwright is available
+    Fetch LeetCode statistics using public GraphQL queries, with browser fallback.
     """
-    # First try browser rendering if available
+    # Try GraphQL first
+    stats = _fetch_leetcode_graphql(username, profile_url)
+    if stats.status in [RetrievalStatus.SUCCESS, RetrievalStatus.PARTIAL]:
+        return stats
+
+    # Try browser rendering fallback if Playwright is available
     try:
-        from .browser_renderer import is_playwright_available, fetch_rendered_page, extract_from_json
-
+        from .browser_renderer import is_playwright_available
         if is_playwright_available():
-            return fetch_leetcode_with_browser(username, profile_url)
-    except ImportError:
+            browser_stats = _fetch_leetcode_browser(username, profile_url)
+            if browser_stats.status in [RetrievalStatus.SUCCESS, RetrievalStatus.PARTIAL]:
+                return browser_stats
+    except Exception:
         pass
-    except Exception as e:
-        # Browser rendering failed, fall back to simple scrape
-        pass
 
-    # Fall back to simple scrape
-    return fetch_leetcode_simple(username, profile_url)
+    return stats
 
 
-def fetch_leetcode_with_browser(username: str, profile_url: str) -> PlatformStats:
+def _execute_graphql(query: str, variables: Dict[str, Any], timeout: int = 15) -> Optional[Dict]:
+    """Execute a single GraphQL query against LeetCode's endpoint."""
+    try:
+        payload = {"query": query, "variables": variables}
+        data = json.dumps(payload).encode("utf-8")
+        headers = dict(GRAPHQL_HEADERS)
+        if "username" in variables:
+            headers["Referer"] = f"https://leetcode.com/u/{variables['username']}/"
+
+        req = urllib.request.Request(LEETCODE_GRAPHQL_URL, data=data, headers=headers, method="POST")
+        with urllib.request.urlopen(req, timeout=timeout) as response:
+            return json.loads(response.read().decode("utf-8"))
+    except Exception:
+        return None
+
+
+def _fetch_leetcode_graphql(username: str, profile_url: str) -> PlatformStats:
+    """Query LeetCode's public GraphQL API across multiple focused query families."""
+    metrics: Dict[str, Any] = {}
+
+    # 1. Profile & Submission Statistics
+    profile_query = """
+    query userPublicProfile($username: String!) {
+        matchedUser(username: $username) {
+            username
+            profile {
+                ranking
+                reputation
+                solutionCount
+            }
+            submitStats {
+                acSubmissionNum {
+                    difficulty
+                    count
+                    submissions
+                }
+                totalSubmissionNum {
+                    difficulty
+                    count
+                    submissions
+                }
+            }
+        }
+    }
     """
-    Fetch LeetCode statistics using browser rendering with network inspection.
+    res = _execute_graphql(profile_query, {"username": username})
+    if res and "data" in res and res["data"].get("matchedUser"):
+        user = res["data"]["matchedUser"]
+        profile = user.get("profile") or {}
+        if profile.get("ranking"):
+            metrics["global_rank"] = profile["ranking"]
+        if profile.get("reputation") is not None:
+            metrics["reputation"] = profile["reputation"]
+        if profile.get("solutionCount") is not None:
+            metrics["solution_count"] = profile["solutionCount"]
+
+        submit_stats = user.get("submitStats") or {}
+        ac_list = submit_stats.get("acSubmissionNum") or []
+        for item in ac_list:
+            diff = (item.get("difficulty") or "").lower()
+            cnt = item.get("count")
+            subs = item.get("submissions")
+            if diff == "all":
+                metrics["solved"] = cnt
+                metrics["ac_submissions"] = subs
+            elif diff in ["easy", "medium", "hard"] and cnt is not None:
+                metrics[diff] = cnt
+
+        total_list = submit_stats.get("totalSubmissionNum") or []
+        for item in total_list:
+            diff = (item.get("difficulty") or "").lower()
+            if diff == "all":
+                total_subs = item.get("submissions")
+                if total_subs is not None:
+                    metrics["submissions"] = total_subs
+
+        # Compute acceptance rate if both ac_submissions and submissions exist
+        if "ac_submissions" in metrics and "submissions" in metrics and metrics["submissions"] > 0:
+            rate = (metrics["ac_submissions"] / metrics["submissions"]) * 100
+            metrics["acceptance_rate"] = round(rate, 1)
+
+    # 2. Badges
+    badges_query = """
+    query userBadges($username: String!) {
+        matchedUser(username: $username) {
+            badges {
+                id
+                name
+                displayName
+                icon
+                creationDate
+            }
+            activeBadge {
+                displayName
+            }
+        }
+    }
     """
+    res = _execute_graphql(badges_query, {"username": username})
+    if res and "data" in res and res["data"].get("matchedUser"):
+        badge_data = res["data"]["matchedUser"]
+        badge_list = badge_data.get("badges") or []
+        metrics["badges_count"] = len(badge_list)
+        badge_names = [b.get("displayName") or b.get("name") for b in badge_list if b.get("displayName") or b.get("name")]
+        if badge_names:
+            metrics["badges"] = badge_names
+        active = badge_data.get("activeBadge")
+        if active and active.get("displayName"):
+            metrics["active_badge"] = active["displayName"]
+
+    # 3. Calendar & Streaks
+    calendar_query = """
+    query userCalendar($username: String!) {
+        matchedUser(username: $username) {
+            userCalendar {
+                activeYears
+                streak
+                totalActiveDays
+            }
+        }
+    }
+    """
+    res = _execute_graphql(calendar_query, {"username": username})
+    if res and "data" in res and res["data"].get("matchedUser"):
+        cal = res["data"]["matchedUser"].get("userCalendar") or {}
+        if cal.get("streak") is not None:
+            metrics["streak_days"] = cal["streak"]
+        if cal.get("totalActiveDays") is not None:
+            metrics["total_active_days"] = cal["totalActiveDays"]
+        if cal.get("activeYears"):
+            metrics["active_years"] = cal["activeYears"]
+
+    # 4. Language Breakdown
+    language_query = """
+    query languageStats($username: String!) {
+        matchedUser(username: $username) {
+            languageProblemCount {
+                languageName
+                problemsSolved
+            }
+        }
+    }
+    """
+    res = _execute_graphql(language_query, {"username": username})
+    if res and "data" in res and res["data"].get("matchedUser"):
+        lang_list = res["data"]["matchedUser"].get("languageProblemCount") or []
+        langs = {item["languageName"]: item["problemsSolved"] for item in lang_list if item.get("languageName") and item.get("problemsSolved") is not None}
+        if langs:
+            metrics["languages"] = langs
+
+    # 5. Contest Ranking
+    contest_query = """
+    query userContestRanking($username: String!) {
+        userContestRanking(username: $username) {
+            attendedContestsCount
+            rating
+            globalRanking
+            totalParticipants
+            topPercentage
+            badge {
+                name
+            }
+        }
+    }
+    """
+    res = _execute_graphql(contest_query, {"username": username})
+    if res and "data" in res and res["data"].get("userContestRanking"):
+        contest = res["data"]["userContestRanking"]
+        if contest.get("rating"):
+            metrics["contest_rating"] = round(contest["rating"], 1)
+        if contest.get("globalRanking"):
+            metrics["contest_global_rank"] = contest["globalRanking"]
+        if contest.get("attendedContestsCount") is not None:
+            metrics["contests_attended"] = contest["attendedContestsCount"]
+        if contest.get("topPercentage") is not None:
+            metrics["contest_top_percentage"] = contest["topPercentage"]
+
+    # 6. Recent Accepted Submissions
+    recent_query = """
+    query recentAcSubmissions($username: String!) {
+        recentAcSubmissionList(username: $username, limit: 5) {
+            title
+            titleSlug
+            timestamp
+        }
+    }
+    """
+    res = _execute_graphql(recent_query, {"username": username})
+    if res and "data" in res and res["data"].get("recentAcSubmissionList"):
+        recents = res["data"]["recentAcSubmissionList"]
+        if recents:
+            metrics["recent_ac"] = [r.get("title") for r in recents if r.get("title")]
+
+    # Determine status
+    if "solved" in metrics and "easy" in metrics and "medium" in metrics and "hard" in metrics:
+        status = RetrievalStatus.SUCCESS
+        error = None
+    elif metrics:
+        status = RetrievalStatus.PARTIAL
+        error = "Retrieved partial LeetCode statistics"
+    else:
+        status = RetrievalStatus.UNAVAILABLE
+        error = "Could not retrieve statistics from LeetCode GraphQL API"
+
+    return PlatformStats(
+        platform="LeetCode",
+        username=username,
+        profile_url=profile_url,
+        metrics=metrics,
+        status=status,
+        source="public_graphql",
+        source_type="live",
+        retrieval_method="graphql_api",
+        retrieved_at=datetime.now(timezone.utc).isoformat(),
+        error=error,
+    )
+
+
+def _fetch_leetcode_browser(username: str, profile_url: str) -> PlatformStats:
+    """Fallback using Playwright browser rendering to extract Next.js embedded data."""
     import asyncio
-    from .browser_renderer import fetch_rendered_page, extract_from_json
+    from .browser_renderer import fetch_rendered_page
 
     async def _fetch():
-        # Fetch rendered page with network capture
         page_data = await fetch_rendered_page(
             profile_url,
-            wait_selector=None,  # Don't wait for specific selector
-            wait_timeout=60000,
+            wait_timeout=25000,
             capture_network=True,
         )
+        metrics: Dict[str, Any] = {}
 
-        metrics = {}
-
-        # First try to extract from embedded JSON (Next.js data)
-        if page_data.get("json_data"):
-            # LeetCode stores data in __NEXT_DATA__
-            # Try multiple possible paths for user data
-            json_paths = {
-                "solved": [["props", "pageProps", "data", "user", "acSubmissionNum", 0, "count"],
-                          ["props", "pageProps", "data", "matchedUser", "submitStats", "acSubmissionNum", 0, "count"]],
-                "easy": [["props", "pageProps", "data", "user", "acSubmissionNum", 1, "count"],
-                        ["props", "pageProps", "data", "matchedUser", "submitStats", "acSubmissionNum", 1, "count"]],
-                "medium": [["props", "pageProps", "data", "user", "acSubmissionNum", 2, "count"],
-                          ["props", "pageProps", "data", "matchedUser", "submitStats", "acSubmissionNum", 2, "count"]],
-                "hard": [["props", "pageProps", "data", "user", "acSubmissionNum", 3, "count"],
-                        ["props", "pageProps", "data", "matchedUser", "submitStats", "acSubmissionNum", 3, "count"]],
-                "contest_rating": [["props", "pageProps", "data", "user", "userContestRanking", "rating"],
-                                 ["props", "pageProps", "data", "matchedUser", "userContestRanking", "rating"]],
-                "global_rank": [["props", "pageProps", "data", "user", "userContestRanking", "globalRanking"],
-                               ["props", "pageProps", "data", "matchedUser", "userContestRanking", "globalRanking"]],
-                "badges": [["props", "pageProps", "data", "matchedUser", "badges", "length"]],
-            }
-
-            json_metrics = extract_from_json(page_data["json_data"], json_paths)
-            metrics.update(json_metrics)
-
-        # Second, try to extract from network requests (GraphQL/JSON)
-        if not metrics or len(metrics) < 3:
-            for request in page_data.get("network_requests", []):
+        # Look in captured network requests for GraphQL responses
+        for req in page_data.get("network_requests", []):
+            if "graphql" in req.get("url", "") and "response_body" in req:
                 try:
-                    if "response_body" in request:
-                        response_data = json.loads(request["response_body"])
-                        # Try to extract from GraphQL responses
-                        if "data" in response_data:
-                            data = response_data["data"]
-                            # Try to find user data
-                            if "user" in data:
-                                user_data = data["user"]
-                                if "acSubmissionNum" in user_data:
-                                    sub_nums = user_data["acSubmissionNum"]
-                                    if isinstance(sub_nums, list) and len(sub_nums) >= 4:
-                                        metrics["solved"] = sub_nums[0].get("count")
-                                        metrics["easy"] = sub_nums[1].get("count")
-                                        metrics["medium"] = sub_nums[2].get("count")
-                                        metrics["hard"] = sub_nums[3].get("count")
-                            if "matchedUser" in data:
-                                matched_user = data["matchedUser"]
-                                if "submitStats" in matched_user:
-                                    sub_stats = matched_user["submitStats"]
-                                    if "acSubmissionNum" in sub_stats:
-                                        sub_nums = sub_stats["acSubmissionNum"]
-                                        if isinstance(sub_nums, list) and len(sub_nums) >= 4:
-                                            if "solved" not in metrics:
-                                                metrics["solved"] = sub_nums[0].get("count")
-                                            if "easy" not in metrics:
-                                                metrics["easy"] = sub_nums[1].get("count")
-                                            if "medium" not in metrics:
-                                                metrics["medium"] = sub_nums[2].get("count")
-                                            if "hard" not in metrics:
-                                                metrics["hard"] = sub_nums[3].get("count")
-                                if "userContestRanking" in matched_user:
-                                    contest = matched_user["userContestRanking"]
-                                    if "rating" in contest and "contest_rating" not in metrics:
-                                        metrics["contest_rating"] = contest["rating"]
-                                    if "globalRanking" in contest and "global_rank" not in metrics:
-                                        metrics["global_rank"] = contest["globalRanking"]
-                except (json.JSONDecodeError, KeyError, TypeError):
+                    data = json.loads(req["response_body"])
+                    user = data.get("data", {}).get("matchedUser", {})
+                    stats = user.get("submitStats", {}).get("acSubmissionNum", [])
+                    for s in stats:
+                        d = s.get("difficulty", "").lower()
+                        if d == "all":
+                            metrics["solved"] = s.get("count")
+                        elif d in ["easy", "medium", "hard"]:
+                            metrics[d] = s.get("count")
+                except Exception:
                     continue
 
-        # Third, extract from rendered text as last resort with improved patterns based on screenshot
-        if not metrics or len(metrics) < 2:
-            text_patterns = {
-                "solved": r"Total\s*Solved\s*Problems[:\s]+(\d{3})",  # Match 3-digit solved like 522
-                "submissions": r"Submissions[:\s]+(\d+)",
-                "acceptance": r"Acceptance[:\s]+([\d.]+)%",
-                "easy": r"Easy[:\s]+(\d+)",
-                "medium": r"Medium[:\s]+(\d+)",
-                "hard": r"Hard[:\s]+(\d+)",
-                "rating": r"Rating[:\s]+(\d+)",
-                "global_rank": r"Rank[:\s]+(\d+)",
-            }
-
-            from .browser_renderer import extract_from_text
-            text_metrics = extract_from_text(page_data["text"], text_patterns)
-            metrics.update(text_metrics)
-
-            # If still no solved, try without the label
-            if not metrics or "solved" not in metrics:
-                # Look for "Total Solved Problems" pattern
-                solved_match = re.search(r"Total\s+Solved\s+Problems\s+(\d+)", page_data["text"], re.IGNORECASE)
-                if solved_match:
-                    metrics["solved"] = int(solved_match.group(1))
-
-        # Determine status
-        if metrics:
-            status = RetrievalStatus.SUCCESS if len(metrics) >= 3 else RetrievalStatus.PARTIAL
+        if "solved" in metrics:
+            status = RetrievalStatus.SUCCESS
+            error = None
+        elif metrics:
+            status = RetrievalStatus.PARTIAL
+            error = "Partial data from browser network capture"
         else:
             status = RetrievalStatus.UNAVAILABLE
-            metrics = {}
+            error = "Could not extract LeetCode data via browser"
 
         return PlatformStats(
             platform="LeetCode",
@@ -157,9 +306,10 @@ def fetch_leetcode_with_browser(username: str, profile_url: str) -> PlatformStat
             metrics=metrics,
             status=status,
             source="public_profile",
+            source_type="live",
             retrieval_method="rendered_profile",
-            retrieved_at=datetime.utcnow().isoformat(),
-            error=None if metrics else "Could not extract statistics from rendered profile or network requests",
+            retrieved_at=datetime.now(timezone.utc).isoformat(),
+            error=error,
         )
 
     try:
@@ -170,94 +320,9 @@ def fetch_leetcode_with_browser(username: str, profile_url: str) -> PlatformStat
             username=username,
             profile_url=profile_url,
             status=RetrievalStatus.FAILED,
-            error=f"Browser rendering error: {str(e)}",
+            error=f"Browser error: {str(e)}",
             source="public_profile",
+            source_type="live",
             retrieval_method="rendered_profile",
-            retrieved_at=datetime.utcnow().isoformat(),
-        )
-
-
-def fetch_leetcode_simple(username: str, profile_url: str) -> PlatformStats:
-    """
-    Fallback: simple HTTP scrape without browser rendering.
-    """
-    try:
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-        }
-        req = urllib.request.Request(profile_url, headers=headers)
-
-        with urllib.request.urlopen(req, timeout=10) as response:
-            html = response.read().decode('utf-8')
-
-        metrics = {}
-
-        # Try to extract from embedded JSON in HTML
-        json_match = re.search(r'__NEXT_DATA__\s*=\s*({.+?});</script>', html, re.DOTALL)
-        if json_match:
-            try:
-                json_data = json.loads(json_match.group(1))
-                # Extract from JSON structure
-                try:
-                    user_data = json_data.get("props", {}).get("pageProps", {}).get("data", {}).get("user", {})
-                    submission_num = user_data.get("acSubmissionNum", [])
-                    if submission_num and len(submission_num) >= 4:
-                        metrics["solved"] = submission_num[0].get("count")
-                        metrics["easy"] = submission_num[1].get("count")
-                        metrics["medium"] = submission_num[2].get("count")
-                        metrics["hard"] = submission_num[3].get("count")
-
-                    contest_ranking = user_data.get("userContestRanking", {})
-                    if contest_ranking:
-                        metrics["contest_rating"] = contest_ranking.get("rating")
-                        metrics["global_rank"] = contest_ranking.get("globalRanking")
-
-                    badges = user_data.get("badges")
-                    if badges:
-                        metrics["badges"] = len(badges)
-                except (KeyError, TypeError, AttributeError):
-                    pass
-            except (json.JSONDecodeError, ValueError):
-                pass
-
-        # Determine status
-        if metrics:
-            status = RetrievalStatus.SUCCESS
-        else:
-            status = RetrievalStatus.UNAVAILABLE
-            metrics = {}
-
-        return PlatformStats(
-            platform="LeetCode",
-            username=username,
-            profile_url=profile_url,
-            metrics=metrics,
-            status=status,
-            source="public_profile",
-            retrieval_method="scrape",
-            retrieved_at=datetime.utcnow().isoformat(),
-            error=None if metrics else "Could not extract statistics from profile page",
-        )
-
-    except urllib.error.URLError as e:
-        return PlatformStats(
-            platform="LeetCode",
-            username=username,
-            profile_url=profile_url,
-            status=RetrievalStatus.FAILED,
-            error=f"Network error: {str(e)}",
-            source="public_profile",
-            retrieval_method="scrape",
-            retrieved_at=datetime.utcnow().isoformat(),
-        )
-    except Exception as e:
-        return PlatformStats(
-            platform="LeetCode",
-            username=username,
-            profile_url=profile_url,
-            status=RetrievalStatus.FAILED,
-            error=f"Unexpected error: {str(e)}",
-            source="public_profile",
-            retrieval_method="scrape",
-            retrieved_at=datetime.utcnow().isoformat(),
+            retrieved_at=datetime.now(timezone.utc).isoformat(),
         )

@@ -8,7 +8,7 @@ To update statistics, run: python scripts/generate_stats.py
 
 ## Overview
 
-- **Total code files**: 403
+- **Total code files**: 404
 
 ## Language Breakdown
 
@@ -16,7 +16,7 @@ To update statistics, run: python scripts/generate_stats.py
 |----------|-------|
 | C++ | 399 |
 | Java | 2 |
-| Python | 2 |
+| Python | 3 |
 
 ## Platform Breakdown
 
@@ -38,4 +38,4 @@ To update statistics, run: python scripts/generate_stats.py
 |-----------|-------|
 | .cpp | 399 |
 | .java | 2 |
-| .py | 2 |
+| .py | 3 |

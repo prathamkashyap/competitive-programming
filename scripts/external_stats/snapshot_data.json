@@ -1,0 +1,75 @@
+{
+  "snapshot_metadata": {
+    "description": "Screenshot-verified competitive programming statistics",
+    "source": "user_provided_screenshots",
+    "note": "Reference snapshot data captured from user profile screenshots. Used as baseline verification and fallback if live retrieval is unavailable."
+  },
+  "platforms": {
+    "leetcode": {
+      "username": "prathamkashyap",
+      "profile_url": "https://leetcode.com/u/prathamkashyap/",
+      "capture_date": "2026-10-07",
+      "metrics": {
+        "solved": 522,
+        "easy": 171,
+        "medium": 279,
+        "hard": 72,
+        "submissions": 858,
+        "acceptance_rate": 87.8,
+        "beats_percentage": 99.3
+      }
+    },
+    "hackerearth": {
+      "username": "prathamkashyap",
+      "profile_url": "https://www.hackerearth.com/@prathamkashyap/",
+      "capture_date": "2026-10-07",
+      "metrics": {
+        "points": 4300,
+        "solved": 175,
+        "submissions": 214,
+        "basic_programming_rank": 188,
+        "data_structures_rank": 35769,
+        "algorithms_rank": 19262,
+        "practice_streak_days": 72,
+        "daily_streak_days": 20,
+        "weekly_streak": "5/5",
+        "coding_practices": "180/3253"
+      }
+    },
+    "geeksforgeeks": {
+      "username": "prathamkashyap",
+      "profile_url": "https://www.geeksforgeeks.org/profile/prathamkashyap",
+      "capture_date": "2026-10-07",
+      "metrics": {
+        "coding_score": 424,
+        "solved": 98,
+        "longest_streak_days": 28,
+        "potd_solved": 28,
+        "submissions_2026": 96
+      }
+    },
+    "hackerrank": {
+      "username": "prathamkashyap",
+      "profile_url": "https://www.hackerrank.com/profile/prathamkashyap",
+      "capture_date": "2026-10-07",
+      "metrics": {
+        "problem_solving_stars": 6,
+        "cpp_stars": 5,
+        "java_stars": 5,
+        "python_stars": 5,
+        "sql_stars": 5,
+        "total_stars": 26,
+        "verified_skills": [
+          "Algorithm",
+          "Javascript(Intermediate)",
+          "Data Structure",
+          "Python(Advanced)",
+          "React",
+          "Css",
+          "NodeJs",
+          "SQL"
+        ]
+      }
+    }
+  }
+}

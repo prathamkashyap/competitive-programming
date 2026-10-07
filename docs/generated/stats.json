@@ -1,21 +1,22 @@
 {
-  "total_files": 403,
+  "total_files": 404,
   "by_language": {
     "C++": 399,
     "Java": 2,
-    "Python": 2
+    "Python": 3
   },
   "by_platform": {
     "codeforces": 392
   },
   "by_category": {
     "solution": 392,
+    "other": 1,
     "template": 11
   },
   "by_extension": {
     ".cpp": 399,
     ".java": 2,
-    ".py": 2
+    ".py": 3
   },
   "solutions": [
     {

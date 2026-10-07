@@ -5,7 +5,7 @@ CSES does not have user profiles with public statistics.
 """
 
 from typing import Dict, Any, Optional
-from datetime import datetime
+from datetime import datetime, timezone
 from .models import PlatformStats, RetrievalStatus
 
 
@@ -24,5 +24,5 @@ def fetch_cses_stats(username: str, profile_url: str) -> PlatformStats:
         error="CSES does not have user profiles with public statistics",
         source="none",
         retrieval_method="none",
-        retrieved_at=datetime.utcnow().isoformat(),
+        retrieved_at=datetime.now(timezone.utc).isoformat(),
     )
