@@ -115,54 +115,97 @@ def generate_external_stats_markdown(results: List[PlatformStats], output_path: 
         "This file contains statistics from external competitive programming platforms.",
         "These are separate from the repository's actual solution files.",
         "",
-        "## Platform Statistics",
+        "Last updated: See individual platform timestamps below.",
         "",
-        "| Platform | Username | Profile URL | Status | Source | Key Metrics |",
-        "|----------|----------|-------------|--------|--------|-------------|",
     ]
 
-    for stats in results:
-        platform = stats.platform
-        username = stats.username
-        profile_url = stats.profile_url
-        status = stats.status.value
-        source = stats.source
+    # Group by status
+    successful = [s for s in results if s.status == RetrievalStatus.SUCCESS]
+    partial = [s for s in results if s.status == RetrievalStatus.PARTIAL]
+    unavailable = [s for s in results if s.status == RetrievalStatus.UNAVAILABLE]
+    failed = [s for s in results if s.status == RetrievalStatus.FAILED]
 
-        # Format key metrics
-        metrics_str = ""
-        if stats.metrics:
-            metric_parts = []
-            for key, value in stats.metrics.items():
-                if value is not None:
-                    metric_parts.append(f"{key}: {value}")
-            metrics_str = ", ".join(metric_parts) if metric_parts else "N/A"
-        else:
-            metrics_str = "N/A"
+    # Successful platforms with detailed sections
+    if successful:
+        lines.append("## Successfully Retrieved Statistics")
+        lines.append("")
 
-        lines.append(
-            f"| {platform} | {username} | [{profile_url}]({profile_url}) | {status} | {source} | {metrics_str} |"
-        )
+        for stats in successful:
+            lines.append(f"### {stats.platform}")
+            lines.append("")
+            lines.append(f"**Profile**: [{stats.username}]({stats.profile_url})")
+            lines.append(f"**Source**: {stats.source}")
+            lines.append(f"**Retrieval Method**: {stats.retrieval_method}")
+            lines.append(f"**Retrieved At**: {stats.retrieved_at}")
+            lines.append("")
+            lines.append("**Metrics:**")
+            lines.append("")
 
-    lines.extend([
-        "",
-        "## Status Legend",
-        "",
-        "- **success**: Statistics successfully retrieved",
-        "- **unavailable**: Platform does not have a reliable public API",
-        "- **unconfigured**: No provider available for this platform",
-        "- **failed**: Error occurred during retrieval",
-        "",
-        "## Important Notes",
-        "",
-        "- External statistics are retrieved from public profile information.",
-        "- These statistics represent actual progress on external platforms.",
-        "- They are separate from the solution files stored in this repository.",
-        "- Not all platforms have reliable public APIs for statistics retrieval.",
-        "",
-        "## Repository Statistics",
-        "",
-        "For statistics about the actual files in this repository, see [stats.md](stats.md).",
-    ])
+            if stats.metrics:
+                for key, value in stats.metrics.items():
+                    if value is not None:
+                        lines.append(f"- **{key}**: {value}")
+            else:
+                lines.append("No metrics available")
+
+            lines.append("")
+
+    # Partial results
+    if partial:
+        lines.append("## Partial Results")
+        lines.append("")
+        lines.append("The following platforms returned partial data:")
+        lines.append("")
+
+        for stats in partial:
+            lines.append(f"- **{stats.platform}**: {stats.error}")
+            if stats.metrics:
+                lines.append(f"  Available metrics: {', '.join(stats.metrics.keys())}")
+        lines.append("")
+
+    # Unavailable platforms
+    if unavailable:
+        lines.append("## Unavailable Platforms")
+        lines.append("")
+        lines.append("The following platforms could not retrieve statistics:")
+        lines.append("")
+
+        for stats in unavailable:
+            lines.append(f"- **{stats.platform}**: {stats.error}")
+        lines.append("")
+
+    # Failed platforms
+    if failed:
+        lines.append("## Failed Retrievals")
+        lines.append("")
+        lines.append("The following platforms failed during retrieval:")
+        lines.append("")
+
+        for stats in failed:
+            lines.append(f"- **{stats.platform}**: {stats.error}")
+        lines.append("")
+
+    # Status legend
+    lines.append("## Status Legend")
+    lines.append("")
+    lines.append("- **success**: All key statistics successfully retrieved")
+    lines.append("- **partial**: Some statistics retrieved, but not all")
+    lines.append("- **unavailable**: Platform does not expose public profile statistics")
+    lines.append("- **failed**: Error occurred during retrieval")
+    lines.append("")
+
+    # Important notes
+    lines.append("## Important Notes")
+    lines.append("")
+    lines.append("- External statistics are retrieved from public profile information.")
+    lines.append("- These statistics represent actual progress on external platforms.")
+    lines.append("- They are separate from the solution files stored in this repository.")
+    lines.append("- Profile URLs are the source of truth for verifiability.")
+    lines.append("")
+    lines.append("## Repository Statistics")
+    lines.append("")
+    lines.append("For statistics about the actual files in this repository, see [stats.md](stats.md).")
+    lines.append("")
 
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(lines))
@@ -189,6 +232,7 @@ def main():
     for stats in results:
         status_emoji = {
             RetrievalStatus.SUCCESS: "✓",
+            RetrievalStatus.PARTIAL: "◐",
             RetrievalStatus.UNAVAILABLE: "⊘",
             RetrievalStatus.UNCONFIGURED: "?",
             RetrievalStatus.FAILED: "✗",
@@ -199,6 +243,15 @@ def main():
             print(f"      Error: {stats.error}")
         if stats.metrics:
             print(f"      Metrics: {stats.metrics}")
+
+    # Calculate total external solved count where available
+    total_solved = 0
+    for stats in results:
+        if stats.status in [RetrievalStatus.SUCCESS, RetrievalStatus.PARTIAL]:
+            if stats.metrics and "solved" in stats.metrics and stats.metrics["solved"]:
+                total_solved += stats.metrics["solved"]
+
+    print(f"\nTotal external problems solved (where available): {total_solved}")
 
     # Generate JSON
     json_path = output_dir / "external-stats.json"
@@ -212,10 +265,11 @@ def main():
 
     # Count results by status
     success_count = sum(1 for s in results if s.status == RetrievalStatus.SUCCESS)
+    partial_count = sum(1 for s in results if s.status == RetrievalStatus.PARTIAL)
     unavailable_count = sum(1 for s in results if s.status == RetrievalStatus.UNAVAILABLE)
     failed_count = sum(1 for s in results if s.status == RetrievalStatus.FAILED)
 
-    print(f"\nSummary: {success_count} successful, {unavailable_count} unavailable, {failed_count} failed")
+    print(f"\nSummary: {success_count} successful, {partial_count} partial, {unavailable_count} unavailable, {failed_count} failed")
 
     # Exit with non-zero if any failures (but unavailable is acceptable)
     if failed_count > 0:

@@ -5,11 +5,13 @@ Data models for external platform statistics.
 from dataclasses import dataclass, field
 from typing import Optional, Dict, Any
 from enum import Enum
+from datetime import datetime
 
 
 class RetrievalStatus(Enum):
     """Status of external statistics retrieval."""
     SUCCESS = "success"
+    PARTIAL = "partial"
     UNAVAILABLE = "unavailable"
     UNCONFIGURED = "unconfigured"
     FAILED = "failed"
@@ -23,6 +25,8 @@ class PlatformStats:
     profile_url: str
     metrics: Dict[str, Any] = field(default_factory=dict)
     source: str = ""
+    retrieval_method: str = ""
+    retrieved_at: str = ""
     status: RetrievalStatus = RetrievalStatus.UNCONFIGURED
     error: Optional[str] = None
 
@@ -34,6 +38,8 @@ class PlatformStats:
             "profile_url": self.profile_url,
             "metrics": self.metrics,
             "source": self.source,
+            "retrieval_method": self.retrieval_method,
+            "retrieved_at": self.retrieved_at,
             "status": self.status.value,
             "error": self.error,
         }

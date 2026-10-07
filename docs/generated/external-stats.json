@@ -12,6 +12,8 @@
       "solved": 374
     },
     "source": "official_api",
+    "retrieval_method": "api",
+    "retrieved_at": "2026-10-07T16:19:38.666525",
     "status": "success",
     "error": null
   },
@@ -20,44 +22,58 @@
     "username": "prathamkashyap",
     "profile_url": "https://leetcode.com/u/prathamkashyap/",
     "metrics": {},
-    "source": "none",
+    "source": "public_profile",
+    "retrieval_method": "scrape",
+    "retrieved_at": "2026-10-07T16:19:39.381303",
     "status": "unavailable",
-    "error": "LeetCode does not have a reliable official public API for profile statistics"
+    "error": "Could not extract statistics from profile page"
   },
   {
     "platform": "CodeChef",
     "username": "prathamkashyap",
     "profile_url": "https://www.codechef.com/users/prathamkashyap",
     "metrics": {},
-    "source": "none",
+    "source": "public_profile",
+    "retrieval_method": "scrape",
+    "retrieved_at": "2026-10-07T16:19:40.047562",
     "status": "unavailable",
-    "error": "CodeChef does not have a reliable official public API for profile statistics"
+    "error": "Could not extract statistics from profile page"
   },
   {
     "platform": "HackerEarth",
     "username": "prathamkashyap",
     "profile_url": "https://www.hackerearth.com/@prathamkashyap/",
     "metrics": {},
-    "source": "none",
+    "source": "public_profile",
+    "retrieval_method": "scrape",
+    "retrieved_at": "2026-10-07T16:19:40.428501",
     "status": "unavailable",
-    "error": "HackerEarth does not have a reliable official public API for profile statistics"
+    "error": "Could not extract statistics from profile page"
   },
   {
     "platform": "HackerRank",
     "username": "prathamkashyap",
     "profile_url": "https://www.hackerrank.com/profile/prathamkashyap",
-    "metrics": {},
-    "source": "none",
-    "status": "unavailable",
-    "error": "HackerRank does not have a reliable official public API for profile statistics"
+    "metrics": {
+      "badges": 2530,
+      "stars": 22,
+      "certifications": 20
+    },
+    "source": "public_profile",
+    "retrieval_method": "scrape",
+    "retrieved_at": "2026-10-07T16:19:41.888924",
+    "status": "success",
+    "error": null
   },
   {
     "platform": "GeeksforGeeks",
     "username": "prathamkashyap",
     "profile_url": "https://www.geeksforgeeks.org/profile/prathamkashyap",
     "metrics": {},
-    "source": "none",
+    "source": "public_profile",
+    "retrieval_method": "scrape",
+    "retrieved_at": "2026-10-07T16:19:43.311603",
     "status": "unavailable",
-    "error": "GeeksforGeeks does not have a reliable official public API for profile statistics"
+    "error": "Could not extract statistics from profile page"
   }
 ]

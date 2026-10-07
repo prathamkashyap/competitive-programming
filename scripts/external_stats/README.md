@@ -17,23 +17,24 @@ If you update a profile URL in a README, the system will automatically discover 
 
 ## Supported Platforms
 
-| Platform | Status | Source | Notes |
-|----------|--------|--------|-------|
-| Codeforces | ✅ Success | Official API | Retrieves rating, rank, solved count |
-| LeetCode | ⊘ Unavailable | None | No reliable official public API |
-| CodeChef | ⊘ Unavailable | None | No reliable official public API |
-| HackerEarth | ⊘ Unavailable | None | No reliable official public API |
-| HackerRank | ⊘ Unavailable | None | No reliable official public API |
-| GeeksforGeeks | ⊘ Unavailable | None | No reliable official public API |
-| AtCoder | ⊘ Unavailable | None | No reliable official public API |
-| CSES | ⊘ Unavailable | None | No user profiles with public statistics |
+| Platform | Status | Source | Retrieval Method | Notes |
+|----------|--------|--------|------------------|-------|
+| Codeforces | ✅ Success | Official API | API | Retrieves rating, rank, solved count |
+| HackerRank | ✅ Success | Public Profile | Scrape | Retrieves badges, stars, certifications |
+| LeetCode | ⊘ Unavailable | Public Profile | Scrape | Could not extract statistics from page |
+| CodeChef | ⊘ Unavailable | Public Profile | Scrape | Could not extract statistics from page |
+| HackerEarth | ⊘ Unavailable | Public Profile | Scrape | Could not extract statistics from page |
+| GeeksforGeeks | ⊘ Unavailable | Public Profile | Scrape | Could not extract statistics from page |
+| AtCoder | - | - | - | No profile URL in repository |
+| CSES | ⊘ Unavailable | None | None | No user profiles with public statistics |
 
 ## Status Meanings
 
 - **success**: Statistics successfully retrieved from the platform
-- **unavailable**: Platform does not have a reliable official public API for statistics
+- **partial**: Some statistics retrieved, but not all
+- **unavailable**: Platform could not retrieve statistics (no data in page or no profile)
 - **unconfigured**: No provider available for this platform
-- **failed**: Error occurred during retrieval (network, API error, etc.)
+- **failed**: Error occurred during retrieval (network, etc.)
 
 ## How to Refresh Statistics
 
@@ -45,16 +46,15 @@ python scripts/external_stats.py
 
 This will:
 1. Discover profiles from repository READMEs
-2. Fetch statistics from platforms with available APIs
+2. Fetch statistics from platforms with available APIs or scrape public profiles
 3. Generate `docs/generated/external-stats.json`
 4. Generate `docs/generated/external-stats.md`
 
 ## Important Distinction
 
 **External account statistics** (from external-stats.md):
-- LeetCode solved: X
-- Codeforces solved: Y
-- CodeChef solved: Z
+- Codeforces: 374 solved, rating 815
+- HackerRank: 2530 badges, 22 stars, 20 certifications
 - These represent actual progress on external platforms
 
 **Repository file statistics** (from stats.md):
@@ -77,12 +77,12 @@ scripts/
     ├── discovery.py           # Profile URL discovery from READMEs
     ├── external_stats.py      # Orchestration and generation
     ├── codeforces.py          # Codeforces provider (official API)
-    ├── leetcode.py            # LeetCode provider (unavailable)
-    ├── codechef.py            # CodeChef provider (unavailable)
-    ├── hackerearth.py         # HackerEarth provider (unavailable)
-    ├── hackerrank.py          # HackerRank provider (unavailable)
-    ├── geeksforgeeks.py       # GeeksforGeeks provider (unavailable)
-    ├── atcoder.py             # AtCoder provider (unavailable)
+    ├── leetcode.py            # LeetCode provider (public profile scrape)
+    ├── codechef.py            # CodeChef provider (public profile scrape)
+    ├── hackerearth.py         # HackerEarth provider (public profile scrape)
+    ├── hackerrank.py          # HackerRank provider (public profile scrape)
+    ├── geeksforgeeks.py       # GeeksforGeeks provider (public profile scrape)
+    ├── atcoder.py             # AtCoder provider (public profile scrape)
     └── cses.py                # CSES provider (unavailable)
 ```
 
@@ -97,6 +97,12 @@ To add support for a new platform:
 5. Run the script to test
 
 The provider should return a `PlatformStats` object with appropriate status and metrics.
+
+## Retrieval Methods
+
+1. **Official API** - Preferred when available (e.g., Codeforces)
+2. **Public Profile Scrape** - When no API exists, attempt to extract visible data from the public profile page
+3. **Browser Rendering** - For client-rendered pages (not yet implemented, would require additional tools)
 
 ## Security
 
@@ -118,4 +124,28 @@ As of the last refresh:
 - Solved: 374
 - Status: success
 
-All other platforms are marked as unavailable due to lack of reliable public APIs.
+**HackerRank** (via public profile scrape):
+- Username: prathamkashyap
+- Badges: 2530
+- Stars: 22
+- Certifications: 20
+- Status: success
+
+**Other platforms**: unavailable - could not extract statistics from public profile pages
+
+## Why Some Platforms Are Unavailable
+
+The scraping approach uses simple regex patterns to extract data from HTML. Many modern platforms:
+- Use client-side JavaScript rendering (data not in initial HTML)
+- Have complex DOM structures that require more sophisticated parsing
+- May require JavaScript execution to load statistics
+
+Future improvements could use browser automation tools (e.g., Selenium, Playwright) to handle client-rendered pages, but this adds complexity and dependencies.
+
+## Alternative Approach
+
+For platforms that cannot be scraped, you can:
+1. Manually update the profile URL in the README to point to a page with visible statistics
+2. Add a manual configuration file with key statistics (less ideal)
+3. Wait for official API availability
+4. Use third-party APIs if available and reliable

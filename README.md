@@ -100,12 +100,16 @@ See [docs/generated/stats.md](docs/generated/stats.md) for complete breakdowns a
 
 ### External Platform Statistics
 
-Public profile statistics from external competitive programming platforms are also tracked separately:
+Public profile statistics from external competitive programming platforms:
 
-- **Codeforces**: 374 solved, rating 815 (via official API)
-- Other platforms: Unavailable due to lack of reliable public APIs
+- **Codeforces**: 374 solved, rating 815 (newbie) [via official API]
+- **HackerRank**: 2530 badges, 22 stars, 20 certifications [via public profile]
+- **LeetCode**: See profile for current statistics
+- **CodeChef**: See profile for current statistics
+- **HackerEarth**: See profile for current statistics
+- **GeeksforGeeks**: See profile for current statistics
 
-See [docs/generated/external-stats.md](docs/generated/external-stats.md) for complete external platform statistics.
+See [docs/generated/external-stats.md](docs/generated/external-stats.md) for complete external platform statistics with retrieved metrics, retrieval methods, and timestamps.
 
 Note: External platform statistics represent actual progress on those platforms and are separate from the solution files stored in this repository.
 

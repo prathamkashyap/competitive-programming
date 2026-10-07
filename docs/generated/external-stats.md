@@ -9,22 +9,53 @@ To update external statistics, run: python scripts/external_stats.py
 This file contains statistics from external competitive programming platforms.
 These are separate from the repository's actual solution files.
 
-## Platform Statistics
+Last updated: See individual platform timestamps below.
 
-| Platform | Username | Profile URL | Status | Source | Key Metrics |
-|----------|----------|-------------|--------|--------|-------------|
-| Codeforces | prathamkashyap | [https://codeforces.com/profile/prathamkashyap](https://codeforces.com/profile/prathamkashyap) | success | official_api | rating: 815, max_rating: 815, rank: newbie, max_rank: newbie, title_photo: https://userpic.codeforces.org/4616539/title/ee83f5d77023a486.jpg, solved: 374 |
-| LeetCode | prathamkashyap | [https://leetcode.com/u/prathamkashyap/](https://leetcode.com/u/prathamkashyap/) | unavailable | none | N/A |
-| CodeChef | prathamkashyap | [https://www.codechef.com/users/prathamkashyap](https://www.codechef.com/users/prathamkashyap) | unavailable | none | N/A |
-| HackerEarth | prathamkashyap | [https://www.hackerearth.com/@prathamkashyap/](https://www.hackerearth.com/@prathamkashyap/) | unavailable | none | N/A |
-| HackerRank | prathamkashyap | [https://www.hackerrank.com/profile/prathamkashyap](https://www.hackerrank.com/profile/prathamkashyap) | unavailable | none | N/A |
-| GeeksforGeeks | prathamkashyap | [https://www.geeksforgeeks.org/profile/prathamkashyap](https://www.geeksforgeeks.org/profile/prathamkashyap) | unavailable | none | N/A |
+## Successfully Retrieved Statistics
+
+### Codeforces
+
+**Profile**: [prathamkashyap](https://codeforces.com/profile/prathamkashyap)
+**Source**: official_api
+**Retrieval Method**: api
+**Retrieved At**: 2026-10-07T16:19:38.666525
+
+**Metrics:**
+
+- **rating**: 815
+- **max_rating**: 815
+- **rank**: newbie
+- **max_rank**: newbie
+- **title_photo**: https://userpic.codeforces.org/4616539/title/ee83f5d77023a486.jpg
+- **solved**: 374
+
+### HackerRank
+
+**Profile**: [prathamkashyap](https://www.hackerrank.com/profile/prathamkashyap)
+**Source**: public_profile
+**Retrieval Method**: scrape
+**Retrieved At**: 2026-10-07T16:19:41.888924
+
+**Metrics:**
+
+- **badges**: 2530
+- **stars**: 22
+- **certifications**: 20
+
+## Unavailable Platforms
+
+The following platforms could not retrieve statistics:
+
+- **LeetCode**: Could not extract statistics from profile page
+- **CodeChef**: Could not extract statistics from profile page
+- **HackerEarth**: Could not extract statistics from profile page
+- **GeeksforGeeks**: Could not extract statistics from profile page
 
 ## Status Legend
 
-- **success**: Statistics successfully retrieved
-- **unavailable**: Platform does not have a reliable public API
-- **unconfigured**: No provider available for this platform
+- **success**: All key statistics successfully retrieved
+- **partial**: Some statistics retrieved, but not all
+- **unavailable**: Platform does not expose public profile statistics
 - **failed**: Error occurred during retrieval
 
 ## Important Notes
@@ -32,7 +63,7 @@ These are separate from the repository's actual solution files.
 - External statistics are retrieved from public profile information.
 - These statistics represent actual progress on external platforms.
 - They are separate from the solution files stored in this repository.
-- Not all platforms have reliable public APIs for statistics retrieval.
+- Profile URLs are the source of truth for verifiability.
 
 ## Repository Statistics
 
