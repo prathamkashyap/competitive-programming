@@ -4,6 +4,33 @@
 
 The external statistics system retrieves public profile information from competitive programming platforms and keeps it separate from the repository's actual solution files.
 
+## Browser Rendering Support
+
+For client-rendered profile pages (LeetCode, CodeChef, HackerEarth, GeeksforGeeks), the system can use browser rendering to extract data that is not available in the initial HTML.
+
+### Installing Browser Support
+
+To enable browser rendering:
+
+1. Install dependencies:
+   ```bash
+   pip3 install -r requirements.txt
+   ```
+
+2. Install Playwright browser:
+   ```bash
+   playwright install chromium
+   ```
+
+### Fallback Behavior
+
+If Playwright is not installed, the system will:
+- Attempt simple HTTP scraping as a fallback
+- Mark platforms as unavailable if data cannot be extracted from static HTML
+- Continue to work for platforms with official APIs (Codeforces) or static profiles (HackerRank)
+
+Browser rendering is optional. The system will function without it, but may not retrieve data from client-rendered pages.
+
 ## How Profile Discovery Works
 
 The system automatically discovers profile URLs from repository README files:
@@ -20,11 +47,11 @@ If you update a profile URL in a README, the system will automatically discover 
 | Platform | Status | Source | Retrieval Method | Notes |
 |----------|--------|--------|------------------|-------|
 | Codeforces | ✅ Success | Official API | API | Retrieves rating, rank, solved count |
+| CodeChef | ✅ Success | Public Profile | Rendered Profile | Retrieves rating, global rank via browser rendering |
 | HackerRank | ✅ Success | Public Profile | Scrape | Retrieves badges, stars, certifications |
-| LeetCode | ⊘ Unavailable | Public Profile | Scrape | Could not extract statistics from page |
-| CodeChef | ⊘ Unavailable | Public Profile | Scrape | Could not extract statistics from page |
-| HackerEarth | ⊘ Unavailable | Public Profile | Scrape | Could not extract statistics from page |
-| GeeksforGeeks | ⊘ Unavailable | Public Profile | Scrape | Could not extract statistics from page |
+| LeetCode | ⊘ Unavailable | Public Profile | Rendered Profile | Could not extract statistics from rendered page |
+| HackerEarth | ⊘ Unavailable | Public Profile | Rendered Profile | Could not extract statistics from rendered page |
+| GeeksforGeeks | ⊘ Unavailable | Public Profile | Rendered Profile | Could not extract statistics from rendered page |
 | AtCoder | - | - | - | No profile URL in repository |
 | CSES | ⊘ Unavailable | None | None | No user profiles with public statistics |
 
@@ -102,7 +129,7 @@ The provider should return a `PlatformStats` object with appropriate status and 
 
 1. **Official API** - Preferred when available (e.g., Codeforces)
 2. **Public Profile Scrape** - When no API exists, attempt to extract visible data from the public profile page
-3. **Browser Rendering** - For client-rendered pages (not yet implemented, would require additional tools)
+3. **Browser Rendering** - For client-rendered pages using Playwright (requires `pip3 install -r requirements.txt` and `playwright install chromium`)
 
 ## Security
 
@@ -124,6 +151,13 @@ As of the last refresh:
 - Solved: 374
 - Status: success
 
+**CodeChef** (via browser rendering):
+- Username: prathamkashyap
+- Rating: 922
+- Max Rating: 922
+- Global Rank: 17165
+- Status: success
+
 **HackerRank** (via public profile scrape):
 - Username: prathamkashyap
 - Badges: 2530
@@ -131,7 +165,7 @@ As of the last refresh:
 - Certifications: 20
 - Status: success
 
-**Other platforms**: unavailable - could not extract statistics from public profile pages
+**Other platforms**: unavailable - could not extract statistics from rendered profiles
 
 ## Why Some Platforms Are Unavailable
 
@@ -149,3 +183,25 @@ For platforms that cannot be scraped, you can:
 2. Add a manual configuration file with key statistics (less ideal)
 3. Wait for official API availability
 4. Use third-party APIs if available and reliable
+
+## Browser Rendering Limitations
+
+Despite browser rendering with Playwright, three platforms remain unavailable:
+
+**LeetCode**: The page renders successfully, but the JSON structure used by LeetCode (Next.js hydration) is complex and the specific data path for user statistics could not be reliably identified in the embedded state. The visible text extraction patterns also did not match the rendered page structure.
+
+**HackerEarth**: The page renders but the statistics are not easily extractable from the visible text using regex patterns. The data may be loaded through complex JavaScript or require more sophisticated DOM traversal.
+
+**GeeksforGeeks**: Similar to HackerEarth, the page renders but statistics are not extractable with simple text patterns. The site may use dynamic content loading that requires specific API calls or more complex DOM inspection.
+
+These limitations are due to:
+- Complex client-side rendering that doesn't expose data in simple text form
+- Proprietary data structures that require site-specific reverse engineering
+- Potential need for authenticated API calls for some statistics
+- Evolving page structures that require ongoing maintenance
+
+Future improvements could:
+- Use site-specific API endpoints where available
+- Implement more sophisticated DOM traversal (CSS selectors, XPath)
+- Add network request interception to capture API responses
+- Use platform-specific third-party APIs if available and reliable

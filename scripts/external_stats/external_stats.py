@@ -219,6 +219,22 @@ def main():
     output_dir = repo_root / "docs" / "generated"
     output_dir.mkdir(parents=True, exist_ok=True)
 
+    # Check for browser support
+    try:
+        from .browser_renderer import is_playwright_available
+        browser_available = is_playwright_available()
+        if not browser_available:
+            print("Note: Playwright not installed. Browser rendering unavailable.")
+            print("Install with: pip3 install -r requirements.txt")
+            print("Then run: playwright install chromium")
+            print()
+    except ImportError:
+        browser_available = False
+        print("Note: Browser rendering dependencies not available.")
+        print("Install with: pip3 install -r requirements.txt")
+        print("Then run: playwright install chromium")
+        print()
+
     print("Discovering profiles from repository...")
     profile_info = get_profile_info(repo_root)
     print(f"Found {len(profile_info)} configured platform(s):")

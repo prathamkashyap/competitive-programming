@@ -18,7 +18,7 @@ Last updated: See individual platform timestamps below.
 **Profile**: [prathamkashyap](https://codeforces.com/profile/prathamkashyap)
 **Source**: official_api
 **Retrieval Method**: api
-**Retrieved At**: 2026-10-07T16:19:38.666525
+**Retrieved At**: 2026-10-07T16:51:23.719917
 
 **Metrics:**
 
@@ -29,12 +29,25 @@ Last updated: See individual platform timestamps below.
 - **title_photo**: https://userpic.codeforces.org/4616539/title/ee83f5d77023a486.jpg
 - **solved**: 374
 
+### CodeChef
+
+**Profile**: [prathamkashyap](https://www.codechef.com/users/prathamkashyap)
+**Source**: public_profile
+**Retrieval Method**: rendered_profile
+**Retrieved At**: 2026-10-07T16:52:32.142263
+
+**Metrics:**
+
+- **rating**: 922
+- **max_rating**: 922
+- **global_rank**: 17165
+
 ### HackerRank
 
 **Profile**: [prathamkashyap](https://www.hackerrank.com/profile/prathamkashyap)
 **Source**: public_profile
 **Retrieval Method**: scrape
-**Retrieved At**: 2026-10-07T16:19:41.888924
+**Retrieved At**: 2026-10-07T16:52:34.712276
 
 **Metrics:**
 
@@ -46,10 +59,9 @@ Last updated: See individual platform timestamps below.
 
 The following platforms could not retrieve statistics:
 
-- **LeetCode**: Could not extract statistics from profile page
-- **CodeChef**: Could not extract statistics from profile page
-- **HackerEarth**: Could not extract statistics from profile page
-- **GeeksforGeeks**: Could not extract statistics from profile page
+- **LeetCode**: Could not extract statistics from rendered profile
+- **HackerEarth**: Could not extract statistics from rendered profile
+- **GeeksforGeeks**: Could not extract statistics from rendered profile
 
 ## Status Legend
 

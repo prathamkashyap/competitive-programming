@@ -13,7 +13,7 @@
     },
     "source": "official_api",
     "retrieval_method": "api",
-    "retrieved_at": "2026-10-07T16:19:38.666525",
+    "retrieved_at": "2026-10-07T16:51:23.719917",
     "status": "success",
     "error": null
   },
@@ -23,21 +23,25 @@
     "profile_url": "https://leetcode.com/u/prathamkashyap/",
     "metrics": {},
     "source": "public_profile",
-    "retrieval_method": "scrape",
-    "retrieved_at": "2026-10-07T16:19:39.381303",
+    "retrieval_method": "rendered_profile",
+    "retrieved_at": "2026-10-07T16:52:26.241840",
     "status": "unavailable",
-    "error": "Could not extract statistics from profile page"
+    "error": "Could not extract statistics from rendered profile"
   },
   {
     "platform": "CodeChef",
     "username": "prathamkashyap",
     "profile_url": "https://www.codechef.com/users/prathamkashyap",
-    "metrics": {},
+    "metrics": {
+      "rating": 922,
+      "max_rating": 922,
+      "global_rank": 17165
+    },
     "source": "public_profile",
-    "retrieval_method": "scrape",
-    "retrieved_at": "2026-10-07T16:19:40.047562",
-    "status": "unavailable",
-    "error": "Could not extract statistics from profile page"
+    "retrieval_method": "rendered_profile",
+    "retrieved_at": "2026-10-07T16:52:32.142263",
+    "status": "success",
+    "error": null
   },
   {
     "platform": "HackerEarth",
@@ -45,10 +49,10 @@
     "profile_url": "https://www.hackerearth.com/@prathamkashyap/",
     "metrics": {},
     "source": "public_profile",
-    "retrieval_method": "scrape",
-    "retrieved_at": "2026-10-07T16:19:40.428501",
+    "retrieval_method": "rendered_profile",
+    "retrieved_at": "2026-10-07T16:52:33.357781",
     "status": "unavailable",
-    "error": "Could not extract statistics from profile page"
+    "error": "Could not extract statistics from rendered profile"
   },
   {
     "platform": "HackerRank",
@@ -61,7 +65,7 @@
     },
     "source": "public_profile",
     "retrieval_method": "scrape",
-    "retrieved_at": "2026-10-07T16:19:41.888924",
+    "retrieved_at": "2026-10-07T16:52:34.712276",
     "status": "success",
     "error": null
   },
@@ -71,9 +75,9 @@
     "profile_url": "https://www.geeksforgeeks.org/profile/prathamkashyap",
     "metrics": {},
     "source": "public_profile",
-    "retrieval_method": "scrape",
-    "retrieved_at": "2026-10-07T16:19:43.311603",
+    "retrieval_method": "rendered_profile",
+    "retrieved_at": "2026-10-07T16:52:39.800359",
     "status": "unavailable",
-    "error": "Could not extract statistics from profile page"
+    "error": "Could not extract statistics from rendered profile"
   }
 ]

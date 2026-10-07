@@ -103,9 +103,9 @@ See [docs/generated/stats.md](docs/generated/stats.md) for complete breakdowns a
 Public profile statistics from external competitive programming platforms:
 
 - **Codeforces**: 374 solved, rating 815 (newbie) [via official API]
+- **CodeChef**: rating 922, global rank 17165 [via browser rendering]
 - **HackerRank**: 2530 badges, 22 stars, 20 certifications [via public profile]
 - **LeetCode**: See profile for current statistics
-- **CodeChef**: See profile for current statistics
 - **HackerEarth**: See profile for current statistics
 - **GeeksforGeeks**: See profile for current statistics
 
