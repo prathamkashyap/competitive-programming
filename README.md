@@ -87,6 +87,8 @@ Algorithmic reference material:
 
 ## Generated Statistics
 
+### Repository Statistics
+
 Exact repository statistics are generated automatically from the filesystem:
 
 - **Total code files**: 403
@@ -95,6 +97,17 @@ Exact repository statistics are generated automatically from the filesystem:
 - **Templates**: 11
 
 See [docs/generated/stats.md](docs/generated/stats.md) for complete breakdowns and [docs/generated/problem-index.md](docs/generated/problem-index.md) for the full problem index.
+
+### External Platform Statistics
+
+Public profile statistics from external competitive programming platforms are also tracked separately:
+
+- **Codeforces**: 374 solved, rating 815 (via official API)
+- Other platforms: Unavailable due to lack of reliable public APIs
+
+See [docs/generated/external-stats.md](docs/generated/external-stats.md) for complete external platform statistics.
+
+Note: External platform statistics represent actual progress on those platforms and are separate from the solution files stored in this repository.
 
 ## Automation
 

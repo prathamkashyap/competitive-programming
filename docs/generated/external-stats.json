@@ -1,0 +1,63 @@
+[
+  {
+    "platform": "Codeforces",
+    "username": "prathamkashyap",
+    "profile_url": "https://codeforces.com/profile/prathamkashyap",
+    "metrics": {
+      "rating": 815,
+      "max_rating": 815,
+      "rank": "newbie",
+      "max_rank": "newbie",
+      "title_photo": "https://userpic.codeforces.org/4616539/title/ee83f5d77023a486.jpg",
+      "solved": 374
+    },
+    "source": "official_api",
+    "status": "success",
+    "error": null
+  },
+  {
+    "platform": "LeetCode",
+    "username": "prathamkashyap",
+    "profile_url": "https://leetcode.com/u/prathamkashyap/",
+    "metrics": {},
+    "source": "none",
+    "status": "unavailable",
+    "error": "LeetCode does not have a reliable official public API for profile statistics"
+  },
+  {
+    "platform": "CodeChef",
+    "username": "prathamkashyap",
+    "profile_url": "https://www.codechef.com/users/prathamkashyap",
+    "metrics": {},
+    "source": "none",
+    "status": "unavailable",
+    "error": "CodeChef does not have a reliable official public API for profile statistics"
+  },
+  {
+    "platform": "HackerEarth",
+    "username": "prathamkashyap",
+    "profile_url": "https://www.hackerearth.com/@prathamkashyap/",
+    "metrics": {},
+    "source": "none",
+    "status": "unavailable",
+    "error": "HackerEarth does not have a reliable official public API for profile statistics"
+  },
+  {
+    "platform": "HackerRank",
+    "username": "prathamkashyap",
+    "profile_url": "https://www.hackerrank.com/profile/prathamkashyap",
+    "metrics": {},
+    "source": "none",
+    "status": "unavailable",
+    "error": "HackerRank does not have a reliable official public API for profile statistics"
+  },
+  {
+    "platform": "GeeksforGeeks",
+    "username": "prathamkashyap",
+    "profile_url": "https://www.geeksforgeeks.org/profile/prathamkashyap",
+    "metrics": {},
+    "source": "none",
+    "status": "unavailable",
+    "error": "GeeksforGeeks does not have a reliable official public API for profile statistics"
+  }
+]
