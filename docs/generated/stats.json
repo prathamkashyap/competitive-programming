@@ -1,0 +1,2040 @@
+{
+  "total_files": 403,
+  "by_language": {
+    "C++": 399,
+    "Java": 2,
+    "Python": 2
+  },
+  "by_platform": {
+    "codeforces": 392
+  },
+  "by_category": {
+    "solution": 392,
+    "template": 11
+  },
+  "by_extension": {
+    ".cpp": 399,
+    ".java": 2,
+    ".py": 2
+  },
+  "solutions": [
+    {
+      "path": "codeforces/1000/1141A_Game23.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/118A_StringTask.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/124A_Thenumberofpositions.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/1312B_Bogosort.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/131A_cAPSlOCK.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/1342A_RoadToZero.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/1374C_MoveBrackets.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/1418A_BuyingTorches.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/1474B_DifferentDivisors.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/1476A_K-divisibleSum.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/1521A_NastiaandNearlyGoodNumbers.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/1690D_BlackandWhiteStripe.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/1744C_TrafficLight.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/1791D_DistinctSplit.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/1840C_SkiResort.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/1849B_Monsters.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/1859B_OlyaandGamewithArrays.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/1883C_Raspberries.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/1913B_SwapandDelete.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/1970A_1BalancedShuffle(Easy).cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/1985C_GoodPrefixes.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/1999B_CardGame.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/1A_TheatreSquare.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/2167D_YetAnotherArrayProblem.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/219A_k-String.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/2237C_DuckSurplus.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/2250B_StringConstruction.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/2256B_DominoTiles.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/230A_Dragons.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/30A_Dragons.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/339B_XeniaandRingroad.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/379A_NewYearCandles.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/43A_Football.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/450A_JzzhuandChildren.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/476A_DreamoonandStairs.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/479A_Expression.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/499B_Lecture.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/500A_NewYearTransportation.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/577A_MultiplicationTable.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/579A_RaisingBacteria.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/584A_OlesyaandRodion.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/58A_Chat_room.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/69A_YoungPhysicist.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1000/742A_Arpa\u2019shardexamandMehrdad\u2019snaivecheat.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/1327A_SumofOddIntegers.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/1335C_TwoTeamsComposing.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/1360C_SimilarPairs.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/1472C_LongJumps.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/1490C_SumofCubes.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/1511C_YetAnotherCardDeck.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/158B_Taxi.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/160B_UnluckyTicket.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/1618C_PainttheArray.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/1669F_EatingCandies.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/1742D_Coprime.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/1791E_NegativesandPositives.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/1791G1_Teleporters(EasyVersion).cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/1832B_MaximumSum.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/1850E_CardboardforPictures.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/1873E_BuildinganAquarium.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/1899B_250ThousandTonsofTNT.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/1899C_YarikandArray.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/1914C_Quests.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/1917B_EraseFirstorSecondLetter.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/2130B_Pathless.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/2184B_Hourglass.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/2240B_AIFindsNothingHere.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/224A_Parallelepiped.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/227B_EffectiveApproach.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/242B_BigSegment.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/270A_FancyFence.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/296A_YaroslavandPermutations.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/313B_IlyaandQueries.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/349A_CinemaLine.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/363B_Fence.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/368B_SerejaandSuffixes.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/456A_Laptops.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/467B_FedorandNewGame.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/478A_InitialBet.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/501B_MishaandChangingHandles.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/519B_AandBandCompilationErrors.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/66B_PetyaAndCountryside.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1100/706B_Interestingdrink.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1042B_Vitamins.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1097B_PetrandaCombinationLock.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1133C_BalancedTeam.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1272C_YetAnotherBrokenKeyboard.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1328C_TernaryXOR.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1339B_SortedAdjacentDifferences.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1343C_AlternatingSubsequence.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1352B_SameParitySummands.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1352C_K-thNotDivisiblebyn.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1354B_TernaryString.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1355A_SequencewithDigits.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1355B_YoungExplorers.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1363A_OddSelection.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1364A_XXXXX.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1385C_MakeItGood.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1399C_BoatsCompetition.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1420B_RockandLever.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1433D_DistrictsConnection.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1472D_Even-OddGame.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1487B_CatCycle.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1497B_M-arrays.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1497C1_k-LCM(easyversion).cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1504B_FliptheBits.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1514B_AND0,SumBig.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1520D_SameDifferences.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1527B1_PalindromeGame(easyversion).cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1537C_ChallengingCliffs.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1539C_StableGroups.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1541B_PleasantPairs.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1582C_GrandmaCapaKnitsaScarf.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1594C_MakeThemEqual.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1613C_PoisonedDagger.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1635C_DifferentialSorting.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1671C_DolceVita.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1679B_StoneAgeProblem.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1692E_BinaryDeque.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1703E_MirrorGrid.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1704C_Virus.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1729D_FriendsandtheRestaurant.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1734C_RemovingSmallestMultiples.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1742E_Scuza.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1790D_Matryoshkas.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1793C_DoraandSearch.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1800D_RemoveTwoLetters.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1808B_PlayinginaCasino.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1832C_ContrastValue.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1857C_AssemblyviaMinimums.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1872D_PlusMinusPermutation.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1909B_MakeAlmostEqualWithMod.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1914D_ThreeActivities.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1926C_VladandaSumofSumofDigits.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/1996C_Sort.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/2000D_RightLeftWrong.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/327A_FlippingGame.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/433B_KuriyamaMirai'sStones.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/445A_DZYLovesChessboard.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/459A_PashmakandGarden.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/466A_CheapTravel.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/474B_Worms.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/489B_BerSUBall.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/492B_VanyaandLanterns.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/4B_BeforeanExam.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/514A_Chewba\u0441caandNumber.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/776B_Sherlockandhisgirlfriend.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/961B_LectureSleep.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1200/977C_LessorEqual.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/1077C_GoodArray.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/1285B_JustEatIt!.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/1294C_ProductofThreeNumbers.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/1328B_K-thBeautifulString.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/1335D_Anti-Sudoku.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/1352D_Alice,BobandCandies.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/1360D_BuyingShovels.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/1360E_Polygon.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/1364B_Mostsocially-distancedsubsequence.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/1365B_TroubleSort.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/1366B_Shuffle.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/1372B_OmkarandLastClassofMath.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/1401C_MereArray.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/1470A_StrangeBirthdayParty.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/1538C_NumberofPairs.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/1612C_ChatBan.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/1669H_MaximalAND.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/1692F_3SUM.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/1703F_YetAnotherProblemAboutPairsSatisfyinganInequality.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/1846E1_RudolfandSnowflakes(simpleversion).cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/1857D_StrongVertices.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/1879C_MakeitAlternating.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/1881D_DivideandEqualize.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/189A_CutRibbon.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/1915E_RomanticGlasses.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/1927D_FindtheDifferentOnes!.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/1931D_DivisiblePairs.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/2179D_BlackslexandPenguinCivilization.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/2195D_AbsoluteCinema.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/2195D_AbsoluteCinema.py",
+      "language": "Python",
+      "extension": ".py"
+    },
+    {
+      "path": "codeforces/1300/2230C_ArrangetheNumbersinaCircle.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/2239A_NimGameIsXORGame.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/2242C_UnstableElements.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/2248C_MaximizetheScore.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/230B_T-primes.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/236B_EasyNumberChallenge.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/25A_IQtest.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/271B_PrimeMatrix.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/276B_LittleGirlandGame.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/371B_FoxDividingCheese.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/450B_JzzhuandSequences.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/451B_SorttheArray.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/459B_PashmakandFlowers.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/469B_ChatOnline.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/476B_DreamoonandWiFi.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/478B_RandomTeams.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/4C_Registrationsystem.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/515B_DrazilandHisHappyFriends.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/545D_Queue.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/600B_Queriesaboutlessorequalelements.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/862B_MahmoudandEhabandthebipartiteness.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/893C_Rumor.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1300/996B_WorldCup.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1400/1195C_BasketballExercise.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1400/1201C_MaximumMedian.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1400/1285C_FadiandLCM.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1400/1324D_PairofTopics.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1400/1350B_OracandModels.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1400/1374D_ZeroRemainderArray.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1400/1475C_BallinBerland.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1400/1520E_ArrangingTheSheep.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1400/1526B_IHate1111.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1400/1692G_2^Sort.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1400/1919C_GroupingIncreases.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1400/1931E_AnnaandtheValentine'sDayGift.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1400/2238C_VillageGuilds.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1400/279B_Books.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1400/363C_FixingTypos.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1400/414B_MashmokhandACM.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1400/479C_Exams.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1400/489C_GivenLengthandSumofDigits....cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1400/515C_DrazilandFactorial.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1400/520B_TwoButtons.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1400/550B_PreparingOlympiad.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1400/698A_Vacations.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1400/816B_KarenandCoffee.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1500/1338A_PoweredAddition.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1500/1418C_MortalKombatTower.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1500/2027C_Add Zeros.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1500/230C_Shifts.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1500/276C_LittleGirlandMaximumSum.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1500/2A_Winner.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1500/443B_KolyaandTandemRepeat.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1500/455A _Boredom.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1500/545C_Woodcutters.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1500/550A_TwoSubstrings.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1500/550C_DivisibilitybyEight.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1500/580B_KefaandCompany.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1500/580C_KefaandPark.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1500/744A_HongcowBuildsANation.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1700/598D_IgorIntheMuseum.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1800/434A_Ryouko'sMemoryNote.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/2000/382B_NumberBusters.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/1030A_InSearchofanEasyProblem.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/110A_NearlyLuckyNumber.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/112A_PetyaAndStrings.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/116A_Tram.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/122A_LuckyDivision.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/1328A_DivisibilityProblem.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/1335A_CandiesandTwoSisters.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/1352A_SumofRoundNumbers.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/136A_Presents.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/141A_AmusingJoke.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/144A_ArrivaloftheGeneral.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/148A_Insomniacure.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/1490A_DenseArray.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/151A_SoftDrinking.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/155_AI_love_%username%.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/158A_NextRound.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/160A_Twins.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/1703B_ICPCBalloons.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/1742A_Sum.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/1773F_Football.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/1850A_ToMyCritics.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/1878A_HowMuchDoesDaytonaCost.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/1900A_CoverinWater.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/1915C_CanISquare?.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/200B_Drinks.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/2094A_TrippiTroppi.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/2122A_GreedyGrid.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/2125A_DifficultContest.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/2130A_SubmissionisAllYouNeed.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/2131A_Lever.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/2131B_AlternatingSeries.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/2133B_Villagers.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/2137A_CollatzConjecture.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/2148B_Lasers.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/2155A_ElFucho.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/2185A_PerfectRoot.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/2230A_OptimalPurchase.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/2240A_AnotherPopcountProblem.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/228A_IsYourHorseshoeOnTheOtherHoof.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/231A_Team.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/236A_BoyorGirl.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/263A_BeautifulMatrix.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/266A_StonesOnTheTable.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/266B_QueueAtTheSchool.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/268A_Games.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/271A_BeautifulNumber.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/281A_WordCapitilization.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/282A_Bit++.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/282A_BitPlusPlus.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/339A_HelpfulMaths.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/344A_Magnets.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/363A_Soroban.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/41A_Translation.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/421A_PashaandHamsters.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/431A_BlackSquare.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/443A_AntonandLetters.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/467A_GeorgeAndAccomodation.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/469A_IWannaBetheGuy.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/472A_DesignTutorial:LearnfromMath.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/486A_CalculatingFunction.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/492A_VanyaandCubes.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/4A_Watermelon.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/50A_DominoPiling.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/510A_FoxAndSnake.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/520A_Pangram.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/546A_SoldiersAndBananas.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/59A_Word2.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/617A_Elephant.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/61A_UltraFastMathematician.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/677A_VanyaAndFence.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/705A_Hulk.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/71A_WayTooLongWords.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/723A_TheNewYearMeetingFriends.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/731A_NightattheMuseum.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/732A_BuyaShovel.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/734A_AntonAndDanik.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/734B_AntonandDigits.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/758A_HolidayOfEquality.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/785A_AntonandPolyhedrons.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/791A_BearAndBigBrother.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/80A_PanoramixsPrediction.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/977A_WrongSubtraction.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/800/996A_HittheLottery.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/129A_Cookies.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/133A_HQ9+.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/1373B_01Game.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/1374B_Multiplyby2divideby6.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/1475A_OddDivisor.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/149A_BusinessTrip.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/1855B_LongestDivisorsInterval.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/1985D_ManhattanCircle.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/1992C_GorillaAndPermutation.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/2028A_AlicesAdventuresInChess.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/2033B_SakurakoandWater.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/2047B_ReplaceCharacter.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/2048B_KevinAndPermutation.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/208A_Dubstep.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/2102B_ThePickyCat.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/2114B_NotQuiteaPalindromicString.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/2137B_FunPermutation.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/2148C_Pacer.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/2149C_MEXRose.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/2171B_YuuKoitoandMinimumAbsoluteSum.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/2209B_Array.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/2238B_CrimsonTriples.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/318A_EvenOdds.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/337A_Puzzles.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/34B_Sale.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/405A_GravityFlip.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/44A_IndianSummer.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/451A_GameWithSticks.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/474A_Keyboard.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/48A_Rock-Paper-Scissors.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/52A_123-sequence.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/545A_ToyCars.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/556A_CaseoftheZerosandOnes.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/580A_KefaAndFirstSteps.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/706A_Beru-taxi.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/96A_Football.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/900/Main.java",
+      "language": "Java",
+      "extension": ".java"
+    },
+    {
+      "path": "codeforces/unrated_questions/1722C_WordGame.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/2004A_ClosestPoint.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/2007B_IndexAndMaximumValue.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/2016B_StChroma.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/2072B_HavingBeenaTreasurerinthePastIHelpGoblinsDeceive.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/2110B_DownWithBrackets.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/2124B_MinimizeSum.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/2125B_LeftAndDown.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/2126B_NoCasinoInTheMountain.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/2132B_TheSecretNumber.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/2134A_PaintingWithTwoColors.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/2136A_InTheDream.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/2139A_MapleAndMultiplication.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/2139B_CakeCollection.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/2145B_DeckOfCards.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/2241A_DivideandConquer.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/2241B_GoodtimesGoodtimes.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/2242A_Bigrams.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/2242B_PredominantFrequencyDivision.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/2244A_IskanderandDrawings.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/2244B_NikitaandBooks.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/2244C_StepanandPermutation.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/2244D_YaroslavandProductivity.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/2244E_MashaandtheGarland.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/2244F_AnyaLovesTrees!.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/2244G_YuraandDeadlines.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/2247A_ZeroSum.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/2250A_ThresholdMovement.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/2252A_BossFight.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/unrated_questions/A_YouDelete,IDelete.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    }
+  ],
+  "templates": [
+    {
+      "path": "templates/cpp/dsu.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "templates/cpp/fenwick_tree.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "templates/cpp/graph_traversal.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "templates/cpp/modular_arithmetic.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "templates/cpp/prefix_sums.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "templates/cpp/segment_tree.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "templates/cpp/sieve_prime.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "templates/cpp/sliding_window.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "templates/cpp/template.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "templates/java/Template.java",
+      "language": "Java",
+      "extension": ".java"
+    },
+    {
+      "path": "templates/python/template.py",
+      "language": "Python",
+      "extension": ".py"
+    }
+  ],
+  "notes": []
+}
