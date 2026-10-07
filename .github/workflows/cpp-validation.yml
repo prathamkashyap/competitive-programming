@@ -1,0 +1,62 @@
+name: C++ Validation
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**.cpp'
+      - '**.cc'
+      - '**.cxx'
+      - 'templates/**'
+      - 'scripts/**'
+      - '.github/workflows/cpp-validation.yml'
+  pull_request:
+    paths:
+      - '**.cpp'
+      - '**.cc'
+      - '**.cxx'
+      - 'templates/**'
+      - 'scripts/**'
+      - '.github/workflows/cpp-validation.yml'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install C++ compiler
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y g++
+
+      - name: Verify Python installation
+        run: |
+          python3 --version
+
+      - name: Run statistics generator
+        run: |
+          python3 scripts/generate_stats.py
+
+      - name: Check generated files exist
+        run: |
+          test -f docs/generated/stats.md
+          test -f docs/generated/problem-index.md
+          test -f docs/generated/stats.json
+
+      - name: Run C++ validation
+        run: |
+          python3 scripts/validate_cpp.py
+
+      - name: Upload generated statistics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-stats
+          path: |
+            docs/generated/stats.md
+            docs/generated/problem-index.md
+            docs/generated/stats.json
