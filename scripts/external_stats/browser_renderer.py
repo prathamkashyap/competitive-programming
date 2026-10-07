@@ -57,7 +57,11 @@ async def fetch_rendered_page(
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
         try:
-            page = await browser.new_page()
+            context = await browser.new_context(
+                user_agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                viewport={'width': 1920, 'height': 1080},
+            )
+            page = await context.new_page()
 
             # Capture network requests if requested
             if capture_network:
@@ -92,6 +96,16 @@ async def fetch_rendered_page(
                 page.on("response", handle_response)
 
             # Navigate to the URL with domcontentloaded as fallback
+            # Add realistic headers to avoid 403 errors
+            await page.set_extra_http_headers({
+                'Accept-Language': 'en-US,en;q=0.9',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                'Accept-Encoding': 'gzip, deflate, br',
+                'DNT': '1',
+                'Connection': 'keep-alive',
+                'Upgrade-Insecure-Requests': '1',
+            })
+
             try:
                 await page.goto(url, wait_until="networkidle", timeout=60000)
             except Exception:
@@ -160,6 +174,7 @@ async def fetch_rendered_page(
             result["page"] = page  # Store page object for selector access
 
         finally:
+            await context.close()
             await browser.close()
 
     return result

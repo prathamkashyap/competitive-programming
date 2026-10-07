@@ -2,6 +2,7 @@
 HackerEarth statistics provider using browser-rendered profile retrieval.
 """
 
+import json
 import re
 import urllib.request
 import urllib.error
@@ -44,7 +45,7 @@ def fetch_hackerearth_with_browser(username: str, profile_url: str) -> PlatformS
     async def _fetch():
         page_data = await fetch_rendered_page(
             profile_url,
-            wait_selector=None,
+            wait_selector=None,  # Don't wait for specific selector
             wait_timeout=30000,
             capture_network=True,
         )
@@ -80,9 +81,9 @@ def fetch_hackerearth_with_browser(username: str, profile_url: str) -> PlatformS
         # Second, extract from rendered text with improved patterns based on screenshot
         if not metrics or len(metrics) < 2:
             text_patterns = {
-                "points": r"(\d+)\s*points",
-                "solved": r"(\d+)\s*problems?\s*solved",
-                "submissions": r"(\d+)\s*submissions",
+                "points": r"(\d{4})\s*points",  # Match 4-digit points like 4300
+                "solved": r"problems?\s*solved[:\s]*(\d+)",
+                "submissions": r"submissions[:\s]*(\d+)",
                 "rank": r"rank[:\s]*(\d+)",
                 "streak": r"(\d+)\s*day\s*streak",
                 "top_1_percent": r"Top\s*1%",

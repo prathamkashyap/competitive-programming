@@ -99,7 +99,7 @@ def fetch_codechef_with_browser(username: str, profile_url: str) -> PlatformStat
         # Extract from rendered text as fallback
         if not metrics or len(metrics) < 3:
             text_patterns = {
-                "rating": r"rating[:\s]*(\d+)",
+                "rating": r"(\d{3})\s*rating",  # Match 3-digit rating like 922
                 "max_rating": r"highest rating[:\s]*(\d+)",
                 "stars": r"(\d+)\s*stars?",
                 "solved": r"(\d+)\s*solved",
@@ -109,6 +109,12 @@ def fetch_codechef_with_browser(username: str, profile_url: str) -> PlatformStat
 
             text_metrics = extract_from_text(page_data["text"], text_patterns)
             metrics.update(text_metrics)
+
+            # If still no rating, try without label
+            if "rating" not in metrics:
+                rating_match = re.search(r"(\d{3})\s*\*", page_data["text"])  # Match "922 *" pattern
+                if rating_match:
+                    metrics["rating"] = int(rating_match.group(1))
 
         # Determine status
         if metrics:

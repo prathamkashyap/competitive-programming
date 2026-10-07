@@ -13,7 +13,7 @@
     },
     "source": "official_api",
     "retrieval_method": "api",
-    "retrieved_at": "2026-10-07T17:19:05.959574",
+    "retrieved_at": "2026-10-07T17:36:54.227410",
     "status": "success",
     "error": null
   },
@@ -21,25 +21,29 @@
     "platform": "LeetCode",
     "username": "prathamkashyap",
     "profile_url": "https://leetcode.com/u/prathamkashyap/",
-    "metrics": {},
+    "metrics": {
+      "easy": 171,
+      "hard": 72,
+      "rating": 1,
+      "global_rank": 195
+    },
     "source": "public_profile",
     "retrieval_method": "rendered_profile",
-    "retrieved_at": "2026-10-07T17:20:08.507635",
-    "status": "unavailable",
-    "error": "Could not extract statistics from rendered profile or network requests"
+    "retrieved_at": "2026-10-07T17:37:14.921460",
+    "status": "success",
+    "error": null
   },
   {
     "platform": "CodeChef",
     "username": "prathamkashyap",
     "profile_url": "https://www.codechef.com/users/prathamkashyap",
     "metrics": {
-      "rating": 922,
       "max_rating": 922,
       "global_rank": 17165
     },
     "source": "public_profile",
     "retrieval_method": "rendered_profile",
-    "retrieved_at": "2026-10-07T17:20:16.016343",
+    "retrieved_at": "2026-10-07T17:37:21.719525",
     "status": "success",
     "error": null
   },
@@ -47,23 +51,31 @@
     "platform": "HackerEarth",
     "username": "prathamkashyap",
     "profile_url": "https://www.hackerearth.com/@prathamkashyap/",
-    "metrics": {},
+    "metrics": {
+      "points": 4300,
+      "solved": 214,
+      "submissions": 212,
+      "top_1_percent": "Top 1%",
+      "top_10_percent": "Top 10%"
+    },
     "source": "public_profile",
     "retrieval_method": "rendered_profile",
-    "retrieved_at": "2026-10-07T17:20:17.287438",
-    "status": "unavailable",
-    "error": "Could not extract statistics from rendered profile or network requests"
+    "retrieved_at": "2026-10-07T17:37:26.592803",
+    "status": "success",
+    "error": null
   },
   {
     "platform": "HackerRank",
     "username": "prathamkashyap",
     "profile_url": "https://www.hackerrank.com/profile/prathamkashyap",
-    "metrics": {},
+    "metrics": {
+      "certifications": 20
+    },
     "source": "public_profile",
-    "retrieval_method": "rendered_profile",
-    "retrieved_at": "2026-10-07T17:20:18.859060",
-    "status": "unavailable",
-    "error": "Could not extract statistics from rendered profile"
+    "retrieval_method": "scrape",
+    "retrieved_at": "2026-10-07T17:37:28.859669",
+    "status": "success",
+    "error": null
   },
   {
     "platform": "GeeksforGeeks",
@@ -72,7 +84,7 @@
     "metrics": {},
     "source": "public_profile",
     "retrieval_method": "rendered_profile",
-    "retrieved_at": "2026-10-07T17:20:22.725528",
+    "retrieved_at": "2026-10-07T17:37:44.867509",
     "status": "unavailable",
     "error": "Could not extract statistics from rendered profile or network requests"
   }

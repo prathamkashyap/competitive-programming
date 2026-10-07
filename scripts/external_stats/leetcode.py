@@ -46,7 +46,7 @@ def fetch_leetcode_with_browser(username: str, profile_url: str) -> PlatformStat
         # Fetch rendered page with network capture
         page_data = await fetch_rendered_page(
             profile_url,
-            wait_selector=None,
+            wait_selector=None,  # Don't wait for specific selector
             wait_timeout=60000,
             capture_network=True,
         )
@@ -122,28 +122,26 @@ def fetch_leetcode_with_browser(username: str, profile_url: str) -> PlatformStat
         # Third, extract from rendered text as last resort with improved patterns based on screenshot
         if not metrics or len(metrics) < 2:
             text_patterns = {
-                "solved": r"Total\s*Solved\s*Problems\s*(\d+)",
-                "submissions": r"Submissions\s*(\d+)",
-                "acceptance": r"Acceptance\s*([\d.]+)%",
-                "easy": r"Easy\s*(\d+)",
-                "medium": r"Medium\s*(\d+)",
-                "hard": r"Hard\s*(\d+)",
-                "rating": r"Rating\s*(\d+)",
-                "global_rank": r"Rank[:\s]*(\d+)",
+                "solved": r"Total\s*Solved\s*Problems[:\s]+(\d{3})",  # Match 3-digit solved like 522
+                "submissions": r"Submissions[:\s]+(\d+)",
+                "acceptance": r"Acceptance[:\s]+([\d.]+)%",
+                "easy": r"Easy[:\s]+(\d+)",
+                "medium": r"Medium[:\s]+(\d+)",
+                "hard": r"Hard[:\s]+(\d+)",
+                "rating": r"Rating[:\s]+(\d+)",
+                "global_rank": r"Rank[:\s]+(\d+)",
             }
 
             from .browser_renderer import extract_from_text
             text_metrics = extract_from_text(page_data["text"], text_patterns)
             metrics.update(text_metrics)
 
-            # Debug: try more generic patterns
+            # If still no solved, try without the label
             if not metrics or "solved" not in metrics:
-                generic_patterns = {
-                    "solved": r"(\d+)\s*(?:solved|accepted|submissions)",
-                    "rating": r"(\d+)\s*(?:rating|rank)",
-                }
-                generic_metrics = extract_from_text(page_data["text"], generic_patterns)
-                metrics.update(generic_metrics)
+                # Look for "Total Solved Problems" pattern
+                solved_match = re.search(r"Total\s+Solved\s+Problems\s+(\d+)", page_data["text"], re.IGNORECASE)
+                if solved_match:
+                    metrics["solved"] = int(solved_match.group(1))
 
         # Determine status
         if metrics:

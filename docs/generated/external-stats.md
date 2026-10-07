@@ -18,7 +18,7 @@ Last updated: See individual platform timestamps below.
 **Profile**: [prathamkashyap](https://codeforces.com/profile/prathamkashyap)
 **Source**: official_api
 **Retrieval Method**: api
-**Retrieved At**: 2026-10-07T17:19:05.959574
+**Retrieved At**: 2026-10-07T17:36:54.227410
 
 **Metrics:**
 
@@ -29,26 +29,62 @@ Last updated: See individual platform timestamps below.
 - **title_photo**: https://userpic.codeforces.org/4616539/title/ee83f5d77023a486.jpg
 - **solved**: 374
 
+### LeetCode
+
+**Profile**: [prathamkashyap](https://leetcode.com/u/prathamkashyap/)
+**Source**: public_profile
+**Retrieval Method**: rendered_profile
+**Retrieved At**: 2026-10-07T17:37:14.921460
+
+**Metrics:**
+
+- **easy**: 171
+- **hard**: 72
+- **rating**: 1
+- **global_rank**: 195
+
 ### CodeChef
 
 **Profile**: [prathamkashyap](https://www.codechef.com/users/prathamkashyap)
 **Source**: public_profile
 **Retrieval Method**: rendered_profile
-**Retrieved At**: 2026-10-07T17:20:16.016343
+**Retrieved At**: 2026-10-07T17:37:21.719525
 
 **Metrics:**
 
-- **rating**: 922
 - **max_rating**: 922
 - **global_rank**: 17165
+
+### HackerEarth
+
+**Profile**: [prathamkashyap](https://www.hackerearth.com/@prathamkashyap/)
+**Source**: public_profile
+**Retrieval Method**: rendered_profile
+**Retrieved At**: 2026-10-07T17:37:26.592803
+
+**Metrics:**
+
+- **points**: 4300
+- **solved**: 214
+- **submissions**: 212
+- **top_1_percent**: Top 1%
+- **top_10_percent**: Top 10%
+
+### HackerRank
+
+**Profile**: [prathamkashyap](https://www.hackerrank.com/profile/prathamkashyap)
+**Source**: public_profile
+**Retrieval Method**: scrape
+**Retrieved At**: 2026-10-07T17:37:28.859669
+
+**Metrics:**
+
+- **certifications**: 20
 
 ## Unavailable Platforms
 
 The following platforms could not retrieve statistics:
 
-- **LeetCode**: Could not extract statistics from rendered profile or network requests
-- **HackerEarth**: Could not extract statistics from rendered profile or network requests
-- **HackerRank**: Could not extract statistics from rendered profile
 - **GeeksforGeeks**: Could not extract statistics from rendered profile or network requests
 
 ## Status Legend

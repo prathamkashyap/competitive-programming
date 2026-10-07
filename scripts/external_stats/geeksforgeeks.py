@@ -43,8 +43,11 @@ def fetch_geeksforgeeks_with_browser(username: str, profile_url: str) -> Platfor
     from .browser_renderer import fetch_rendered_page, extract_from_text
 
     async def _fetch():
+        # Try the practice tab URL instead of overview
+        practice_url = f"https://www.geeksforgeeks.org/profile/{username}/practice"
+
         page_data = await fetch_rendered_page(
-            profile_url,
+            practice_url,
             wait_selector=None,
             wait_timeout=30000,
             capture_network=True,
@@ -81,14 +84,14 @@ def fetch_geeksforgeeks_with_browser(username: str, profile_url: str) -> Platfor
         # Second, extract from rendered text with improved patterns based on screenshot
         if not metrics or len(metrics) < 2:
             text_patterns = {
-                "coding_score": r"Coding\s*Score\s*(\d+)",
-                "solved": r"Problems\s*Solved\s*(\d+)",
+                "coding_score": r"Coding\s*Score[:\s]*(\d+)",
+                "solved": r"Problems\s*Solved[:\s]*(\d+)",
                 "streak": r"Longest\s*Streak[:\s]*(\d+)\s*Days",
-                "potd_solved": r"POTDs\s*Solved\s*(\d+)",
-                "basic": r"Basic\s*(\d+)",
-                "easy": r"Easy\s*(\d+)",
-                "medium": r"Medium\s*(\d+)",
-                "hard": r"Hard\s*(\d+)",
+                "potd_solved": r"POTDs\s*Solved[:\s]*(\d+)",
+                "basic": r"Basic[:\s]*(\d+)",
+                "easy": r"Easy[:\s]*(\d+)",
+                "medium": r"Medium[:\s]*(\d+)",
+                "hard": r"Hard[:\s]*(\d+)",
             }
 
             text_metrics = extract_from_text(page_data["text"], text_patterns)
