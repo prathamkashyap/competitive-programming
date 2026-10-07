@@ -54,7 +54,7 @@ def fetch_leetcode_with_browser(username: str, profile_url: str) -> PlatformStat
         metrics = {}
 
         # First try to extract from embedded JSON (Next.js data)
-        if page_data["json_data"]:
+        if page_data.get("json_data"):
             # LeetCode stores data in __NEXT_DATA__
             # Try multiple possible paths for user data
             json_paths = {
@@ -119,10 +119,12 @@ def fetch_leetcode_with_browser(username: str, profile_url: str) -> PlatformStat
                 except (json.JSONDecodeError, KeyError, TypeError):
                     continue
 
-        # Third, extract from rendered text as last resort
+        # Third, extract from rendered text as last resort with improved patterns based on screenshot
         if not metrics or len(metrics) < 2:
             text_patterns = {
-                "solved": r"Solved\s*(\d+)",
+                "solved": r"Total\s*Solved\s*Problems\s*(\d+)",
+                "submissions": r"Submissions\s*(\d+)",
+                "acceptance": r"Acceptance\s*([\d.]+)%",
                 "easy": r"Easy\s*(\d+)",
                 "medium": r"Medium\s*(\d+)",
                 "hard": r"Hard\s*(\d+)",
@@ -135,7 +137,7 @@ def fetch_leetcode_with_browser(username: str, profile_url: str) -> PlatformStat
             metrics.update(text_metrics)
 
             # Debug: try more generic patterns
-            if not metrics:
+            if not metrics or "solved" not in metrics:
                 generic_patterns = {
                     "solved": r"(\d+)\s*(?:solved|accepted|submissions)",
                     "rating": r"(\d+)\s*(?:rating|rank)",

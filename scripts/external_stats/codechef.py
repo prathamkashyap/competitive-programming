@@ -45,14 +45,45 @@ def fetch_codechef_with_browser(username: str, profile_url: str) -> PlatformStat
     async def _fetch():
         page_data = await fetch_rendered_page(
             profile_url,
-            wait_selector=None,  # Don't wait for specific selector
+            wait_selector=None,
             wait_timeout=30000,
+            capture_network=True,
         )
 
         metrics = {}
 
-        # Try to extract from embedded JSON
-        if page_data["json_data"]:
+        # First, try to extract from network requests (JSON/GraphQL)
+        for request in page_data.get("network_requests", []):
+            try:
+                if "response_body" in request:
+                    response_data = json.loads(request["response_body"])
+                    # Try to find user/profile data
+                    if isinstance(response_data, dict):
+                        # Look for common profile data keys
+                        if "user" in response_data:
+                            user_data = response_data["user"]
+                            if "rating" in user_data:
+                                metrics["rating"] = user_data["rating"]
+                            if "maxRating" in user_data:
+                                metrics["max_rating"] = user_data["maxRating"]
+                            if "stars" in user_data:
+                                metrics["stars"] = user_data["stars"]
+                            if "solved" in user_data:
+                                metrics["solved"] = user_data["solved"]
+                            if "globalRank" in user_data:
+                                metrics["global_rank"] = user_data["globalRank"]
+                            if "countryRank" in user_data:
+                                metrics["country_rank"] = user_data["countryRank"]
+                        # Also check top-level keys
+                        if "rating" in response_data:
+                            metrics["rating"] = response_data["rating"]
+                        if "solved" in response_data:
+                            metrics["solved"] = response_data["solved"]
+            except (json.JSONDecodeError, KeyError, TypeError):
+                continue
+
+        # Second, try to extract from embedded JSON
+        if page_data.get("json_data"):
             json_paths = {
                 "rating": [["user", "rating"]],
                 "max_rating": [["user", "maxRating"]],

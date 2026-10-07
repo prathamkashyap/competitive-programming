@@ -154,6 +154,11 @@ async def fetch_rendered_page(
             if capture_network:
                 result["network_requests"] = requests
 
+            # Extract data using CSS selectors if any are provided
+            # (This allows more reliable extraction than text patterns)
+            # Callers can use this by implementing their own selector logic
+            result["page"] = page  # Store page object for selector access
+
         finally:
             await browser.close()
 

@@ -77,22 +77,26 @@ def fetch_hackerearth_with_browser(username: str, profile_url: str) -> PlatformS
             except (json.JSONDecodeError, KeyError, TypeError):
                 continue
 
-        # Second, extract from rendered text
+        # Second, extract from rendered text with improved patterns based on screenshot
         if not metrics or len(metrics) < 2:
             text_patterns = {
                 "points": r"(\d+)\s*points",
-                "solved": r"(\d+)\s*solved",
+                "solved": r"(\d+)\s*problems?\s*solved",
                 "submissions": r"(\d+)\s*submissions",
                 "rank": r"rank[:\s]*(\d+)",
+                "streak": r"(\d+)\s*day\s*streak",
+                "top_1_percent": r"Top\s*1%",
+                "top_10_percent": r"Top\s*10%",
+                "top_22_percent": r"Top\s*22%",
             }
 
             text_metrics = extract_from_text(page_data["text"], text_patterns)
             metrics.update(text_metrics)
 
             # Try more generic patterns if specific ones fail
-            if not metrics:
+            if not metrics or "points" not in metrics:
                 generic_patterns = {
-                    "points": r"(\d+)\s*(?:points|score)",
+                    "points": r"(\d{4,})\s*(?:points|score)",  # Match 4+ digit numbers (like 4300)
                     "solved": r"(\d+)\s*(?:solved|problems)",
                     "submissions": r"(\d+)\s*(?:submissions|attempts)",
                 }

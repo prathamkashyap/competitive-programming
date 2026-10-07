@@ -13,7 +13,7 @@
     },
     "source": "official_api",
     "retrieval_method": "api",
-    "retrieved_at": "2026-10-07T17:01:43.534503",
+    "retrieved_at": "2026-10-07T17:19:05.959574",
     "status": "success",
     "error": null
   },
@@ -24,7 +24,7 @@
     "metrics": {},
     "source": "public_profile",
     "retrieval_method": "rendered_profile",
-    "retrieved_at": "2026-10-07T17:02:45.688290",
+    "retrieved_at": "2026-10-07T17:20:08.507635",
     "status": "unavailable",
     "error": "Could not extract statistics from rendered profile or network requests"
   },
@@ -39,7 +39,7 @@
     },
     "source": "public_profile",
     "retrieval_method": "rendered_profile",
-    "retrieved_at": "2026-10-07T17:02:52.011549",
+    "retrieved_at": "2026-10-07T17:20:16.016343",
     "status": "success",
     "error": null
   },
@@ -50,7 +50,7 @@
     "metrics": {},
     "source": "public_profile",
     "retrieval_method": "rendered_profile",
-    "retrieved_at": "2026-10-07T17:02:53.291284",
+    "retrieved_at": "2026-10-07T17:20:17.287438",
     "status": "unavailable",
     "error": "Could not extract statistics from rendered profile or network requests"
   },
@@ -58,15 +58,12 @@
     "platform": "HackerRank",
     "username": "prathamkashyap",
     "profile_url": "https://www.hackerrank.com/profile/prathamkashyap",
-    "metrics": {
-      "badges": 22,
-      "certifications": 20
-    },
+    "metrics": {},
     "source": "public_profile",
-    "retrieval_method": "scrape",
-    "retrieved_at": "2026-10-07T17:02:54.456900",
-    "status": "success",
-    "error": null
+    "retrieval_method": "rendered_profile",
+    "retrieved_at": "2026-10-07T17:20:18.859060",
+    "status": "unavailable",
+    "error": "Could not extract statistics from rendered profile"
   },
   {
     "platform": "GeeksforGeeks",
@@ -75,7 +72,7 @@
     "metrics": {},
     "source": "public_profile",
     "retrieval_method": "rendered_profile",
-    "retrieved_at": "2026-10-07T17:03:11.376465",
+    "retrieved_at": "2026-10-07T17:20:22.725528",
     "status": "unavailable",
     "error": "Could not extract statistics from rendered profile or network requests"
   }

@@ -78,23 +78,27 @@ def fetch_geeksforgeeks_with_browser(username: str, profile_url: str) -> Platfor
             except (json.JSONDecodeError, KeyError, TypeError):
                 continue
 
-        # Second, extract from rendered text
+        # Second, extract from rendered text with improved patterns based on screenshot
         if not metrics or len(metrics) < 2:
             text_patterns = {
-                "coding_score": r"(\d+)\s*coding\s*score",
-                "overall_score": r"(\d+)\s*overall\s*score",
-                "solved": r"(\d+)\s*problems?\s*solved",
-                "streak": r"(\d+)\s*day\s*streak",
+                "coding_score": r"Coding\s*Score\s*(\d+)",
+                "solved": r"Problems\s*Solved\s*(\d+)",
+                "streak": r"Longest\s*Streak[:\s]*(\d+)\s*Days",
+                "potd_solved": r"POTDs\s*Solved\s*(\d+)",
+                "basic": r"Basic\s*(\d+)",
+                "easy": r"Easy\s*(\d+)",
+                "medium": r"Medium\s*(\d+)",
+                "hard": r"Hard\s*(\d+)",
             }
 
             text_metrics = extract_from_text(page_data["text"], text_patterns)
             metrics.update(text_metrics)
 
             # Try more generic patterns if specific ones fail
-            if not metrics:
+            if not metrics or "coding_score" not in metrics:
                 generic_patterns = {
-                    "coding_score": r"(\d+)\s*(?:coding|practice)\s*score",
-                    "solved": r"(\d+)\s*(?:problems?|questions)\s*solved",
+                    "coding_score": r"(\d{3})\s*(?:coding|practice)\s*score",  # Match 3-digit numbers like 424
+                    "solved": r"(\d{2,3})\s*(?:problems?|questions)\s*solved",  # Match 2-3 digit numbers like 98
                     "streak": r"(\d+)\s*(?:day|streak)",
                 }
                 generic_metrics = extract_from_text(page_data["text"], generic_patterns)
