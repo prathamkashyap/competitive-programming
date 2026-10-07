@@ -260,14 +260,16 @@ def main():
         if stats.metrics:
             print(f"      Metrics: {stats.metrics}")
 
-    # Calculate total external solved count where available
-    total_solved = 0
+    # Calculate combined platform-reported solves (not unique problems)
+    combined_solved = 0
     for stats in results:
         if stats.status in [RetrievalStatus.SUCCESS, RetrievalStatus.PARTIAL]:
             if stats.metrics and "solved" in stats.metrics and stats.metrics["solved"]:
-                total_solved += stats.metrics["solved"]
+                combined_solved += stats.metrics["solved"]
 
-    print(f"\nTotal external problems solved (where available): {total_solved}")
+    if combined_solved > 0:
+        print(f"\nCombined platform-reported solves: {combined_solved}")
+        print("(Note: This is a simple sum of platform-reported solves, not a unique problem count)")
 
     # Generate JSON
     json_path = output_dir / "external-stats.json"

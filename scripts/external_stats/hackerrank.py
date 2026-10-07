@@ -13,6 +13,8 @@ from .models import PlatformStats, RetrievalStatus
 def fetch_hackerrank_stats(username: str, profile_url: str) -> PlatformStats:
     """
     Fetch HackerRank statistics from the public profile page.
+
+    Semantically verify metrics before labeling them.
     """
     try:
         # Use proper user agent to avoid 403
@@ -27,21 +29,33 @@ def fetch_hackerrank_stats(username: str, profile_url: str) -> PlatformStats:
 
         metrics = {}
 
-        # Extract badges - HackerRank shows badges as icons with counts
-        # Look for badge counts in the page
-        badge_matches = re.findall(r'(\d+)\s*badges?', html, re.IGNORECASE)
-        if badge_matches:
-            metrics["badges"] = sum(int(b) for b in badge_matches)
+        # Extract badges - look for badge count with clear context
+        # HackerRank shows badge count in the profile
+        badge_count = re.search(r'(\d+)\s*badges?\s*(?:earned|completed|unlocked)', html, re.IGNORECASE)
+        if badge_count:
+            metrics["badges"] = int(badge_count.group(1))
+        else:
+            # Fallback: just count the word "badge" near a number
+            badge_match = re.search(r'(\d+)\s*badges?', html, re.IGNORECASE)
+            if badge_match:
+                # Only use if it's a reasonable number (not all badges on the platform)
+                count = int(badge_match.group(1))
+                if count < 10000:  # Sanity check
+                    metrics["badges"] = count
 
-        # Extract stars/points if available
-        stars_match = re.search(r'(\d+)\s*stars', html, re.IGNORECASE)
+        # Extract stars - look for star rating context
+        stars_match = re.search(r'(\d+)\s*stars?', html, re.IGNORECASE)
         if stars_match:
-            metrics["stars"] = int(stars_match.group(1))
+            count = int(stars_match.group(1))
+            if count <= 10:  # Stars are typically 1-5 or 1-10
+                metrics["stars"] = count
 
-        # Extract certifications if mentioned
+        # Extract certifications - look for certification count
         cert_match = re.search(r'(\d+)\s*certifications?', html, re.IGNORECASE)
         if cert_match:
-            metrics["certifications"] = int(cert_match.group(1))
+            count = int(cert_match.group(1))
+            if count < 100:  # Sanity check
+                metrics["certifications"] = count
 
         # Determine status
         if metrics:

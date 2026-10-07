@@ -13,7 +13,7 @@
     },
     "source": "official_api",
     "retrieval_method": "api",
-    "retrieved_at": "2026-10-07T16:51:23.719917",
+    "retrieved_at": "2026-10-07T17:01:43.534503",
     "status": "success",
     "error": null
   },
@@ -24,9 +24,9 @@
     "metrics": {},
     "source": "public_profile",
     "retrieval_method": "rendered_profile",
-    "retrieved_at": "2026-10-07T16:52:26.241840",
+    "retrieved_at": "2026-10-07T17:02:45.688290",
     "status": "unavailable",
-    "error": "Could not extract statistics from rendered profile"
+    "error": "Could not extract statistics from rendered profile or network requests"
   },
   {
     "platform": "CodeChef",
@@ -39,7 +39,7 @@
     },
     "source": "public_profile",
     "retrieval_method": "rendered_profile",
-    "retrieved_at": "2026-10-07T16:52:32.142263",
+    "retrieved_at": "2026-10-07T17:02:52.011549",
     "status": "success",
     "error": null
   },
@@ -50,22 +50,21 @@
     "metrics": {},
     "source": "public_profile",
     "retrieval_method": "rendered_profile",
-    "retrieved_at": "2026-10-07T16:52:33.357781",
+    "retrieved_at": "2026-10-07T17:02:53.291284",
     "status": "unavailable",
-    "error": "Could not extract statistics from rendered profile"
+    "error": "Could not extract statistics from rendered profile or network requests"
   },
   {
     "platform": "HackerRank",
     "username": "prathamkashyap",
     "profile_url": "https://www.hackerrank.com/profile/prathamkashyap",
     "metrics": {
-      "badges": 2530,
-      "stars": 22,
+      "badges": 22,
       "certifications": 20
     },
     "source": "public_profile",
     "retrieval_method": "scrape",
-    "retrieved_at": "2026-10-07T16:52:34.712276",
+    "retrieved_at": "2026-10-07T17:02:54.456900",
     "status": "success",
     "error": null
   },
@@ -76,8 +75,8 @@
     "metrics": {},
     "source": "public_profile",
     "retrieval_method": "rendered_profile",
-    "retrieved_at": "2026-10-07T16:52:39.800359",
+    "retrieved_at": "2026-10-07T17:03:11.376465",
     "status": "unavailable",
-    "error": "Could not extract statistics from rendered profile"
+    "error": "Could not extract statistics from rendered profile or network requests"
   }
 ]

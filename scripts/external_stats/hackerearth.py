@@ -36,7 +36,7 @@ def fetch_hackerearth_stats(username: str, profile_url: str) -> PlatformStats:
 
 def fetch_hackerearth_with_browser(username: str, profile_url: str) -> PlatformStats:
     """
-    Fetch HackerEarth statistics using browser rendering.
+    Fetch HackerEarth statistics using browser rendering with network inspection.
     """
     import asyncio
     from .browser_renderer import fetch_rendered_page, extract_from_text
@@ -44,36 +44,64 @@ def fetch_hackerearth_with_browser(username: str, profile_url: str) -> PlatformS
     async def _fetch():
         page_data = await fetch_rendered_page(
             profile_url,
-            wait_selector=None,  # Don't wait for specific selector
+            wait_selector=None,
             wait_timeout=30000,
+            capture_network=True,
         )
 
         metrics = {}
 
-        # Extract from rendered text
-        text_patterns = {
-            "points": r"(\d+)\s*points",
-            "solved": r"(\d+)\s*solved",
-            "submissions": r"(\d+)\s*submissions",
-            "rank": r"rank[:\s]*(\d+)",
-        }
+        # First, try to extract from network requests (JSON/GraphQL)
+        for request in page_data.get("network_requests", []):
+            try:
+                if "response_body" in request:
+                    response_data = json.loads(request["response_body"])
+                    # Try to find user/profile data
+                    if isinstance(response_data, dict):
+                        # Look for common profile data keys
+                        if "user" in response_data:
+                            user_data = response_data["user"]
+                            if "points" in user_data:
+                                metrics["points"] = user_data["points"]
+                            if "solved" in user_data:
+                                metrics["solved"] = user_data["solved"]
+                            if "submissions" in user_data:
+                                metrics["submissions"] = user_data["submissions"]
+                        # Also check top-level keys
+                        if "points" in response_data:
+                            metrics["points"] = response_data["points"]
+                        if "solved" in response_data:
+                            metrics["solved"] = response_data["solved"]
+                        if "submissions" in response_data:
+                            metrics["submissions"] = response_data["submissions"]
+            except (json.JSONDecodeError, KeyError, TypeError):
+                continue
 
-        text_metrics = extract_from_text(page_data["text"], text_patterns)
-        metrics.update(text_metrics)
-
-        # Try more generic patterns if specific ones fail
-        if not metrics:
-            generic_patterns = {
-                "points": r"(\d+)\s*(?:points|score)",
-                "solved": r"(\d+)\s*(?:solved|problems)",
-                "submissions": r"(\d+)\s*(?:submissions|attempts)",
+        # Second, extract from rendered text
+        if not metrics or len(metrics) < 2:
+            text_patterns = {
+                "points": r"(\d+)\s*points",
+                "solved": r"(\d+)\s*solved",
+                "submissions": r"(\d+)\s*submissions",
+                "rank": r"rank[:\s]*(\d+)",
             }
-            generic_metrics = extract_from_text(page_data["text"], generic_patterns)
-            metrics.update(generic_metrics)
+
+            text_metrics = extract_from_text(page_data["text"], text_patterns)
+            metrics.update(text_metrics)
+
+            # Try more generic patterns if specific ones fail
+            if not metrics:
+                generic_patterns = {
+                    "points": r"(\d+)\s*(?:points|score)",
+                    "solved": r"(\d+)\s*(?:solved|problems)",
+                    "submissions": r"(\d+)\s*(?:submissions|attempts)",
+                }
+                generic_metrics = extract_from_text(page_data["text"], generic_patterns)
+                metrics.update(generic_metrics)
 
         # Determine status
         if metrics:
-            status = RetrievalStatus.SUCCESS
+            status = RetrievalStatus.SUCCESS if len(metrics) >= 2 else RetrievalStatus.PARTIAL
         else:
             status = RetrievalStatus.UNAVAILABLE
             metrics = {}
@@ -87,7 +115,7 @@ def fetch_hackerearth_with_browser(username: str, profile_url: str) -> PlatformS
             source="public_profile",
             retrieval_method="rendered_profile",
             retrieved_at=datetime.utcnow().isoformat(),
-            error=None if metrics else "Could not extract statistics from rendered profile",
+            error=None if metrics else "Could not extract statistics from rendered profile or network requests",
         )
 
     try:

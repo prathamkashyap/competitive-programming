@@ -37,39 +37,90 @@ def fetch_leetcode_stats(username: str, profile_url: str) -> PlatformStats:
 
 def fetch_leetcode_with_browser(username: str, profile_url: str) -> PlatformStats:
     """
-    Fetch LeetCode statistics using browser rendering.
+    Fetch LeetCode statistics using browser rendering with network inspection.
     """
     import asyncio
     from .browser_renderer import fetch_rendered_page, extract_from_json
 
     async def _fetch():
-        # Fetch rendered page
+        # Fetch rendered page with network capture
         page_data = await fetch_rendered_page(
             profile_url,
-            wait_selector=None,  # Don't wait for specific selector, just networkidle
-            wait_timeout=60000,  # Longer timeout for LeetCode
+            wait_selector=None,
+            wait_timeout=60000,
+            capture_network=True,
         )
 
         metrics = {}
 
-        # Try to extract from embedded JSON (Next.js data)
+        # First try to extract from embedded JSON (Next.js data)
         if page_data["json_data"]:
             # LeetCode stores data in __NEXT_DATA__
+            # Try multiple possible paths for user data
             json_paths = {
-                "solved": [["props", "pageProps", "data", "user", "acSubmissionNum", 0, "count"]],
-                "easy": [["props", "pageProps", "data", "user", "acSubmissionNum", 1, "count"]],
-                "medium": [["props", "pageProps", "data", "user", "acSubmissionNum", 2, "count"]],
-                "hard": [["props", "pageProps", "data", "user", "acSubmissionNum", 3, "count"]],
-                "contest_rating": [["props", "pageProps", "data", "user", "userContestRanking", "rating"]],
-                "global_rank": [["props", "pageProps", "data", "user", "userContestRanking", "globalRanking"]],
+                "solved": [["props", "pageProps", "data", "user", "acSubmissionNum", 0, "count"],
+                          ["props", "pageProps", "data", "matchedUser", "submitStats", "acSubmissionNum", 0, "count"]],
+                "easy": [["props", "pageProps", "data", "user", "acSubmissionNum", 1, "count"],
+                        ["props", "pageProps", "data", "matchedUser", "submitStats", "acSubmissionNum", 1, "count"]],
+                "medium": [["props", "pageProps", "data", "user", "acSubmissionNum", 2, "count"],
+                          ["props", "pageProps", "data", "matchedUser", "submitStats", "acSubmissionNum", 2, "count"]],
+                "hard": [["props", "pageProps", "data", "user", "acSubmissionNum", 3, "count"],
+                        ["props", "pageProps", "data", "matchedUser", "submitStats", "acSubmissionNum", 3, "count"]],
+                "contest_rating": [["props", "pageProps", "data", "user", "userContestRanking", "rating"],
+                                 ["props", "pageProps", "data", "matchedUser", "userContestRanking", "rating"]],
+                "global_rank": [["props", "pageProps", "data", "user", "userContestRanking", "globalRanking"],
+                               ["props", "pageProps", "data", "matchedUser", "userContestRanking", "globalRanking"]],
                 "badges": [["props", "pageProps", "data", "matchedUser", "badges", "length"]],
             }
 
             json_metrics = extract_from_json(page_data["json_data"], json_paths)
             metrics.update(json_metrics)
 
-        # Also try to extract from rendered text as fallback
+        # Second, try to extract from network requests (GraphQL/JSON)
         if not metrics or len(metrics) < 3:
+            for request in page_data.get("network_requests", []):
+                try:
+                    if "response_body" in request:
+                        response_data = json.loads(request["response_body"])
+                        # Try to extract from GraphQL responses
+                        if "data" in response_data:
+                            data = response_data["data"]
+                            # Try to find user data
+                            if "user" in data:
+                                user_data = data["user"]
+                                if "acSubmissionNum" in user_data:
+                                    sub_nums = user_data["acSubmissionNum"]
+                                    if isinstance(sub_nums, list) and len(sub_nums) >= 4:
+                                        metrics["solved"] = sub_nums[0].get("count")
+                                        metrics["easy"] = sub_nums[1].get("count")
+                                        metrics["medium"] = sub_nums[2].get("count")
+                                        metrics["hard"] = sub_nums[3].get("count")
+                            if "matchedUser" in data:
+                                matched_user = data["matchedUser"]
+                                if "submitStats" in matched_user:
+                                    sub_stats = matched_user["submitStats"]
+                                    if "acSubmissionNum" in sub_stats:
+                                        sub_nums = sub_stats["acSubmissionNum"]
+                                        if isinstance(sub_nums, list) and len(sub_nums) >= 4:
+                                            if "solved" not in metrics:
+                                                metrics["solved"] = sub_nums[0].get("count")
+                                            if "easy" not in metrics:
+                                                metrics["easy"] = sub_nums[1].get("count")
+                                            if "medium" not in metrics:
+                                                metrics["medium"] = sub_nums[2].get("count")
+                                            if "hard" not in metrics:
+                                                metrics["hard"] = sub_nums[3].get("count")
+                                if "userContestRanking" in matched_user:
+                                    contest = matched_user["userContestRanking"]
+                                    if "rating" in contest and "contest_rating" not in metrics:
+                                        metrics["contest_rating"] = contest["rating"]
+                                    if "globalRanking" in contest and "global_rank" not in metrics:
+                                        metrics["global_rank"] = contest["globalRanking"]
+                except (json.JSONDecodeError, KeyError, TypeError):
+                    continue
+
+        # Third, extract from rendered text as last resort
+        if not metrics or len(metrics) < 2:
             text_patterns = {
                 "solved": r"Solved\s*(\d+)",
                 "easy": r"Easy\s*(\d+)",
@@ -85,7 +136,6 @@ def fetch_leetcode_with_browser(username: str, profile_url: str) -> PlatformStat
 
             # Debug: try more generic patterns
             if not metrics:
-                # Try to find any number followed by "solved"
                 generic_patterns = {
                     "solved": r"(\d+)\s*(?:solved|accepted|submissions)",
                     "rating": r"(\d+)\s*(?:rating|rank)",
@@ -95,7 +145,7 @@ def fetch_leetcode_with_browser(username: str, profile_url: str) -> PlatformStat
 
         # Determine status
         if metrics:
-            status = RetrievalStatus.SUCCESS
+            status = RetrievalStatus.SUCCESS if len(metrics) >= 3 else RetrievalStatus.PARTIAL
         else:
             status = RetrievalStatus.UNAVAILABLE
             metrics = {}
@@ -109,7 +159,7 @@ def fetch_leetcode_with_browser(username: str, profile_url: str) -> PlatformStat
             source="public_profile",
             retrieval_method="rendered_profile",
             retrieved_at=datetime.utcnow().isoformat(),
-            error=None if metrics else "Could not extract statistics from rendered profile",
+            error=None if metrics else "Could not extract statistics from rendered profile or network requests",
         )
 
     try:

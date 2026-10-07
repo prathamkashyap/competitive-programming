@@ -2,6 +2,7 @@
 GeeksforGeeks statistics provider using browser-rendered profile retrieval.
 """
 
+import json
 import re
 import urllib.request
 import urllib.error
@@ -36,7 +37,7 @@ def fetch_geeksforgeeks_stats(username: str, profile_url: str) -> PlatformStats:
 
 def fetch_geeksforgeeks_with_browser(username: str, profile_url: str) -> PlatformStats:
     """
-    Fetch GeeksforGeeks statistics using browser rendering.
+    Fetch GeeksforGeeks statistics using browser rendering with network inspection.
     """
     import asyncio
     from .browser_renderer import fetch_rendered_page, extract_from_text
@@ -44,36 +45,64 @@ def fetch_geeksforgeeks_with_browser(username: str, profile_url: str) -> Platfor
     async def _fetch():
         page_data = await fetch_rendered_page(
             profile_url,
-            wait_selector=None,  # Don't wait for specific selector
+            wait_selector=None,
             wait_timeout=30000,
+            capture_network=True,
         )
 
         metrics = {}
 
-        # Extract from rendered text
-        text_patterns = {
-            "coding_score": r"(\d+)\s*coding\s*score",
-            "overall_score": r"(\d+)\s*overall\s*score",
-            "solved": r"(\d+)\s*problems?\s*solved",
-            "streak": r"(\d+)\s*day\s*streak",
-        }
+        # First, try to extract from network requests (JSON/GraphQL)
+        for request in page_data.get("network_requests", []):
+            try:
+                if "response_body" in request:
+                    response_data = json.loads(request["response_body"])
+                    # Try to find user/profile data
+                    if isinstance(response_data, dict):
+                        # Look for common profile data keys
+                        if "user" in response_data:
+                            user_data = response_data["user"]
+                            if "coding_score" in user_data:
+                                metrics["coding_score"] = user_data["coding_score"]
+                            if "solved" in user_data:
+                                metrics["solved"] = user_data["solved"]
+                            if "streak" in user_data:
+                                metrics["streak"] = user_data["streak"]
+                        # Also check top-level keys
+                        if "coding_score" in response_data:
+                            metrics["coding_score"] = response_data["coding_score"]
+                        if "solved" in response_data:
+                            metrics["solved"] = response_data["solved"]
+                        if "streak" in response_data:
+                            metrics["streak"] = response_data["streak"]
+            except (json.JSONDecodeError, KeyError, TypeError):
+                continue
 
-        text_metrics = extract_from_text(page_data["text"], text_patterns)
-        metrics.update(text_metrics)
-
-        # Try more generic patterns if specific ones fail
-        if not metrics:
-            generic_patterns = {
-                "coding_score": r"(\d+)\s*(?:coding|practice)\s*score",
-                "solved": r"(\d+)\s*(?:problems?|questions)\s*solved",
-                "streak": r"(\d+)\s*(?:day|streak)",
+        # Second, extract from rendered text
+        if not metrics or len(metrics) < 2:
+            text_patterns = {
+                "coding_score": r"(\d+)\s*coding\s*score",
+                "overall_score": r"(\d+)\s*overall\s*score",
+                "solved": r"(\d+)\s*problems?\s*solved",
+                "streak": r"(\d+)\s*day\s*streak",
             }
-            generic_metrics = extract_from_text(page_data["text"], generic_patterns)
-            metrics.update(generic_metrics)
+
+            text_metrics = extract_from_text(page_data["text"], text_patterns)
+            metrics.update(text_metrics)
+
+            # Try more generic patterns if specific ones fail
+            if not metrics:
+                generic_patterns = {
+                    "coding_score": r"(\d+)\s*(?:coding|practice)\s*score",
+                    "solved": r"(\d+)\s*(?:problems?|questions)\s*solved",
+                    "streak": r"(\d+)\s*(?:day|streak)",
+                }
+                generic_metrics = extract_from_text(page_data["text"], generic_patterns)
+                metrics.update(generic_metrics)
 
         # Determine status
         if metrics:
-            status = RetrievalStatus.SUCCESS
+            status = RetrievalStatus.SUCCESS if len(metrics) >= 2 else RetrievalStatus.PARTIAL
         else:
             status = RetrievalStatus.UNAVAILABLE
             metrics = {}
@@ -87,7 +116,7 @@ def fetch_geeksforgeeks_with_browser(username: str, profile_url: str) -> Platfor
             source="public_profile",
             retrieval_method="rendered_profile",
             retrieved_at=datetime.utcnow().isoformat(),
-            error=None if metrics else "Could not extract statistics from rendered profile",
+            error=None if metrics else "Could not extract statistics from rendered profile or network requests",
         )
 
     try:

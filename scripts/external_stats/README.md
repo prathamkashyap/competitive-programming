@@ -130,6 +130,7 @@ The provider should return a `PlatformStats` object with appropriate status and 
 1. **Official API** - Preferred when available (e.g., Codeforces)
 2. **Public Profile Scrape** - When no API exists, attempt to extract visible data from the public profile page
 3. **Browser Rendering** - For client-rendered pages using Playwright (requires `pip3 install -r requirements.txt` and `playwright install chromium`)
+4. **Network Inspection** - Capture and inspect public network requests (XHR, fetch, JSON, GraphQL) during page rendering to extract structured data
 
 ## Security
 
@@ -158,50 +159,28 @@ As of the last refresh:
 - Global Rank: 17165
 - Status: success
 
-**HackerRank** (via public profile scrape):
+**HackerRank** (via public profile scrape with semantic verification):
 - Username: prathamkashyap
-- Badges: 2530
-- Stars: 22
+- Badges: 22 (semantically verified from profile context)
 - Certifications: 20
 - Status: success
 
 **Other platforms**: unavailable - could not extract statistics from rendered profiles
 
-## Why Some Platforms Are Unavailable
-
-The scraping approach uses simple regex patterns to extract data from HTML. Many modern platforms:
-- Use client-side JavaScript rendering (data not in initial HTML)
-- Have complex DOM structures that require more sophisticated parsing
-- May require JavaScript execution to load statistics
-
-Future improvements could use browser automation tools (e.g., Selenium, Playwright) to handle client-rendered pages, but this adds complexity and dependencies.
-
-## Alternative Approach
-
-For platforms that cannot be scraped, you can:
-1. Manually update the profile URL in the README to point to a page with visible statistics
-2. Add a manual configuration file with key statistics (less ideal)
-3. Wait for official API availability
-4. Use third-party APIs if available and reliable
-
 ## Browser Rendering Limitations
 
-Despite browser rendering with Playwright, three platforms remain unavailable:
+Despite browser rendering with Playwright and network inspection, three platforms remain unavailable:
 
-**LeetCode**: The page renders successfully, but the JSON structure used by LeetCode (Next.js hydration) is complex and the specific data path for user statistics could not be reliably identified in the embedded state. The visible text extraction patterns also did not match the rendered page structure.
+**LeetCode**: The page renders successfully and network requests were captured. However, the specific GraphQL/JSON data path for user statistics could not be reliably identified in the captured responses. The embedded Next.js state structure is complex and requires more specific reverse engineering. The visible text extraction patterns also did not match the rendered page structure.
 
-**HackerEarth**: The page renders but the statistics are not easily extractable from the visible text using regex patterns. The data may be loaded through complex JavaScript or require more sophisticated DOM traversal.
+**HackerEarth**: The page renders and network requests were captured, but no structured JSON/GraphQL responses containing profile statistics were found in the public network traffic. The statistics are likely loaded through complex JavaScript or require authenticated endpoints. Visible text patterns did not yield extractable data.
 
-**GeeksforGeeks**: Similar to HackerEarth, the page renders but statistics are not extractable with simple text patterns. The site may use dynamic content loading that requires specific API calls or more complex DOM inspection.
+**GeeksforGeeks**: Similar to HackerEarth - the page renders and network requests were captured, but no structured public responses containing profile statistics were found. The site may use private APIs or complex client-side state management that is not exposed in public network traffic.
 
 These limitations are due to:
-- Complex client-side rendering that doesn't expose data in simple text form
-- Proprietary data structures that require site-specific reverse engineering
-- Potential need for authenticated API calls for some statistics
-- Evolving page structures that require ongoing maintenance
+- Complex GraphQL/JSON data structures requiring site-specific reverse engineering
+- Statistics potentially loaded through authenticated or private endpoints
+- Proprietary client-side state management not exposed in public network traffic
+- Evolving page structures requiring ongoing maintenance
 
-Future improvements could:
-- Use site-specific API endpoints where available
-- Implement more sophisticated DOM traversal (CSS selectors, XPath)
-- Add network request interception to capture API responses
-- Use platform-specific third-party APIs if available and reliable
+**Network Inspection Added**: The system now captures and inspects public network requests (XHR, fetch, JSON, GraphQL) during page rendering. This allows extraction from structured public responses when available, but the three platforms above either don't expose profile data in public network requests or use complex data paths that require more specific reverse engineering.

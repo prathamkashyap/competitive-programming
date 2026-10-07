@@ -25,6 +25,7 @@ async def fetch_rendered_page(
     url: str,
     wait_selector: Optional[str] = None,
     wait_timeout: int = 10000,
+    capture_network: bool = False,
 ) -> Dict[str, Any]:
     """
     Fetch a page with browser rendering and extract its content.
@@ -33,6 +34,7 @@ async def fetch_rendered_page(
         url: The URL to fetch
         wait_selector: CSS selector to wait for before extracting content
         wait_timeout: Maximum time to wait for the selector (ms)
+        capture_network: Whether to capture network requests
 
     Returns:
         Dict containing:
@@ -40,6 +42,7 @@ async def fetch_rendered_page(
         - text: All visible text
         - scripts: Embedded script contents
         - json_data: Any JSON data found in scripts
+        - network_requests: List of network requests (if capture_network=True)
     """
     from playwright.async_api import async_playwright
 
@@ -48,12 +51,45 @@ async def fetch_rendered_page(
         "text": "",
         "scripts": [],
         "json_data": {},
+        "network_requests": [],
     }
 
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
         try:
             page = await browser.new_page()
+
+            # Capture network requests if requested
+            if capture_network:
+                requests = []
+
+                async def handle_request(request):
+                    requests.append({
+                        "url": request.url,
+                        "method": request.method,
+                        "resource_type": request.resource_type,
+                    })
+
+                page.on("request", handle_request)
+
+                async def handle_response(response):
+                    try:
+                        content_type = response.headers.get("content-type", "")
+                        if "application/json" in content_type or "application/graphql" in content_type:
+                            try:
+                                body = await response.body()
+                                if body:
+                                    for req in requests:
+                                        if req["url"] == response.url:
+                                            req["response_body"] = body.decode('utf-8', errors='ignore')
+                                            req["status"] = response.status
+                                            break
+                            except Exception:
+                                pass
+                    except Exception:
+                        pass
+
+                page.on("response", handle_response)
 
             # Navigate to the URL with domcontentloaded as fallback
             try:
@@ -113,6 +149,10 @@ async def fetch_rendered_page(
                             pass
             except Exception:
                 pass
+
+            # Store network requests if captured
+            if capture_network:
+                result["network_requests"] = requests
 
         finally:
             await browser.close()
