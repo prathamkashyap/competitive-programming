@@ -107,6 +107,96 @@ def _fetch_hackerearth_api(username: str, metrics: Dict[str, Any], errors: List[
     return "points" in metrics or "solved" in metrics
 
 
+def _parse_hackerearth_tracks(html: str, text: str) -> Dict[str, Any]:
+    """
+    Parse track leaderboard rankings and points with strict structural verification
+    and validation, avoiding fragile positional regex assumptions.
+    """
+    extracted: Dict[str, Any] = {}
+
+    # 1. Structured table extraction from HTML if present
+    tables = re.findall(r"<table[^>]*>(.*?)</table>", html, re.DOTALL | re.IGNORECASE)
+    for table_html in tables:
+        headers = [re.sub(r"<[^>]+>", "", h).strip().lower() for h in re.findall(r"<th[^>]*>(.*?)</th>", table_html, re.DOTALL | re.IGNORECASE)]
+        rank_idx = -1
+        points_idx = -1
+        for idx, h in enumerate(headers):
+            if "rank" in h:
+                rank_idx = idx
+            elif "point" in h or "score" in h:
+                points_idx = idx
+
+        if rank_idx != -1 and points_idx != -1:
+            rows = re.findall(r"<tr[^>]*>(.*?)</tr>", table_html, re.DOTALL | re.IGNORECASE)
+            for row in rows:
+                cols = [re.sub(r"<[^>]+>", "", c).strip() for c in re.findall(r"<td[^>]*>(.*?)</td>", row, re.DOTALL | re.IGNORECASE)]
+                if len(cols) > max(rank_idx, points_idx):
+                    row_content = " ".join(cols).lower()
+                    track_key = None
+                    if "basic programming" in row_content:
+                        track_key = "basic_programming"
+                    elif "algorithms" in row_content:
+                        track_key = "algorithms"
+
+                    if track_key:
+                        try:
+                            rank_digits = re.sub(r"[^\d]", "", cols[rank_idx])
+                            points_digits = re.sub(r"[^\d]", "", cols[points_idx])
+                            if rank_digits and points_digits:
+                                r_val = int(rank_digits)
+                                p_val = int(points_digits)
+                                if 1 <= r_val <= 10_000_000 and 0 <= p_val <= 100_000:
+                                    extracted[f"{track_key}_rank"] = r_val
+                                    extracted[f"{track_key}_points"] = p_val
+                        except (ValueError, IndexError):
+                            pass
+
+    # 2. Text-based extraction with verified header order and bounds validation
+    tracks = [
+        ("Basic Programming", "basic_programming"),
+        ("Algorithms", "algorithms"),
+    ]
+
+    for label, track_key in tracks:
+        if f"{track_key}_rank" in extracted:
+            continue
+
+        label_pos = text.find(label)
+        if label_pos == -1:
+            continue
+
+        window_start = max(0, label_pos - 500)
+        preceding_text = text[window_start:label_pos]
+
+        header_match_rank_first = re.search(r"(topic|track)[\s\S]{1,50}?(rank)[\s\S]{1,50}?(points|score)", preceding_text, re.IGNORECASE)
+        header_match_pts_first = re.search(r"(topic|track)[\s\S]{1,50}?(points|score)[\s\S]{1,50}?(rank)", preceding_text, re.IGNORECASE)
+
+        rank_first = None
+        if header_match_rank_first:
+            rank_first = True
+        elif header_match_pts_first:
+            rank_first = False
+
+        if rank_first is None:
+            # Header order cannot be verified; fail safely to prevent incorrect metric assignment
+            continue
+
+        line_chunk = text[label_pos:label_pos + 120]
+        m = re.search(rf"{re.escape(label)}\s*(\d+)\s*(\d+)", line_chunk, re.IGNORECASE)
+        if m:
+            try:
+                v1, v2 = int(m.group(1)), int(m.group(2))
+                r_val = v1 if rank_first else v2
+                p_val = v2 if rank_first else v1
+                if 1 <= r_val <= 10_000_000 and 0 <= p_val <= 100_000:
+                    extracted[f"{track_key}_rank"] = r_val
+                    extracted[f"{track_key}_points"] = p_val
+            except ValueError:
+                pass
+
+    return extracted
+
+
 def _fetch_hackerearth_browser(username: str, profile_url: str, metrics: Dict[str, Any]):
     """Use browser rendering to supplement track rankings, top percentiles, and star levels."""
     import asyncio
@@ -119,7 +209,8 @@ def _fetch_hackerearth_browser(username: str, profile_url: str, metrics: Dict[st
             capture_network=False,
         )
         text = page_data.get("text", "")
-        if not text:
+        html = page_data.get("html", "")
+        if not text and not html:
             return
 
         # Top percentiles
@@ -132,23 +223,9 @@ def _fetch_hackerearth_browser(username: str, profile_url: str, metrics: Dict[st
         if top_list:
             metrics["top_percentiles"] = sorted(list(set(top_list)))
 
-        # Basic Programming rank
-        bp_match = re.search(r"Basic Programming\s*(\d+)\s*(\d+)", text)
-        if bp_match:
-            try:
-                metrics["basic_programming_rank"] = int(bp_match.group(1))
-                metrics["basic_programming_points"] = int(bp_match.group(2))
-            except ValueError:
-                pass
-
-        # Algorithms rank
-        algo_match = re.search(r"Algorithms\s*(\d+)\s*(\d+)", text)
-        if algo_match:
-            try:
-                metrics["algorithms_rank"] = int(algo_match.group(1))
-                metrics["algorithms_points"] = int(algo_match.group(2))
-            except ValueError:
-                pass
+        # Track rankings and points with verified structural parsing and bounds
+        track_metrics = _parse_hackerearth_tracks(html, text)
+        metrics.update(track_metrics)
 
         # Submissions in last year
         subs_match = re.search(r"(\d+)\s*in the last year", text)

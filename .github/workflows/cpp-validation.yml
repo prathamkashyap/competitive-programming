@@ -10,6 +10,7 @@ on:
       - '**.cxx'
       - 'templates/**'
       - 'scripts/**'
+      - 'tests/**'
       - '.github/workflows/cpp-validation.yml'
   pull_request:
     paths:
@@ -18,26 +19,52 @@ on:
       - '**.cxx'
       - 'templates/**'
       - 'scripts/**'
+      - 'tests/**'
       - '.github/workflows/cpp-validation.yml'
 
 jobs:
   validate:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install C++ compiler
+      - name: Verify C++ compiler
+        timeout-minutes: 2
         run: |
-          sudo apt-get update
-          sudo apt-get install -y g++
+          if command -v g++ >/dev/null 2>&1; then
+            echo "Pre-installed g++ found:"
+            g++ --version
+            COMPILER="g++"
+          elif command -v clang++ >/dev/null 2>&1; then
+            echo "Pre-installed clang++ found:"
+            clang++ --version
+            COMPILER="clang++"
+          else
+            echo "No C++ compiler found on runner; performing bounded fallback installation..."
+            export DEBIAN_FRONTEND=noninteractive
+            sudo apt-get update -qq -o Acquire::Retries=3 -o Acquire::http::Timeout=10
+            sudo apt-get install -y -qq --no-install-recommends g++
+            g++ --version
+            COMPILER="g++"
+          fi
+          # Verify C++17 compatibility with minimal test
+          echo 'int main() { return 0; }' | $COMPILER -std=c++17 -fsyntax-only -x c++ -
 
       - name: Verify Python installation
+        timeout-minutes: 2
         run: |
           python3 --version
 
+      - name: Run unit tests
+        timeout-minutes: 3
+        run: |
+          python3 -m unittest discover tests
+
       - name: Run statistics generator
+        timeout-minutes: 3
         run: |
           python3 scripts/generate_stats.py
 
@@ -48,6 +75,7 @@ jobs:
           test -f docs/generated/stats.json
 
       - name: Run C++ validation
+        timeout-minutes: 10
         run: |
           python3 scripts/validate_cpp.py
 

@@ -1,22 +1,21 @@
 {
-  "total_files": 404,
+  "total_files": 405,
   "by_language": {
-    "C++": 399,
+    "C++": 401,
     "Java": 2,
-    "Python": 3
+    "Python": 2
   },
   "by_platform": {
-    "codeforces": 392
+    "codeforces": 394
   },
   "by_category": {
-    "solution": 392,
-    "other": 1,
+    "solution": 394,
     "template": 11
   },
   "by_extension": {
-    ".cpp": 399,
+    ".cpp": 401,
     ".java": 2,
-    ".py": 3
+    ".py": 2
   },
   "solutions": [
     {
@@ -1030,6 +1029,11 @@
       "extension": ".cpp"
     },
     {
+      "path": "codeforces/1400/1167C_NewsDistribution.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
       "path": "codeforces/1400/1195C_BasketballExercise.cpp",
       "language": "C++",
       "extension": ".cpp"
@@ -1151,6 +1155,11 @@
     },
     {
       "path": "codeforces/1500/1418C_MortalKombatTower.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1500/1526C1_Potions(EasyVersion).cpp",
       "language": "C++",
       "extension": ".cpp"
     },

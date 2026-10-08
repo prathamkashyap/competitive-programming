@@ -47,8 +47,18 @@ def get_snapshot_stats(platform: str, username: str, profile_url: str) -> Option
 
     capture_date = platform_snapshot.get("capture_date", datetime.now(timezone.utc).strftime("%Y-%m-%d"))
 
+    platform_display_names = {
+        "leetcode": "LeetCode",
+        "codeforces": "Codeforces",
+        "codechef": "CodeChef",
+        "hackerrank": "HackerRank",
+        "hackerearth": "HackerEarth",
+        "geeksforgeeks": "GeeksforGeeks",
+    }
+    canon_platform = platform_display_names.get(platform_key, platform.capitalize())
+
     return PlatformStats(
-        platform=platform,
+        platform=canon_platform,
         username=username,
         profile_url=profile_url,
         metrics=metrics,

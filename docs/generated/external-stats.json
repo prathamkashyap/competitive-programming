@@ -4,56 +4,18 @@
     "username": "prathamkashyap",
     "profile_url": "https://leetcode.com/u/prathamkashyap/",
     "metrics": {
-      "global_rank": 195472,
-      "reputation": 0,
-      "solution_count": 0,
       "solved": 522,
-      "ac_submissions": 753,
       "easy": 171,
       "medium": 279,
       "hard": 72,
       "submissions": 858,
       "acceptance_rate": 87.8,
-      "badges_count": 10,
-      "badges": [
-        "100 Days Badge 2026",
-        "50 Days Badge 2026",
-        "100 Days Badge 2025",
-        "50 Days Badge 2025",
-        "Sep LeetCoding Challenge",
-        "Aug LeetCoding Challenge",
-        "Jul LeetCoding Challenge",
-        "Sep LeetCoding Challenge",
-        "LeetCode 75",
-        "Top Interview 150"
-      ],
-      "active_badge": "100 Days Badge 2026",
-      "streak_days": 101,
-      "total_active_days": 113,
-      "active_years": [
-        2024,
-        2025,
-        2026
-      ],
-      "languages": {
-        "C++": 498,
-        "Java": 46,
-        "Python3": 41,
-        "Pandas": 15
-      },
-      "recent_ac": [
-        "Validate Binary Search Tree",
-        "Binary Tree Inorder Traversal",
-        "Remove Invalid Parentheses",
-        "Find Minimum in Rotated Sorted Array",
-        "Binary Tree Maximum Path Sum"
-      ],
       "beats_percentage": 99.3
     },
-    "source": "public_graphql",
-    "source_type": "live",
-    "retrieval_method": "graphql_api",
-    "retrieved_at": "2026-10-07T18:23:15.564428+00:00",
+    "source": "screenshot_snapshot",
+    "source_type": "screenshot_snapshot",
+    "retrieval_method": "screenshot_snapshot",
+    "retrieved_at": "2026-10-07",
     "status": "success",
     "error": null
   },
@@ -67,12 +29,12 @@
       "rank": "newbie",
       "max_rank": "newbie",
       "title_photo": "https://userpic.codeforces.org/4616539/title/ee83f5d77023a486.jpg",
-      "solved": 374
+      "solved": 376
     },
     "source": "official_api",
     "source_type": "live",
     "retrieval_method": "api",
-    "retrieved_at": "2026-10-07T18:23:16.530907+00:00",
+    "retrieved_at": "2026-10-08T13:28:25.309142+00:00",
     "status": "success",
     "error": null
   },
@@ -86,14 +48,14 @@
       "max_rating": 922,
       "dsa_rating": 1067,
       "dsa_global_rank": 2341,
-      "solved": 630,
+      "solved": 631,
       "stars": 1,
       "league": "Diamond League"
     },
     "source": "public_profile",
     "source_type": "live",
     "retrieval_method": "embedded_state",
-    "retrieved_at": "2026-10-07T18:23:16.930744+00:00",
+    "retrieved_at": "2026-10-08T13:28:25.809899+00:00",
     "status": "success",
     "error": null
   },
@@ -110,32 +72,27 @@
       "skill_badges": {
         "Problem Solving": {
           "stars": 6,
-          "solved": 229,
-          "points": 9436.56,
-          "rank": 1931
+          "solved": 231,
+          "points": 9636.56,
+          "rank": 1871
         },
         "C++": {
           "stars": 5,
           "solved": 18,
           "points": 425.0,
-          "rank": 65854
+          "rank": 65859
         },
         "Java": {
           "stars": 5,
           "solved": 22,
           "points": 258.0,
-          "rank": 231721
+          "rank": 231773
         },
         "Python": {
           "stars": 5,
           "solved": 26,
           "points": 405.0,
-          "rank": 351677
-        },
-        "30 Days of Code": {
-          "stars": 0,
-          "solved": 1,
-          "points": 1.0
+          "rank": 351747
         },
         "Sql": {
           "stars": 5,
@@ -144,11 +101,18 @@
           "rank": 1
         }
       },
-      "badges_count": 6,
+      "badges_count": 5,
       "total_stars": 26,
-      "total_challenges_solved": 354,
+      "tutorial_badges": {
+        "30 Days of Code": {
+          "stars": 0,
+          "solved": 1,
+          "points": 1.0
+        }
+      },
+      "total_challenges_solved": 356,
       "sql_rank": 1,
-      "problem_solving_rank": 1931,
+      "problem_solving_rank": 1871,
       "verified_skills": [
         "Algorithm",
         "Javascript(Intermediate)",
@@ -162,31 +126,31 @@
       "verified_skills_count": 8,
       "track_ranks": {
         "Algorithms": {
-          "rank": 2430,
+          "rank": 2437,
           "score": 6831.56
         },
         "Python": {
-          "rank": 351677,
+          "rank": 351747,
           "score": 405.0
         },
         "C++": {
-          "rank": 65854,
+          "rank": 65859,
           "score": 425.0
         },
         "Java": {
-          "rank": 231721,
+          "rank": 231773,
           "score": 258.0
         },
         "Data Structures": {
-          "rank": 1917,
-          "score": 2605.0
+          "rank": 1747,
+          "score": 2805.0
         },
         "SQL": {
           "rank": 1,
           "score": 1130.0
         },
         "Tutorials": {
-          "rank": 1209580,
+          "rank": 1209610,
           "score": 60.0
         }
       },
@@ -194,10 +158,10 @@
       "level": 5,
       "member_since": "2021-01-18"
     },
-    "source": "official_rest_api",
+    "source": "public_rest_api",
     "source_type": "live",
-    "retrieval_method": "rest_api",
-    "retrieved_at": "2026-10-07T18:23:18.759741+00:00",
+    "retrieval_method": "public_rest_api",
+    "retrieved_at": "2026-10-08T13:28:27.996811+00:00",
     "status": "success",
     "error": null
   },
@@ -206,46 +170,32 @@
     "username": "prathamkashyap",
     "profile_url": "https://www.hackerearth.com/@prathamkashyap/",
     "metrics": {
-      "points": 4300,
-      "solved": 175,
-      "submissions": 214,
+      "points": 4370,
+      "solved": 178,
+      "submissions": 217,
       "contest_rating": 0,
       "badges": [
-        "C++ language",
+        "Data Structures - 1 Star",
+        "Data Structures - 2 Stars",
+        "Algorithms - 1 Star",
+        "Algorithms - 2 Stars",
         "Basic Programming - 1 Star",
         "Basic Programming - 2 Stars",
         "Basic Programming - 3 Stars",
         "Basic Programming - 4 Stars",
         "Basic Programming - 5 Stars",
-        "Algorithms - 1 Star",
-        "Algorithms - 2 Stars",
-        "Data Structures - 1 Star",
-        "Data Structures - 2 Stars",
         "Novice",
         "Amateur",
         "Explorer",
-        "Elite"
+        "Elite",
+        "C++ language"
       ],
-      "badges_count": 14,
-      "top_percentiles": [
-        "Top 1% in Basic Programming",
-        "Top 10% in Algorithms"
-      ],
-      "basic_programming_rank": 188,
-      "basic_programming_points": 3810,
-      "algorithms_rank": 19263,
-      "algorithms_points": 220,
-      "submissions_last_year": 212,
-      "data_structures_rank": 35769,
-      "practice_streak_days": 72,
-      "daily_streak_days": 20,
-      "weekly_streak": "5/5",
-      "coding_practices": "180/3253"
+      "badges_count": 14
     },
     "source": "public_api",
     "source_type": "live",
-    "retrieval_method": "api_and_rendered",
-    "retrieved_at": "2026-10-07T18:23:24.734953+00:00",
+    "retrieval_method": "public_api",
+    "retrieved_at": "2026-10-08T13:28:28.868594+00:00",
     "status": "success",
     "error": null
   },
@@ -254,23 +204,16 @@
     "username": "prathamkashyap",
     "profile_url": "https://www.geeksforgeeks.org/profile/prathamkashyap",
     "metrics": {
-      "easy_solved": 14,
-      "basic_solved": 8,
-      "medium_solved": 56,
-      "hard_solved": 20,
-      "solved": 98,
-      "submissions_2026": 96,
-      "active_days_2026": 28,
       "coding_score": 424,
+      "solved": 98,
       "longest_streak_days": 28,
-      "current_streak_days": 28,
       "potd_solved": 28,
-      "monthly_score": 104
+      "submissions_2026": 96
     },
-    "source": "public_profile",
-    "source_type": "live",
-    "retrieval_method": "embedded_state_and_api",
-    "retrieved_at": "2026-10-07T18:23:27.946384+00:00",
+    "source": "screenshot_snapshot",
+    "source_type": "screenshot_snapshot",
+    "retrieval_method": "screenshot_snapshot",
+    "retrieved_at": "2026-10-07",
     "status": "success",
     "error": null
   }

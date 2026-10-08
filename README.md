@@ -105,47 +105,42 @@ Public profile statistics from external competitive programming platforms (verif
 
 | Platform | Profile | Status | Solves / Rating | Key Highlights |
 | :--- | :--- | :---: | :--- | :--- |
-| **[LeetCode](https://leetcode.com/u/prathamkashyap/)** | `@prathamkashyap` | 🟢 `live` | **522** solved (171 E / 279 M / 72 H) | 87.8% AC, #195,472, 101d streak, 10 badges |
-| **[Codeforces](https://codeforces.com/profile/prathamkashyap)** | `@prathamkashyap` | 🟢 `live` | Rating **815** (`newbie`), **374** solved | Max rating 815, Official API verified |
-| **[CodeChef](https://www.codechef.com/users/prathamkashyap)** | `@prathamkashyap` | 🟢 `live` | Rating **922** (★ 1 Star), **630** solved | Diamond League, DSA Monday **1067** (Rank #2,341) |
-| **[HackerRank](https://www.hackerrank.com/profile/prathamkashyap)** | `@prathamkashyap` | 🟢 `live` | **26** stars, **354** solved | Problem Solving 6★ (#1,931), SQL 5★ (#1), C++/Java/Python 5★ |
-| **[HackerEarth](https://www.hackerearth.com/@prathamkashyap/)** | `@prathamkashyap` | 🟢 `live` | **4,300** pts, **175** solved (214 subs) | BP #188 (Top 1%), Algo #19263 (Top 10%), 14 badges |
-| **[GeeksforGeeks](https://www.geeksforgeeks.org/profile/prathamkashyap)** | `@prathamkashyap` | 🟢 `live` | Score **424**, **98** solved | 28 POTDs solved, 28d streak, 96 subs (2026) |
+| **[LeetCode](https://leetcode.com/u/prathamkashyap/)** | `@prathamkashyap` | 📸 `snapshot` | **522** solved (171 E / 279 M / 72 H) | 87.8% AC |
+| **[Codeforces](https://codeforces.com/profile/prathamkashyap)** | `@prathamkashyap` | 🟢 `live` | Rating **815** (`newbie`), **376** solved | Max rating 815, Official API verified |
+| **[CodeChef](https://www.codechef.com/users/prathamkashyap)** | `@prathamkashyap` | 🟢 `live` | Rating **922** (★ 1 Star), **631** solved | Diamond League, DSA Monday **1067** (Rank #2,341) |
+| **[HackerRank](https://www.hackerrank.com/profile/prathamkashyap)** | `@prathamkashyap` | 🟢 `live` | **26** stars, **356** solved | Problem Solving 6★ (#1,871), SQL 5★ (#1), C++ 5★/Java 5★/Python 5★ |
+| **[HackerEarth](https://www.hackerearth.com/@prathamkashyap/)** | `@prathamkashyap` | 🟢 `live` | **4,370** pts, **178** solved (217 subs) | 14 badges |
+| **[GeeksforGeeks](https://www.geeksforgeeks.org/profile/prathamkashyap)** | `@prathamkashyap` | 📸 `snapshot` | Score **424**, **98** solved | 28 POTDs solved, 28d streak, 96 subs (2026) |
 
 <details>
 <summary><b>Detailed Platform Breakdown & Honors</b></summary>
 
 #### LeetCode ([@prathamkashyap](https://leetcode.com/u/prathamkashyap/))
 - **Problem Solves**: `522` total (🟢 Easy: `171`, 🟡 Medium: `279`, 🔴 Hard: `72`)
-- **Submissions & Acceptance**: `858` submissions, `753` accepted (`87.8%` AC rate)
-- **Rankings & Streaks**: Global Rank `#195,472`, `101` days current streak, `113` total active days
-- **Languages**: C++ (`498`), Java (`46`), Python3 (`41`), Pandas (`15`)
-- **Featured Badges**: 100 Days Badge 2026, 50 Days Badge 2026, 100 Days Badge 2025, 50 Days Badge 2025, Sep LeetCoding Challenge, Aug LeetCoding Challenge
+- **Submissions & Acceptance**: `858` submissions, `—` accepted (`87.8%` AC rate)
 
 #### Codeforces ([@prathamkashyap](https://codeforces.com/profile/prathamkashyap))
 - **Current Rating**: `815` (`newbie`) | **Max Rating**: `815` (`newbie`)
-- **Unique Solved Problems**: `374`
+- **Unique Solved Problems**: `376`
 
 #### CodeChef ([@prathamkashyap](https://www.codechef.com/users/prathamkashyap))
 - **Rating**: `922` (★ `1` Star) | **Max Rating**: `922` | **League**: `Diamond League`
 - **DSA Monday Rating**: `1067` (Rank `#2,341`) | **Global Rank**: `#17,165`
-- **Total Problems Solved**: `630`
+- **Total Problems Solved**: `631`
 
 #### HackerRank ([@prathamkashyap](https://www.hackerrank.com/profile/prathamkashyap))
-- **Skill Badges**: Problem Solving (`6★` Gold, `#1,931`), SQL (`5★` Gold, `#1`), C++ (`5★` Gold), Java (`5★` Gold), Python (`5★` Gold)
-- **Total Stars & Solves**: `26` stars earned, `354` challenges solved
+- **Skill Badges**: Problem Solving (`6★`, `#1,871`), C++ (`5★`, `#65,859`), Java (`5★`, `#231,773`), Python (`5★`, `#351,747`), Sql (`5★`, `#1`)
+- **Total Stars & Solves**: `26` stars earned, `356` challenges solved
 - **Verified Skills**: `Algorithm`, `Javascript(Intermediate)`, `Data Structure`, `Python(Advanced)`, `React`, `Css`, `NodeJs`, `SQL`
 
 #### HackerEarth ([@prathamkashyap](https://www.hackerearth.com/@prathamkashyap/))
-- **Points & Solves**: `4,300` points, `175` solved, `214` solutions submitted
-- **Track Rankings**: Basic Programming `#188` (Top 1%), Algorithms `#19263` (Top 10%)
-- **Stars & Badges**: Basic Programming (`5★`), Algorithms (`2★`), Data Structures (`2★`), Novice, Amateur, Explorer, Elite
-- **Streaks**: Practice Streak: `72` days, Daily Streak: `20` days
+- **Points & Solves**: `4,370` points, `178` solved, `217` solutions submitted
+- **Badges**: Data Structures - 1 Star, Data Structures - 2 Stars, Algorithms - 1 Star, Algorithms - 2 Stars, Basic Programming - 1 Star, Basic Programming - 2 Stars, Basic Programming - 3 Stars, Basic Programming - 4 Stars, Basic Programming - 5 Stars, Novice, Amateur, Explorer, Elite, C++ language
 
 #### GeeksforGeeks ([@prathamkashyap](https://www.geeksforgeeks.org/profile/prathamkashyap))
-- **Coding Score**: `424` | **Total Solved**: `98` (Basic: `8`, Easy: `14`, Medium: `56`, Hard: `20`)
+- **Coding Score**: `424` | **Total Solved**: `98`
 - **Streaks & POTD**: `28` POTDs solved, `28` day longest streak
-- **2026 Activity**: `96` submissions across `28` active days
+- **2026 Activity**: `96` submissions
 
 </details>
 

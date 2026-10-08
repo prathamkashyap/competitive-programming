@@ -212,6 +212,7 @@ This index lists all solution files in the repository.
 | Codeforces | `codeforces/1300/862B_MahmoudandEhabandthebipartiteness.cpp` | 862B_MahmoudandEhabandthebipartiteness.cpp | C++ | 1300 |
 | Codeforces | `codeforces/1300/893C_Rumor.cpp` | 893C_Rumor.cpp | C++ | 1300 |
 | Codeforces | `codeforces/1300/996B_WorldCup.cpp` | 996B_WorldCup.cpp | C++ | 1300 |
+| Codeforces | `codeforces/1400/1167C_NewsDistribution.cpp` | 1167C_NewsDistribution.cpp | C++ | 1400 |
 | Codeforces | `codeforces/1400/1195C_BasketballExercise.cpp` | 1195C_BasketballExercise.cpp | C++ | 1400 |
 | Codeforces | `codeforces/1400/1201C_MaximumMedian.cpp` | 1201C_MaximumMedian.cpp | C++ | 1400 |
 | Codeforces | `codeforces/1400/1285C_FadiandLCM.cpp` | 1285C_FadiandLCM.cpp | C++ | 1400 |
@@ -237,6 +238,7 @@ This index lists all solution files in the repository.
 | Codeforces | `codeforces/1400/816B_KarenandCoffee.cpp` | 816B_KarenandCoffee.cpp | C++ | 1400 |
 | Codeforces | `codeforces/1500/1338A_PoweredAddition.cpp` | 1338A_PoweredAddition.cpp | C++ | 1500 |
 | Codeforces | `codeforces/1500/1418C_MortalKombatTower.cpp` | 1418C_MortalKombatTower.cpp | C++ | 1500 |
+| Codeforces | `codeforces/1500/1526C1_Potions(EasyVersion).cpp` | 1526C1_Potions(EasyVersion).cpp | C++ | 1500 |
 | Codeforces | `codeforces/1500/2027C_Add Zeros.cpp` | 2027C_Add Zeros.cpp | C++ | 1500 |
 | Codeforces | `codeforces/1500/230C_Shifts.cpp` | 230C_Shifts.cpp | C++ | 1500 |
 | Codeforces | `codeforces/1500/276C_LittleGirlandMaximumSum.cpp` | 276C_LittleGirlandMaximumSum.cpp | C++ | 1500 |

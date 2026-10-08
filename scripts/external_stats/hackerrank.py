@@ -1,5 +1,5 @@
 """
-HackerRank statistics provider using official public REST endpoints.
+HackerRank statistics provider using public REST endpoints.
 """
 
 import json
@@ -18,7 +18,7 @@ HACKERRANK_HEADERS = {
 
 def fetch_hackerrank_stats(username: str, profile_url: str) -> PlatformStats:
     """
-    Fetch HackerRank statistics using official public REST endpoints.
+    Fetch HackerRank statistics using public REST endpoints.
     """
     metrics: Dict[str, Any] = {}
     errors: List[str] = []
@@ -44,7 +44,7 @@ def fetch_hackerrank_stats(username: str, profile_url: str) -> PlatformStats:
         error = "; ".join(errors) if errors else "Retrieved partial HackerRank statistics"
     else:
         status = RetrievalStatus.UNAVAILABLE
-        error = "; ".join(errors) if errors else "Could not retrieve statistics from HackerRank REST API"
+        error = "; ".join(errors) if errors else "Could not retrieve statistics from HackerRank public REST API"
 
     return PlatformStats(
         platform="HackerRank",
@@ -52,9 +52,9 @@ def fetch_hackerrank_stats(username: str, profile_url: str) -> PlatformStats:
         profile_url=profile_url,
         metrics=metrics,
         status=status,
-        source="official_rest_api",
+        source="public_rest_api",
         source_type="live",
-        retrieval_method="rest_api",
+        retrieval_method="public_rest_api",
         retrieved_at=datetime.now(timezone.utc).isoformat(),
         error=error,
     )
@@ -72,6 +72,7 @@ def _fetch_hackerrank_badges(username: str, metrics: Dict[str, Any], errors: Lis
             data = json.loads(resp.read().decode("utf-8"))
             models = data.get("models", [])
             skill_badges: Dict[str, Any] = {}
+            tutorial_badges: Dict[str, Any] = {}
             total_solved = 0
             total_stars = 0
 
@@ -92,9 +93,14 @@ def _fetch_hackerrank_badges(username: str, metrics: Dict[str, Any], errors: Lis
                     if rank is not None:
                         badge_info["rank"] = rank
 
-                    skill_badges[badge_name] = badge_info
+                    # Separate earned skill badges (stars > 0) from tutorial/unearned tracks (stars == 0)
+                    if stars > 0:
+                        skill_badges[badge_name] = badge_info
+                        total_stars += stars
+                    else:
+                        tutorial_badges[badge_name] = badge_info
+
                     total_solved += solved
-                    total_stars += stars
 
                     # Specific field mappings
                     norm_name = badge_name.lower().replace(" ", "_").replace("++", "pp")
@@ -105,6 +111,9 @@ def _fetch_hackerrank_badges(username: str, metrics: Dict[str, Any], errors: Lis
                 metrics["skill_badges"] = skill_badges
                 metrics["badges_count"] = len(skill_badges)
                 metrics["total_stars"] = total_stars
+            if tutorial_badges:
+                metrics["tutorial_badges"] = tutorial_badges
+            if total_solved > 0:
                 metrics["total_challenges_solved"] = total_solved
 
             # Extract specific high-value ranks

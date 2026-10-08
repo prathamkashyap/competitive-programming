@@ -12,6 +12,7 @@ from unittest.mock import patch, MagicMock
 from scripts.external_stats.models import PlatformStats, RetrievalStatus
 from scripts.external_stats.discovery import extract_username_from_url, discover_profiles
 from scripts.external_stats.leetcode import _fetch_leetcode_graphql
+from scripts.external_stats.codeforces import fetch_codeforces_stats
 from scripts.external_stats.hackerrank import (
     _fetch_hackerrank_badges,
     _fetch_hackerrank_skills,
@@ -19,10 +20,20 @@ from scripts.external_stats.hackerrank import (
     _fetch_hackerrank_profile,
     fetch_hackerrank_stats,
 )
-from scripts.external_stats.hackerearth import _fetch_hackerearth_api, fetch_hackerearth_stats
+from scripts.external_stats.hackerearth import (
+    _fetch_hackerearth_api,
+    fetch_hackerearth_stats,
+    _parse_hackerearth_tracks,
+)
 from scripts.external_stats.geeksforgeeks import _fetch_gfg_practice_api, _fetch_gfg_embedded_state
 from scripts.external_stats.codechef import _fetch_codechef_html
 from scripts.external_stats.snapshot_loader import get_snapshot_stats
+from scripts.external_stats.external_stats import (
+    fetch_all_external_stats,
+    generate_external_stats_json,
+    generate_external_stats_markdown,
+    update_readme_external_stats,
+)
 
 
 class TestProfileDiscovery(unittest.TestCase):
@@ -175,7 +186,7 @@ class TestLeetCodeGraphQL(unittest.TestCase):
 
 
 class TestHackerRankREST(unittest.TestCase):
-    """Test HackerRank official REST response parsing and semantic mapping."""
+    """Test HackerRank public REST response parsing and semantic mapping."""
 
     def test_hackerrank_badges_semantic_mapping(self):
         badges_fixture = {
@@ -201,6 +212,12 @@ class TestHackerRankREST(unittest.TestCase):
                     "current_points": 425.0,
                     "hacker_rank": 65854,
                 },
+                {
+                    "badge_name": "30 Days of Code",
+                    "stars": 0,
+                    "solved": 30,
+                    "current_points": 300.0,
+                },
             ]
         }
 
@@ -220,7 +237,23 @@ class TestHackerRankREST(unittest.TestCase):
         self.assertEqual(metrics["sql_rank"], 1)
         self.assertEqual(metrics["problem_solving_rank"], 1931)
         self.assertEqual(metrics["total_stars"], 16)
-        self.assertEqual(metrics["total_challenges_solved"], 305)
+        # Only tracks with stars > 0 are counted in badges_count
+        self.assertEqual(metrics["badges_count"], 3)
+        self.assertIn("30 Days of Code", metrics["tutorial_badges"])
+        self.assertEqual(metrics["total_challenges_solved"], 335)
+
+    def test_hackerrank_provenance(self):
+        badges_fixture = {"models": [{"badge_name": "Problem Solving", "stars": 6, "solved": 100}]}
+        mock_resp = MagicMock()
+        mock_resp.read.return_value = json.dumps(badges_fixture).encode("utf-8")
+        mock_resp.__enter__.return_value = mock_resp
+
+        with patch("urllib.request.urlopen", return_value=mock_resp):
+            stats = fetch_hackerrank_stats("testuser", "https://www.hackerrank.com/profile/testuser")
+
+        self.assertEqual(stats.source, "public_rest_api")
+        self.assertEqual(stats.retrieval_method, "public_rest_api")
+        self.assertEqual(stats.status, RetrievalStatus.SUCCESS)
 
     def test_hackerrank_skills_parsing(self):
         skills_fixture = ["Algorithm", "Data Structure", "SQL", "Python(Advanced)"]
@@ -372,6 +405,249 @@ class TestSnapshotFallback(unittest.TestCase):
     def test_snapshot_nonexistent_user(self):
         stats = get_snapshot_stats("geeksforgeeks", "unknown_user", "https://www.geeksforgeeks.org/profile/unknown_user")
         self.assertIsNone(stats)
+
+
+class TestCodeforcesAPI(unittest.TestCase):
+    """Test Codeforces official API response parsing and error handling."""
+
+    def test_codeforces_success(self):
+        info_fixture = {
+            "status": "OK",
+            "result": [
+                {
+                    "handle": "testuser",
+                    "rating": 1284,
+                    "maxRating": 1340,
+                    "rank": "pupil",
+                    "maxRank": "pupil",
+                    "titlePhoto": "https://userpic.codeforces.org/photo.jpg",
+                }
+            ],
+        }
+
+        status_fixture = {
+            "status": "OK",
+            "result": [
+                {"id": 1, "verdict": "OK", "problem": {"contestId": 1000, "index": "A"}},
+                {"id": 2, "verdict": "OK", "problem": {"contestId": 1000, "index": "A"}},  # Duplicate
+                {"id": 3, "verdict": "WRONG_ANSWER", "problem": {"contestId": 1000, "index": "B"}},
+                {"id": 4, "verdict": "OK", "problem": {"contestId": 1001, "index": "C"}},
+            ],
+        }
+
+        def mock_urlopen(req, timeout=10):
+            url = req if isinstance(req, str) else req.full_url
+            mock_resp = MagicMock()
+            if "user.info" in url:
+                mock_resp.read.return_value = json.dumps(info_fixture).encode("utf-8")
+            elif "user.status" in url:
+                mock_resp.read.return_value = json.dumps(status_fixture).encode("utf-8")
+            mock_resp.__enter__.return_value = mock_resp
+            return mock_resp
+
+        with patch("urllib.request.urlopen", side_effect=mock_urlopen):
+            stats = fetch_codeforces_stats("testuser", "https://codeforces.com/profile/testuser")
+
+        self.assertEqual(stats.status, RetrievalStatus.SUCCESS)
+        self.assertEqual(stats.metrics["rating"], 1284)
+        self.assertEqual(stats.metrics["max_rating"], 1340)
+        self.assertEqual(stats.metrics["rank"], "pupil")
+        self.assertEqual(stats.metrics["max_rank"], "pupil")
+        # Unique solved problems: 1000_A and 1001_C -> 2
+        self.assertEqual(stats.metrics["solved"], 2)
+
+    def test_codeforces_api_error_handling(self):
+        error_fixture = {
+            "status": "FAILED",
+            "comment": "handles: User not found",
+        }
+        mock_resp = MagicMock()
+        mock_resp.read.return_value = json.dumps(error_fixture).encode("utf-8")
+        mock_resp.__enter__.return_value = mock_resp
+
+        with patch("urllib.request.urlopen", return_value=mock_resp):
+            stats = fetch_codeforces_stats("nonexistent", "https://codeforces.com/profile/nonexistent")
+
+        self.assertEqual(stats.status, RetrievalStatus.FAILED)
+        self.assertIn("handles: User not found", stats.error)
+
+    def test_codeforces_network_error_handling(self):
+        import urllib.error
+        with patch("urllib.request.urlopen", side_effect=urllib.error.URLError("Connection refused")):
+            stats = fetch_codeforces_stats("testuser", "https://codeforces.com/profile/testuser")
+
+        self.assertEqual(stats.status, RetrievalStatus.FAILED)
+        self.assertIn("Network error", stats.error)
+
+
+class TestProvenanceAndSnapshotIsolation(unittest.TestCase):
+    """Test live-vs-snapshot precedence and provenance isolation."""
+
+    def test_live_success_never_merges_snapshot_metrics(self):
+        from scripts.external_stats import external_stats
+
+        mock_live_lc = PlatformStats(
+            platform="LeetCode",
+            username="prathamkashyap",
+            profile_url="https://leetcode.com/u/prathamkashyap/",
+            status=RetrievalStatus.SUCCESS,
+            source="graphql",
+            source_type="live",
+            retrieval_method="graphql",
+            metrics={"solved": 522, "easy": 171, "medium": 279, "hard": 72},
+        )
+
+        with patch.dict(external_stats.PROVIDERS, {"leetcode": lambda u, url: mock_live_lc}), \
+             patch("scripts.external_stats.external_stats.get_profile_info", return_value={
+                 "leetcode": {"username": "prathamkashyap", "profile_url": "https://leetcode.com/u/prathamkashyap/"}
+             }):
+            results = fetch_all_external_stats(Path("/fake/root"))
+
+        self.assertEqual(len(results), 1)
+        res = results[0]
+        self.assertEqual(res.source_type, "live")
+        self.assertEqual(res.status, RetrievalStatus.SUCCESS)
+        # Snapshot-exclusive metrics must NOT be merged into a live record
+        self.assertNotIn("beats_percentage", res.metrics)
+
+    def test_snapshot_fallback_on_live_failure(self):
+        from scripts.external_stats import external_stats
+
+        mock_failed_lc = PlatformStats(
+            platform="LeetCode",
+            username="prathamkashyap",
+            profile_url="https://leetcode.com/u/prathamkashyap/",
+            status=RetrievalStatus.UNAVAILABLE,
+            source="graphql",
+            error="Cloudflare 403",
+        )
+
+        with patch.dict(external_stats.PROVIDERS, {"leetcode": lambda u, url: mock_failed_lc}), \
+             patch("scripts.external_stats.external_stats.get_profile_info", return_value={
+                 "leetcode": {"username": "prathamkashyap", "profile_url": "https://leetcode.com/u/prathamkashyap/"}
+             }):
+            results = fetch_all_external_stats(Path("/fake/root"))
+
+        self.assertEqual(len(results), 1)
+        res = results[0]
+        self.assertEqual(res.source_type, "screenshot_snapshot")
+        self.assertEqual(res.source, "screenshot_snapshot")
+        self.assertEqual(res.metrics["solved"], 522)
+        self.assertIn("beats_percentage", res.metrics)
+
+
+class TestHackerEarthParserValidation(unittest.TestCase):
+    """Test HackerEarth leaderboard parsing structure verification and validation."""
+
+    def test_parse_tracks_html_table_standard_order(self):
+        html = """
+        <table>
+            <thead><tr><th>Topic</th><th>Rank</th><th>Points</th></tr></thead>
+            <tbody>
+                <tr><td>Basic Programming</td><td>188</td><td>4300</td></tr>
+                <tr><td>Algorithms</td><td>19262</td><td>1500</td></tr>
+            </tbody>
+        </table>
+        """
+        metrics = _parse_hackerearth_tracks(html, "")
+        self.assertEqual(metrics["basic_programming_rank"], 188)
+        self.assertEqual(metrics["basic_programming_points"], 4300)
+        self.assertEqual(metrics["algorithms_rank"], 19262)
+        self.assertEqual(metrics["algorithms_points"], 1500)
+
+    def test_parse_tracks_html_table_inverted_order(self):
+        # Column order swapped: Points before Rank
+        html = """
+        <table>
+            <thead><tr><th>Topic</th><th>Points</th><th>Rank</th></tr></thead>
+            <tbody>
+                <tr><td>Basic Programming</td><td>4300</td><td>188</td></tr>
+            </tbody>
+        </table>
+        """
+        metrics = _parse_hackerearth_tracks(html, "")
+        self.assertEqual(metrics["basic_programming_rank"], 188)
+        self.assertEqual(metrics["basic_programming_points"], 4300)
+
+    def test_parse_tracks_text_with_verified_headers(self):
+        text = """
+        Tracks Leaderboard
+        Topic       Rank    Points
+        Basic Programming   188     4300
+        Algorithms          19262   1500
+        """
+        metrics = _parse_hackerearth_tracks("", text)
+        self.assertEqual(metrics["basic_programming_rank"], 188)
+        self.assertEqual(metrics["basic_programming_points"], 4300)
+        self.assertEqual(metrics["algorithms_rank"], 19262)
+        self.assertEqual(metrics["algorithms_points"], 1500)
+
+    def test_parse_tracks_unverified_structure_fails_safely(self):
+        # No headers preceding tracks -> cannot verify whether column 1 is rank or points
+        text = """
+        Some unrelated text
+        Basic Programming   188     4300
+        """
+        metrics = _parse_hackerearth_tracks("", text)
+        # Must fail safely and not guess
+        self.assertEqual(metrics, {})
+
+    def test_parse_tracks_invalid_bounds_fails_safely(self):
+        # Rank is 0 (invalid rank)
+        html = """
+        <table>
+            <thead><tr><th>Topic</th><th>Rank</th><th>Points</th></tr></thead>
+            <tbody>
+                <tr><td>Basic Programming</td><td>0</td><td>4300</td></tr>
+            </tbody>
+        </table>
+        """
+        metrics = _parse_hackerearth_tracks(html, "")
+        self.assertNotIn("basic_programming_rank", metrics)
+
+
+class TestNoCrossPlatformAggregateSolved(unittest.TestCase):
+    """Verify that there is no cross-platform aggregate 'total solved' metric."""
+
+    def test_no_aggregate_solved_in_json(self):
+        import tempfile
+
+        stats_list = [
+            PlatformStats(platform="LeetCode", username="u1", profile_url="url1", metrics={"solved": 500}),
+            PlatformStats(platform="Codeforces", username="u2", profile_url="url2", metrics={"solved": 200}),
+            PlatformStats(platform="CodeChef", username="u3", profile_url="url3", metrics={"solved": 300}),
+        ]
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            json_file = Path(tmpdir) / "stats.json"
+            generate_external_stats_json(stats_list, json_file)
+            with open(json_file, "r") as f:
+                data = json.load(f)
+
+        self.assertIsInstance(data, list)
+        for item in data:
+            self.assertNotIn("total_solved_across_platforms", item.get("metrics", {}))
+            self.assertNotIn("aggregate_solved", item.get("metrics", {}))
+
+    def test_readme_formatter_keeps_platforms_independent(self):
+        import tempfile
+
+        stats_list = [
+            PlatformStats(platform="LeetCode", username="u1", profile_url="url1", source_type="live", metrics={"solved": 500}),
+            PlatformStats(platform="Codeforces", username="u2", profile_url="url2", source_type="live", metrics={"solved": 200}),
+        ]
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            readme = Path(tmpdir) / "README.md"
+            readme.write_text("### External Platform Statistics\n\n## Automation", encoding="utf-8")
+            update_readme_external_stats(stats_list, readme)
+            content = readme.read_text(encoding="utf-8")
+
+        # Must not mention combined 700 solved
+        self.assertNotIn("700", content)
+        self.assertIn("500", content)
+        self.assertIn("200", content)
+        self.assertIn("not combined into a misleading total", content)
 
 
 if __name__ == "__main__":

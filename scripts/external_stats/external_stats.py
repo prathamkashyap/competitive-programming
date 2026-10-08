@@ -80,14 +80,8 @@ def fetch_all_external_stats(repo_root: Path) -> List[PlatformStats]:
                 else:
                     results.append(stats)
             else:
-                # If live succeeded or partial, check if snapshot can supplement any dashboard-only metrics
-                snapshot_stats = get_snapshot_stats(platform, username, profile_url)
-                if snapshot_stats and snapshot_stats.metrics:
-                    # Supplement non-conflicting metrics (like dashboard streaks)
-                    for k, v in snapshot_stats.metrics.items():
-                        if k not in stats.metrics:
-                            stats.metrics[k] = v
-
+                # Live retrieval succeeded or was partial.
+                # Strictly isolate live metrics: never merge snapshot data into a live record.
                 results.append(stats)
 
         except Exception as e:
@@ -227,15 +221,24 @@ def _format_platform_highlights(platform: str, m: Dict[str, Any]) -> str:
         parts = [f"Rating **{rating}**", league, dsa, solved]
         return ", ".join([p for p in parts if p])
     elif p == "hackerrank":
-        ps_stars = f"Problem Solving **{m.get('problem_solving_stars', '—')}★**"
-        tot_stars = f"**{m.get('total_stars', '—')}** total stars"
-        solved = f"**{m.get('total_challenges_solved', '—')}** solved"
-        return f"{ps_stars}, {tot_stars}, {solved}"
+        parts = []
+        if "problem_solving_stars" in m:
+            parts.append(f"Problem Solving **{m['problem_solving_stars']}★**")
+        if "total_stars" in m:
+            parts.append(f"**{m['total_stars']}** total stars")
+        if "total_challenges_solved" in m:
+            parts.append(f"**{m['total_challenges_solved']}** solved")
+        return ", ".join(parts) if parts else "Public REST API"
     elif p == "hackerearth":
-        pts = f"**{m.get('points', '—')}** pts"
-        solved = f"**{m.get('solved', '—')}** solved"
-        rank = f"BP #{m['basic_programming_rank']}" if "basic_programming_rank" in m else ""
-        return f"{pts}, {solved}, {rank}"
+        parts = []
+        if "points" in m:
+            pts_val = f"{m['points']:,}" if isinstance(m['points'], int) else f"{m['points']}"
+            parts.append(f"**{pts_val}** pts")
+        if "solved" in m:
+            parts.append(f"**{m['solved']}** solved")
+        if "basic_programming_rank" in m:
+            parts.append(f"BP #{m['basic_programming_rank']}")
+        return ", ".join(parts) if parts else "Public Profile"
     elif p == "geeksforgeeks":
         score = f"Score **{m.get('coding_score', '—')}**"
         solved = f"**{m.get('solved', '—')}** solved"
@@ -351,24 +354,43 @@ def _format_platform_detail_section(s: PlatformStats) -> List[str]:
             ])
 
     elif p == "hackerearth":
-        lines.extend([
+        he_lines = [
             "#### 🚀 Competitive Practice & Rankings",
             "",
             f"- **Total Points**: `{m.get('points', '—'):,}`" if isinstance(m.get('points'), int) else f"- **Total Points**: `{m.get('points', '—')}`",
             f"- **Problems Solved**: `{m.get('solved', '—')}`",
             f"- **Solutions Submitted**: `{m.get('submissions', '—')}`",
-            f"- **Basic Programming Rank**: `#{m.get('basic_programming_rank', '—')}` (Top 1%)",
-            f"- **Algorithms Rank**: `#{m.get('algorithms_rank', '—')}` (Top 10%)",
-            "",
-        ])
+        ]
+        if "basic_programming_rank" in m:
+            he_lines.append(f"- **Basic Programming Rank**: `#{m['basic_programming_rank']}`")
+        if "algorithms_rank" in m:
+            he_lines.append(f"- **Algorithms Rank**: `#{m['algorithms_rank']}`")
+        if "top_percentiles" in m and m["top_percentiles"]:
+            he_lines.append(f"- **Top Percentiles**: {', '.join(m['top_percentiles'])}")
+        he_lines.append("")
+
         if "badges" in m and m["badges"]:
-            lines.extend([
+            he_lines.extend([
                 "#### 🎖️ Badges & Achievements",
                 "",
             ])
             for b in m["badges"]:
-                lines.append(f"- 🏅 {b}")
-            lines.append("")
+                he_lines.append(f"- 🏅 {b}")
+            he_lines.append("")
+
+        streak_parts = []
+        if "practice_streak_days" in m:
+            streak_parts.append(f"Practice Streak: `{m['practice_streak_days']} days`")
+        if "daily_streak_days" in m:
+            streak_parts.append(f"Daily Streak: `{m['daily_streak_days']} days`")
+        if streak_parts:
+            he_lines.extend([
+                "#### 🔥 Streaks",
+                "",
+                f"- {', '.join(streak_parts)}",
+                "",
+            ])
+        lines.extend(he_lines)
 
     elif p == "geeksforgeeks":
         lines.extend([
@@ -426,8 +448,17 @@ def update_readme_external_stats(results: List[PlatformStats], readme_path: Path
 
         if p == "leetcode":
             solves_rating = f"**{m.get('solved', '—')}** solved ({m.get('easy', '—')} E / {m.get('medium', '—')} M / {m.get('hard', '—')} H)"
-            rank_fmt = f"#{m['global_rank']:,}" if isinstance(m.get('global_rank'), int) else f"#{m.get('global_rank', '—')}"
-            highlights = f"{m.get('acceptance_rate', '—')}% AC, {rank_fmt}, {m.get('streak_days', '—')}d streak, {m.get('badges_count', '—')} badges"
+            lc_parts = []
+            if "acceptance_rate" in m:
+                lc_parts.append(f"{m['acceptance_rate']}% AC")
+            if "global_rank" in m:
+                rank_fmt = f"#{m['global_rank']:,}" if isinstance(m['global_rank'], int) else f"#{m['global_rank']}"
+                lc_parts.append(rank_fmt)
+            if "streak_days" in m:
+                lc_parts.append(f"{m['streak_days']}d streak")
+            if "badges_count" in m:
+                lc_parts.append(f"{m['badges_count']} badges")
+            highlights = ", ".join(lc_parts) if lc_parts else "Solved Breakdown"
         elif p == "codeforces":
             solves_rating = f"Rating **{m.get('rating', '—')}** (`{m.get('rank', '—')}`), **{m.get('solved', '—')}** solved"
             highlights = f"Max rating {m.get('max_rating', '—')}, Official API verified"
@@ -437,11 +468,38 @@ def update_readme_external_stats(results: List[PlatformStats], readme_path: Path
             highlights = f"{m.get('league', '—')}, DSA Monday **{m.get('dsa_rating', '—')}** (Rank {rank_fmt})"
         elif p == "hackerrank":
             solves_rating = f"**{m.get('total_stars', '—')}** stars, **{m.get('total_challenges_solved', '—')}** solved"
-            highlights = f"Problem Solving {m.get('problem_solving_stars', '—')}★ (#{m.get('problem_solving_rank', '—'):,}), SQL {m.get('sql_stars', '—')}★ (#1), C++/Java/Python 5★"
+            hr_parts = []
+            if "problem_solving_stars" in m:
+                ps_str = f"Problem Solving {m['problem_solving_stars']}★"
+                if "problem_solving_rank" in m:
+                    ps_str += f" (#{m['problem_solving_rank']:,})"
+                hr_parts.append(ps_str)
+            if "sql_stars" in m:
+                sql_str = f"SQL {m['sql_stars']}★"
+                if "sql_rank" in m:
+                    sql_str += f" (#{m['sql_rank']:,})"
+                hr_parts.append(sql_str)
+            lang_stars = []
+            for lang in ["cpp", "java", "python"]:
+                if f"{lang}_stars" in m:
+                    lang_name = "C++" if lang == "cpp" else lang.capitalize()
+                    lang_stars.append(f"{lang_name} {m[f'{lang}_stars']}★")
+            if lang_stars:
+                hr_parts.append("/".join(lang_stars))
+            highlights = ", ".join(hr_parts) if hr_parts else "Public REST API verified"
         elif p == "hackerearth":
             pts_fmt = f"{m['points']:,}" if isinstance(m.get('points'), int) else f"{m.get('points', '—')}"
             solves_rating = f"**{pts_fmt}** pts, **{m.get('solved', '—')}** solved ({m.get('submissions', '—')} subs)"
-            highlights = f"BP #{m.get('basic_programming_rank', '—')} (Top 1%), Algo #{m.get('algorithms_rank', '—')} (Top 10%), {m.get('badges_count', '—')} badges"
+            he_parts = []
+            if "basic_programming_rank" in m:
+                he_parts.append(f"BP #{m['basic_programming_rank']}")
+            if "algorithms_rank" in m:
+                he_parts.append(f"Algo #{m['algorithms_rank']}")
+            if "top_percentiles" in m and m["top_percentiles"]:
+                he_parts.append(", ".join(m["top_percentiles"]))
+            if "badges_count" in m:
+                he_parts.append(f"{m['badges_count']} badges")
+            highlights = ", ".join(he_parts) if he_parts else "Public API verified"
         elif p == "geeksforgeeks":
             solves_rating = f"Score **{m.get('coding_score', '—')}**, **{m.get('solved', '—')}** solved"
             highlights = f"{m.get('potd_solved', '—')} POTDs solved, {m.get('longest_streak_days', '—')}d streak, {m.get('submissions_2026', '—')} subs (2026)"
@@ -464,15 +522,28 @@ def update_readme_external_stats(results: List[PlatformStats], readme_path: Path
             lang_str = ", ".join([f"{k} (`{v}`)" for k, v in m.get("languages", {}).items()]) if "languages" in m else "—"
             badges_str = ", ".join(m.get("badges", [])[:6]) if "badges" in m else "—"
             rank_fmt = f"#{m['global_rank']:,}" if isinstance(m.get('global_rank'), int) else f"#{m.get('global_rank', '—')}"
-            section_lines.extend([
+            lc_lines = [
                 f"#### LeetCode ([@{s.username}]({s.profile_url}))",
                 f"- **Problem Solves**: `{m.get('solved', '—')}` total (🟢 Easy: `{m.get('easy', '—')}`, 🟡 Medium: `{m.get('medium', '—')}`, 🔴 Hard: `{m.get('hard', '—')}`)",
-                f"- **Submissions & Acceptance**: `{m.get('submissions', '—')}` submissions, `{m.get('ac_submissions', '—')}` accepted (`{m.get('acceptance_rate', '—')}%` AC rate)",
-                f"- **Rankings & Streaks**: Global Rank `{rank_fmt}`, `{m.get('streak_days', '—')}` days current streak, `{m.get('total_active_days', '—')}` total active days",
-                f"- **Languages**: {lang_str}",
-                f"- **Featured Badges**: {badges_str}",
-                "",
-            ])
+            ]
+            if "submissions" in m or "ac_submissions" in m or "acceptance_rate" in m:
+                lc_lines.append(f"- **Submissions & Acceptance**: `{m.get('submissions', '—')}` submissions, `{m.get('ac_submissions', '—')}` accepted (`{m.get('acceptance_rate', '—')}%` AC rate)")
+
+            streak_parts = []
+            if "global_rank" in m:
+                streak_parts.append(f"Global Rank `{rank_fmt}`")
+            if "streak_days" in m:
+                streak_parts.append(f"`{m['streak_days']}` days current streak")
+            if "total_active_days" in m:
+                streak_parts.append(f"`{m['total_active_days']}` total active days")
+            if streak_parts:
+                lc_lines.append(f"- **Rankings & Streaks**: {', '.join(streak_parts)}")
+            if "languages" in m and m["languages"]:
+                lc_lines.append(f"- **Languages**: {lang_str}")
+            if "badges" in m and m["badges"]:
+                lc_lines.append(f"- **Featured Badges**: {badges_str}")
+            lc_lines.append("")
+            section_lines.extend(lc_lines)
         elif p == "codeforces":
             section_lines.extend([
                 f"#### Codeforces ([@{s.username}]({s.profile_url}))",
@@ -491,32 +562,76 @@ def update_readme_external_stats(results: List[PlatformStats], readme_path: Path
                 "",
             ])
         elif p == "hackerrank":
-            skills_str = ", ".join([f"`{sk}`" for sk in m.get("verified_skills", [])]) if "verified_skills" in m else "—"
-            section_lines.extend([
+            badges_dict = m.get("skill_badges", {})
+            badge_items = []
+            for name, bdata in badges_dict.items():
+                stars = bdata.get("stars", 0)
+                stars_txt = f"`{stars}★`" if stars else ""
+                rank = bdata.get("rank")
+                rank_txt = f", `#{rank:,}`" if rank else ""
+                badge_items.append(f"{name} ({stars_txt}{rank_txt})".replace(" ()", ""))
+            badges_line = ", ".join(badge_items) if badge_items else "—"
+
+            hr_lines = [
                 f"#### HackerRank ([@{s.username}]({s.profile_url}))",
-                f"- **Skill Badges**: Problem Solving (`6★` Gold, `#{m.get('problem_solving_rank', '—'):,}`), SQL (`5★` Gold, `#1`), C++ (`5★` Gold), Java (`5★` Gold), Python (`5★` Gold)",
+                f"- **Skill Badges**: {badges_line}",
                 f"- **Total Stars & Solves**: `{m.get('total_stars', '—')}` stars earned, `{m.get('total_challenges_solved', '—')}` challenges solved",
-                f"- **Verified Skills**: {skills_str}",
-                "",
-            ])
+            ]
+            if "verified_skills" in m and m["verified_skills"]:
+                skills_str = ", ".join([f"`{sk}`" for sk in m["verified_skills"]])
+                hr_lines.append(f"- **Verified Skills**: {skills_str}")
+            hr_lines.append("")
+            section_lines.extend(hr_lines)
         elif p == "hackerearth":
             pts_fmt = f"{m['points']:,}" if isinstance(m.get('points'), int) else f"{m.get('points', '—')}"
-            section_lines.extend([
+            he_lines = [
                 f"#### HackerEarth ([@{s.username}]({s.profile_url}))",
                 f"- **Points & Solves**: `{pts_fmt}` points, `{m.get('solved', '—')}` solved, `{m.get('submissions', '—')}` solutions submitted",
-                f"- **Track Rankings**: Basic Programming `#{m.get('basic_programming_rank', '—')}` (Top 1%), Algorithms `#{m.get('algorithms_rank', '—')}` (Top 10%)",
-                f"- **Stars & Badges**: Basic Programming (`5★`), Algorithms (`2★`), Data Structures (`2★`), Novice, Amateur, Explorer, Elite",
-                f"- **Streaks**: Practice Streak: `{m.get('practice_streak_days', '72')}` days, Daily Streak: `{m.get('daily_streak_days', '20')}` days",
-                "",
-            ])
+            ]
+            rank_parts = []
+            if "basic_programming_rank" in m:
+                rank_parts.append(f"Basic Programming `#{m['basic_programming_rank']}`")
+            if "algorithms_rank" in m:
+                rank_parts.append(f"Algorithms `#{m['algorithms_rank']}`")
+            if rank_parts:
+                he_lines.append(f"- **Track Rankings**: {', '.join(rank_parts)}")
+            if "top_percentiles" in m and m["top_percentiles"]:
+                he_lines.append(f"- **Top Percentiles**: {', '.join(m['top_percentiles'])}")
+            if "badges" in m and m["badges"]:
+                badges_str = ", ".join(m["badges"])
+                he_lines.append(f"- **Badges**: {badges_str}")
+            streak_parts = []
+            if "practice_streak_days" in m:
+                streak_parts.append(f"Practice Streak: `{m['practice_streak_days']}` days")
+            if "daily_streak_days" in m:
+                streak_parts.append(f"Daily Streak: `{m['daily_streak_days']}` days")
+            if streak_parts:
+                he_lines.append(f"- **Streaks**: {', '.join(streak_parts)}")
+            he_lines.append("")
+            section_lines.extend(he_lines)
         elif p == "geeksforgeeks":
-            section_lines.extend([
+            diff_parts = []
+            for diff_name in ["basic", "easy", "medium", "hard"]:
+                if f"{diff_name}_solved" in m:
+                    diff_parts.append(f"{diff_name.capitalize()}: `{m[f'{diff_name}_solved']}`")
+            diff_str = f" ({', '.join(diff_parts)})" if diff_parts else ""
+
+            gfg_lines = [
                 f"#### GeeksforGeeks ([@{s.username}]({s.profile_url}))",
-                f"- **Coding Score**: `{m.get('coding_score', '—')}` | **Total Solved**: `{m.get('solved', '—')}` (Basic: `{m.get('basic_solved', '—')}`, Easy: `{m.get('easy_solved', '—')}`, Medium: `{m.get('medium_solved', '—')}`, Hard: `{m.get('hard_solved', '—')}`)",
-                f"- **Streaks & POTD**: `{m.get('potd_solved', '—')}` POTDs solved, `{m.get('longest_streak_days', '—')}` day longest streak",
-                f"- **2026 Activity**: `{m.get('submissions_2026', '—')}` submissions across `{m.get('active_days_2026', '—')}` active days",
-                "",
-            ])
+                f"- **Coding Score**: `{m.get('coding_score', '—')}` | **Total Solved**: `{m.get('solved', '—')}`{diff_str}",
+            ]
+            streak_parts = []
+            if "potd_solved" in m:
+                streak_parts.append(f"`{m['potd_solved']}` POTDs solved")
+            if "longest_streak_days" in m:
+                streak_parts.append(f"`{m['longest_streak_days']}` day longest streak")
+            if streak_parts:
+                gfg_lines.append(f"- **Streaks & POTD**: {', '.join(streak_parts)}")
+            if "submissions_2026" in m:
+                act_str = f" across `{m['active_days_2026']}` active days" if "active_days_2026" in m else ""
+                gfg_lines.append(f"- **2026 Activity**: `{m['submissions_2026']}` submissions{act_str}")
+            gfg_lines.append("")
+            section_lines.extend(gfg_lines)
 
     section_lines.extend([
         "</details>",

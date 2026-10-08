@@ -33,6 +33,7 @@ IGNORE_DIRS = {
     'badges',
     'docs',
     'scripts',
+    'tests',
     '__pycache__',
     '.vscode',
     '.cph',
