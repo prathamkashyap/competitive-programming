@@ -1,6 +1,6 @@
 # Algorithmic Patterns
 
-This directory contains focused documentation on common algorithmic problem-solving patterns for competitive programming and interview preparation.
+My documentation on common algorithmic problem-solving patterns for competitive programming and interview preparation.
 
 Each pattern document explains:
 - When to recognize the pattern
@@ -35,3 +35,7 @@ Each pattern document explains:
 - [../docs/patterns.md](../docs/patterns.md) - Top-level pattern index
 - [../docs/roadmap.md](../docs/roadmap.md) - Progressive learning path
 - [../notes/](../notes/) - Theoretical reference material
+
+---
+
+[← Back to Main Repository](../README.md)

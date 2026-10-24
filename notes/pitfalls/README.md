@@ -1,8 +1,6 @@
-# Common Pitfalls and Mistakes
+# ⚠️ Common Pitfalls
 
-This directory contains practical notes on common mistakes that cause WA, TLE, RE, or incorrect complexity assumptions in competitive programming.
-
-These notes focus on actual implementation mistakes rather than theoretical concepts.
+Practical mistakes that cost contests - off-by-one errors, overflow issues, recursion depth, and other gotchas I've learned the hard way.
 
 ## Available Notes
 
@@ -20,8 +18,6 @@ These notes focus on actual implementation mistakes rather than theoretical conc
 2. **When debugging**: Check if your bug matches a known pitfall
 3. **For review**: Use as a checklist of common mistakes
 
-## Related
+---
 
-- [../complexity_and_limits.md](../complexity_and_limits.md) - Complexity fundamentals
-- [../../patterns/](../../patterns/) - Algorithmic patterns
-- [../../docs/roadmap.md](../../docs/roadmap.md) - Learning roadmap
+[← Back to Notes](../README.md)
