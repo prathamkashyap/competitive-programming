@@ -13,6 +13,7 @@ from datetime import datetime
 from .models import PlatformStats, RetrievalStatus
 from .discovery import get_profile_info
 from .snapshot_loader import get_snapshot_stats
+from .badge_generator import generate_all_badges
 
 
 # Platform provider mapping
@@ -39,6 +40,10 @@ def fetch_all_external_stats(repo_root: Path) -> List[PlatformStats]:
 
     Returns:
         List of PlatformStats for all platforms
+
+    Note:
+        Each platform is fetched independently. Failure of one platform does not
+        prevent other platforms from being fetched. Partial success is acceptable.
     """
     profile_info = get_profile_info(repo_root)
     results = []
@@ -86,6 +91,7 @@ def fetch_all_external_stats(repo_root: Path) -> List[PlatformStats]:
 
         except Exception as e:
             # If provider threw uncaught exception, attempt snapshot fallback
+            # This ensures one platform's failure doesn't stop others
             snapshot_stats = get_snapshot_stats(platform, username, profile_url)
             if snapshot_stats:
                 results.append(snapshot_stats)
@@ -420,12 +426,20 @@ def _format_platform_detail_section(s: PlatformStats) -> List[str]:
     return lines
 
 
-def update_readme_external_stats(results: List[PlatformStats], readme_path: Path):
+def update_readme_external_stats(results: List[PlatformStats], readme_path: Path, badge_paths: Dict[str, str] = None):
     """
     Update the External Platform Statistics section in README.md from external-stats results.
+
+    Args:
+        results: List of PlatformStats
+        readme_path: Path to README.md
+        badge_paths: Dict mapping badge names to relative paths (optional)
     """
     if not readme_path.exists():
         return
+
+    if badge_paths is None:
+        badge_paths = {}
 
     content = readme_path.read_text(encoding="utf-8")
 
@@ -435,9 +449,24 @@ def update_readme_external_stats(results: List[PlatformStats], readme_path: Path
         "",
         "Public profile statistics from external competitive programming platforms (verified from public APIs, GraphQL, and structured profiles):",
         "",
+    ]
+
+    # Add badges at the top if available
+    if badge_paths:
+        section_lines.extend([
+            "",
+            "![Codeforces Rating](docs/generated/badges/codeforces-rating.svg) ",
+            "![LeetCode Solved](docs/generated/badges/leetcode-solved.svg) ",
+            "![CodeChef Rating](docs/generated/badges/codechef-rating.svg) ",
+            "![Repo Solutions](docs/generated/badges/repo-solutions.svg)",
+            "",
+        ])
+
+    section_lines.extend([
+        "",
         "| Platform | Profile | Status | Solves / Rating | Key Highlights |",
         "| :--- | :--- | :---: | :--- | :--- |",
-    ]
+    ])
 
     for s in results:
         status_badge = "🟢 `live`" if s.source_type == "live" else "📸 `snapshot`"
@@ -705,9 +734,26 @@ def main():
     generate_external_stats_markdown(results, md_path)
     print(f"Generated: {md_path}")
 
+    # Generate badges
+    print("\nGenerating badges...")
+    badge_dir = output_dir / "badges"
+    # Load repository stats for repo badge
+    repo_stats_path = output_dir / "stats.json"
+    repo_stats = {}
+    if repo_stats_path.exists():
+        with open(repo_stats_path, 'r', encoding='utf-8') as f:
+            repo_stats = json.load(f)
+    else:
+        print("  Warning: stats.json not found, repo badge will be skipped")
+
+    external_stats_dict = [stats.to_dict() for stats in results]
+    badge_paths = generate_all_badges(external_stats_dict, repo_stats, badge_dir)
+    for badge_name, badge_path in badge_paths.items():
+        print(f"  Generated: {badge_path}")
+
     # Update README
     readme_path = repo_root / "README.md"
-    update_readme_external_stats(results, readme_path)
+    update_readme_external_stats(results, readme_path, badge_paths)
     print(f"Updated README: {readme_path}")
 
     # Count results by status
@@ -718,11 +764,10 @@ def main():
 
     print(f"\nSummary: {success_count} successful, {partial_count} partial, {unavailable_count} unavailable, {failed_count} failed")
 
-    if failed_count > 0:
-        sys.exit(1)
-    else:
-        print("\nExternal statistics generation complete!")
-        sys.exit(0)
+    # Exit with success even if some platforms failed - partial success is acceptable
+    # This allows the scheduled workflow to continue and commit partial results
+    print("\nExternal statistics generation complete!")
+    sys.exit(0)
 
 
 if __name__ == "__main__":

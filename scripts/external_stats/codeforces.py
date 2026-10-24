@@ -8,23 +8,41 @@ import urllib.error
 from typing import Dict, Any, Optional
 from datetime import datetime, timezone
 from .models import PlatformStats, RetrievalStatus
+from .utils import rate_limit_delay, retry_with_backoff
 
 
 CODEFORCES_API_BASE = "https://codeforces.com/api/"
+CODEFORCES_RATE_LIMIT_DELAY = 2.0  # Codeforces API rate limit: ~1 request per 2 seconds
+
+
+@retry_with_backoff(max_retries=3, initial_delay=1.0, backoff_factor=2.0)
+def _fetch_codeforces_api(url: str) -> Dict:
+    """
+    Fetch data from Codeforces API with retry logic.
+
+    Args:
+        url: API endpoint URL
+
+    Returns:
+        Parsed JSON response
+    """
+    with urllib.request.urlopen(url, timeout=10) as response:
+        return json.loads(response.read().decode('utf-8'))
 
 
 def fetch_codeforces_stats(username: str, profile_url: str) -> PlatformStats:
     """
     Fetch Codeforces statistics using the official public API.
 
-    API endpoint: user.info
+    API endpoint: user.info, user.status
     Documentation: https://codeforces.com/apiHelp/methods?locale=en#user.info
+
+    Rate limit: ~1 request per 2 seconds (enforced via delay between calls)
     """
     try:
         # Fetch user info
         url = f"{CODEFORCES_API_BASE}user.info?handles={username}"
-        with urllib.request.urlopen(url, timeout=10) as response:
-            data = json.loads(response.read().decode('utf-8'))
+        data = _fetch_codeforces_api(url)
 
         if data.get("status") != "OK":
             error_msg = data.get("comment", "Unknown error")
@@ -50,11 +68,13 @@ def fetch_codeforces_stats(username: str, profile_url: str) -> PlatformStats:
             "title_photo": user_info.get("titlePhoto"),
         }
 
+        # Enforce rate limit delay before second API call
+        rate_limit_delay(CODEFORCES_RATE_LIMIT_DELAY)
+
         # Fetch submission info for solved count
         try:
             submissions_url = f"{CODEFORCES_API_BASE}user.status?handle={username}"
-            with urllib.request.urlopen(submissions_url, timeout=10) as response:
-                submissions_data = json.loads(response.read().decode('utf-8'))
+            submissions_data = _fetch_codeforces_api(submissions_url)
 
             if submissions_data.get("status") == "OK":
                 submissions = submissions_data["result"]
