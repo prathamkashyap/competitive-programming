@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competitive Programming Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Competitive Programming Dashboard</h1>
+            <p class="subtitle">Live statistics and searchable problem index</p>
+        </header>
+
+        <!-- Live Stats Section -->
+        <section class="stats-section">
+            <h2>Live Platform Statistics</h2>
+            <div id="stats-loading">Loading statistics...</div>
+            <div id="stats-container" class="stats-grid"></div>
+        </section>
+
+        <!-- Problem Browser Section -->
+        <section class="browser-section">
+            <h2>Problem Browser</h2>
+
+            <!-- Filters -->
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="search">Search:</label>
+                    <input type="text" id="search" placeholder="Code, title, or path...">
+                </div>
+                <div class="filter-group">
+                    <label for="platform">Platform:</label>
+                    <select id="platform">
+                        <option value="">All Platforms</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="rating">Rating:</label>
+                    <select id="rating">
+                        <option value="">All Ratings</option>
+                        <option value="800-1200">800-1200</option>
+                        <option value="1200-1400">1200-1400</option>
+                        <option value="1400-1600">1400-1600</option>
+                        <option value="1600-1800">1600-1800</option>
+                        <option value="1800-2000">1800-2000</option>
+                        <option value="2000+">2000+</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="language">Language:</label>
+                    <select id="language">
+                        <option value="">All Languages</option>
+                        <option value="cpp">C++</option>
+                        <option value="python">Python</option>
+                        <option value="java">Java</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <button id="random-btn" class="btn btn-secondary">🎲 Random Problem</button>
+                </div>
+                <div class="filter-group">
+                    <button id="clear-btn" class="btn btn-secondary">Clear Filters</button>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="results-info">
+                <span id="results-count">Loading...</span>
+            </div>
+
+            <div id="problems-loading">Loading problems...</div>
+            <div id="problems-container" class="problems-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Platform</th>
+                            <th>Code</th>
+                            <th>Title</th>
+                            <th>Rating</th>
+                            <th>Language</th>
+                            <th>Link</th>
+                        </tr>
+                    </thead>
+                    <tbody id="problems-body"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer>
+            <p>Data auto-generated from <a href="../generated/external-stats.md">external stats</a> and <a href="../generated/problem-index.md">problem index</a></p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

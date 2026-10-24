@@ -1,0 +1,50 @@
+name: Update External Stats
+
+on:
+  schedule:
+    # Run daily at 00:00 UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+    # Allow manual trigger via GitHub Actions UI
+
+jobs:
+  update-stats:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify Python installation
+        run: |
+          python3 --version
+
+      - name: Run statistics generator
+        run: |
+          python3 scripts/generate_stats.py
+
+      - name: Run external statistics generator
+        run: |
+          python3 scripts/external_stats.py
+        continue-on-error: true
+        # Continue even if some platforms fail - partial success is acceptable
+
+      - name: Check generated files exist
+        run: |
+          test -f docs/generated/external-stats.json || echo "Warning: external-stats.json not generated"
+          test -f docs/generated/external-stats.md || echo "Warning: external-stats.md not generated"
+          test -f docs/generated/problem-index.json || echo "Warning: problem-index.json not generated"
+
+      - name: Commit generated files
+        run: |
+          git config user.name "prathamkashyap"
+          git config user.email "77629675+prathamkashyap@users.noreply.github.com"
+          git add docs/generated/external-stats.json docs/generated/external-stats.md docs/generated/badges/ docs/generated/problem-index.json docs/generated/stats.json README.md
+          git diff --staged --quiet || git commit -m "chore(stats): update external platform statistics"
+        continue-on-error: true
+
+      - name: Push changes
+        run: |
+          git push
+        continue-on-error: true

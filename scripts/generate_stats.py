@@ -10,9 +10,11 @@ Generated output is deterministic and requires no external APIs or network acces
 
 import os
 import json
+import re
 from pathlib import Path
 from collections import defaultdict
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Optional
+from datetime import datetime, timezone
 
 
 # Configuration
@@ -176,16 +178,59 @@ def scan_repository() -> Dict:
     return stats
 
 
-def extract_codeforces_rating(filepath: Path) -> str:
+def extract_codeforces_rating(filepath: Path) -> Optional[str]:
     """
     Extract Codeforces rating from directory structure if present.
-    Returns the rating as a string, or 'unrated' if not found.
+    Returns the rating as a string, or None if not found.
     """
     parts = filepath.parts
     for part in parts:
         if part.isdigit():
             return part
-    return 'unrated'
+    return None
+
+
+def extract_problem_code(filepath: Path, platform: str) -> Optional[str]:
+    """
+    Extract problem code from filename (e.g., "1701C.cpp" -> "1701C", "1701C_Title.cpp" -> "1701C").
+    Returns None if pattern doesn't match.
+    """
+    filename = filepath.stem  # filename without extension
+    if platform == "codeforces":
+        # Codeforces pattern: contestId_problemIndex (e.g., 1701C, 1348B)
+        # May be followed by underscore and title: 1701C_Title.cpp
+        # Problem index is typically uppercase letter (A-Z) or (A-Z)(a-z)
+        match = re.match(r'^(\d+[A-Z][a-z]?)(?:_.*)?$', filename)
+        if match:
+            return match.group(1)
+    # For other platforms, we can't reliably extract codes without more context
+    return None
+
+
+def extract_problem_title(filepath: Path) -> Optional[str]:
+    """
+    Extract problem title from file header if present.
+    Returns None if not found.
+    """
+    try:
+        content = filepath.read_text(encoding='utf-8', errors='ignore')
+        # Look for common title patterns in comments
+        patterns = [
+            r'//\s*Title:\s*(.+)',
+            r'/\*\*\s*Title:\s*(.+)',
+            r'#\s*Title:\s*(.+)',
+            r'//\s*Problem:\s*(.+)',
+        ]
+        for pattern in patterns:
+            match = re.search(pattern, content, re.IGNORECASE)
+            if match:
+                title = match.group(1).strip()
+                # Remove trailing comment markers
+                title = re.sub(r'\s*\*/\s*$', '', title)
+                return title if title else None
+    except Exception:
+        pass
+    return None
 
 
 def generate_problem_index(stats: Dict) -> List[Dict]:
@@ -209,17 +254,36 @@ def generate_problem_index(stats: Dict) -> List[Dict]:
         # Extract Codeforces rating if applicable
         rating = None
         if platform == 'codeforces':
-            rating = extract_codeforces_rating(filepath)
+            rating_str = extract_codeforces_rating(filepath)
+            if rating_str:
+                rating = int(rating_str)
+
+        # Extract problem code if applicable
+        code = extract_problem_code(filepath, platform)
+
+        # Extract title from file header
+        title = extract_problem_title(filepath)
+
+        # Normalize language to lowercase short form
+        lang = solution['language'].lower()
+        if lang == 'c++':
+            lang = 'cpp'
 
         entry = {
             'platform': platform,
             'path': str(filepath),
             'filename': filepath.name,
-            'language': solution['language'],
+            'language': lang,
         }
 
-        if rating:
+        if rating is not None:
             entry['rating'] = rating
+        if code:
+            entry['code'] = code
+        if title:
+            entry['title'] = title
+        # Tags empty for now - can be added later if a tagging system is implemented
+        entry['tags'] = []
 
         problem_index.append(entry)
 
@@ -320,6 +384,34 @@ def generate_problem_index_markdown(problem_index: List[Dict]) -> str:
     return "\n".join(lines)
 
 
+def generate_problem_index_json(problem_index: List[Dict]) -> Dict:
+    """
+    Generate a structured JSON document with the problem index.
+
+    Schema:
+    {
+        "generated_at": "<ISO timestamp>",
+        "total_problems": <count>,
+        "problems": [
+            {
+                "platform": "codeforces",
+                "code": "1701C",
+                "title": "",
+                "rating": 1400,
+                "path": "codeforces/1400/1701C.cpp",
+                "language": "cpp",
+                "tags": []
+            }
+        ]
+    }
+    """
+    return {
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "total_problems": len(problem_index),
+        "problems": problem_index,
+    }
+
+
 def main():
     """Main entry point."""
     print("Scanning repository...")
@@ -344,7 +436,13 @@ def main():
     index_path.write_text(index_md)
     print(f"Written problem index to {index_path}")
 
-    # Optionally write JSON for programmatic access
+    # Write problem index JSON
+    index_json = generate_problem_index_json(problem_index)
+    index_json_path = REPO_ROOT / 'docs' / 'generated' / 'problem-index.json'
+    index_json_path.write_text(json.dumps(index_json, indent=2))
+    print(f"Written problem index JSON to {index_json_path}")
+
+    # Write repository stats JSON
     json_path = REPO_ROOT / 'docs' / 'generated' / 'stats.json'
     json_path.write_text(json.dumps(stats, indent=2))
     print(f"Written JSON statistics to {json_path}")
