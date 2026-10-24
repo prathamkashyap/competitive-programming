@@ -1,4 +1,4 @@
-# Competitive Programming & Algorithmic Problem Solving
+# Competitive Programming & Algorithmic Problem Solving 🚀
 
 My personal collection of competitive programming solutions, reusable templates, and algorithmic notes that I use for contest practice and interview preparation.
 
@@ -47,7 +47,7 @@ Public profile statistics from external competitive programming platforms (verif
 | **[GeeksforGeeks](https://www.geeksforgeeks.org/profile/prathamkashyap)** | `@prathamkashyap` | 🟢 `live` | Score **618**, **150** solved | 45 POTDs solved, 45d streak, 147 subs (2026) |
 
 <details>
-<summary><b>Detailed Platform Breakdown & Honors</b></summary>
+<summary><b>🔍 Detailed Platform Breakdown & Honors</b></summary>
 
 #### LeetCode ([@prathamkashyap](https://leetcode.com/u/prathamkashyap/))
 - **Problem Solves**: `542` total (🟢 Easy: `176`, 🟡 Medium: `290`, 🔴 Hard: `76`)
@@ -119,12 +119,12 @@ competitive-programming/
 
 ## 📚 What's in This Repo
 
-### Solutions
+### 🎮 Solutions
 - **400+ Codeforces solutions** organized by difficulty rating (800-2000)
 - Multi-platform practice: LeetCode, CodeChef, HackerRank, HackerEarth, GeeksforGeeks, AtCoder, CSES
 - C++ as primary language with Python and Java support
 
-### Templates
+### 🛠️ Templates
 I maintain a set of copy-paste ready templates for common data structures and algorithms that I reuse in contests:
 - Fast I/O boilerplate
 - DSU, Segment Tree, Fenwick Tree
@@ -134,7 +134,7 @@ I maintain a set of copy-paste ready templates for common data structures and al
 
 See [templates/](templates/) for the complete collection.
 
-### Notes & Cheat Sheets
+### 📝 Notes & Cheat Sheets
 Concise reference material I use for contest revision:
 - Complexity analysis and time limits
 - Number theory and modular arithmetic
@@ -199,6 +199,6 @@ For the complete problem index, see [docs/generated/problem-index.md](docs/gener
 
 ## 🔗 Connect
 
-- [GitHub](https://github.com/prathamkashyap)
-- [LinkedIn](https://www.linkedin.com/in/prathamkashyap5)
-- [Codeforces](https://codeforces.com/profile/prathamkashyap)
+- [GitHub](https://github.com/prathamkashyap) 🐙
+- [LinkedIn](https://www.linkedin.com/in/prathamkashyap5) 💼
+- [Codeforces](https://codeforces.com/profile/prathamkashyap) 🎮

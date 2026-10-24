@@ -1,8 +1,10 @@
-# Implementation Tricks
+# 🔧 Implementation Tricks ⚡
 
 Common gotchas and techniques I've learned from contest mistakes.
 
-## Off-by-One Errors
+---
+
+## ⚠️ Off-by-One Errors
 
 ### Loop Conditions
 
@@ -40,7 +42,9 @@ while (lo < hi) {
 }
 ```
 
-## Overflow
+---
+
+## 💥 Overflow
 
 ### Integer Overflow
 
@@ -69,7 +73,9 @@ long long prod = (long long)a * b;
 // Use modular arithmetic instead
 ```
 
-## Coordinate Compression
+---
+
+## 🗺️ Coordinate Compression
 
 ```cpp
 // Sort unique values, map to 0..n-1
@@ -81,7 +87,9 @@ vals.erase(unique(vals.begin(), vals.end()), vals.end());
 int idx = lower_bound(vals.begin(), vals.end(), x) - vals.begin();
 ```
 
-## Modulo with Negative Numbers
+---
+
+## ➗ Modulo with Negative Numbers
 
 ```cpp
 // Wrong: -5 % 3 = -2 in C++
@@ -89,7 +97,9 @@ int idx = lower_bound(vals.begin(), vals.end(), x) - vals.begin();
 int ans = ((a % mod) + mod) % mod;
 ```
 
-## String Handling
+---
+
+## 📝 String Handling
 
 ### Empty String
 
@@ -104,6 +114,15 @@ if (i < s.length() && s[i] == 'x') { ... }
 // Wrong: s.substr(i, len) can go out of bounds
 // Correct: ensure i + len <= s.length()
 ```
+
+---
+
+## 💡 Quick Tips
+
+- Always use `long long` for intermediate calculations in DP
+- Check array bounds before accessing
+- Use modular arithmetic for large numbers
+- Test edge cases: n=0, n=1, maximum constraints
 
 ---
 

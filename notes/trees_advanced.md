@@ -1,8 +1,10 @@
-# Trees Advanced
+# 🌲 Trees Advanced 🧠
 
 Advanced tree queries and algorithms I use for tree problems.
 
-## LCA (Lowest Common Ancestor)
+---
+
+## 🔍 LCA (Lowest Common Ancestor)
 
 Binary lifting preprocess in O(n log n), queries in O(log n).
 
@@ -40,7 +42,9 @@ int lca(int u, int v) {
 }
 ```
 
-## Subtree Queries
+---
+
+## 📊 Subtree Queries
 
 Euler tour flattens tree to array for subtree range queries.
 
@@ -61,7 +65,9 @@ void dfs_euler(int u, int p) {
 // Subtree of u is range [tin[u], tout[u]]
 ```
 
-## Binary Lifting
+---
+
+## 🦘 Binary Lifting
 
 Jump 2^k ancestors for fast LCA and path queries.
 
@@ -74,11 +80,32 @@ int jump(int u, int k) {
 }
 ```
 
-## When to Use
+---
 
-- **LCA**: Find common ancestor, path length queries, tree DP
-- **Subtree queries**: Queries on entire subtree, Euler tour
-- **Binary lifting**: Jump k ancestors, path between nodes
+## 🎯 When to Use
+
+| 🎯 Problem | 🧩 Algorithm | ⏱️ Complexity |
+| :--- | :--- | :--- |
+| Common ancestor queries | LCA (binary lifting) | O(n log n) preprocess, O(log n) query |
+| Subtree queries | Euler tour + prefix sums | O(n) preprocess, O(1) query |
+| K-th ancestor | Binary lifting | O(n log n) preprocess, O(log n) query |
+| Path between nodes | LCA + distance | O(log n) |
+
+---
+
+## 💡 Quick Tips
+
+- Use binary lifting for any ancestor-related queries
+- Euler tour transforms subtree queries to range queries
+- Distance between nodes = depth[u] + depth[v] - 2*depth[lca(u,v)]
+- Set LOGN = ceil(log2(max nodes)) + 1
+
+---
+
+## 📚 Related
+
+- Template: [`lca.cpp`](../templates/cpp/lca.cpp) 🌲
+- Basic trees: [graphs_and_trees.md](graphs_and_trees.md) 📖
 
 ---
 
