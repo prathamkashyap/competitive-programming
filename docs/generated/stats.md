@@ -8,13 +8,13 @@ To update statistics, run: python scripts/generate_stats.py
 
 ## Overview
 
-- **Total code files**: 405
+- **Total code files**: 437
 
 ## Language Breakdown
 
 | Language | Count |
 |----------|-------|
-| C++ | 401 |
+| C++ | 433 |
 | Java | 2 |
 | Python | 2 |
 
@@ -22,13 +22,13 @@ To update statistics, run: python scripts/generate_stats.py
 
 | Platform | Solution Count |
 |----------|----------------|
-| Codeforces | 394 |
+| Codeforces | 426 |
 
 ## Category Breakdown
 
 | Category | Count |
 |----------|-------|
-| Solution | 394 |
+| Solution | 426 |
 | Template | 11 |
 | Note | 0 |
 
@@ -36,6 +36,6 @@ To update statistics, run: python scripts/generate_stats.py
 
 | Extension | Count |
 |-----------|-------|
-| .cpp | 401 |
+| .cpp | 433 |
 | .java | 2 |
 | .py | 2 |

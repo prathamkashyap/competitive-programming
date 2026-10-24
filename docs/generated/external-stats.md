@@ -19,12 +19,12 @@ These metrics represent verified activity across official APIs, public GraphQL e
 
 | Platform | Handle | Status | Source Type | Method | Key Highlights |
 | :--- | :--- | :---: | :---: | :--- | :--- |
-| **[LeetCode](https://leetcode.com/u/prathamkashyap/)** | `prathamkashyap` | ✅ `success` | 📸 `snapshot` | `screenshot_snapshot` | **522** solved, 87.8% AC |
-| **[Codeforces](https://codeforces.com/profile/prathamkashyap)** | `prathamkashyap` | ✅ `success` | 🟢 `live` | `api` | Rating **815** (newbie), 376 solved |
-| **[CodeChef](https://www.codechef.com/users/prathamkashyap)** | `prathamkashyap` | ✅ `success` | 🟢 `live` | `embedded_state` | Rating **922**, Diamond League, DSA **1067**, 631 solved |
-| **[HackerRank](https://www.hackerrank.com/profile/prathamkashyap)** | `prathamkashyap` | ✅ `success` | 🟢 `live` | `public_rest_api` | Problem Solving **6★**, **26** total stars, **356** solved |
-| **[HackerEarth](https://www.hackerearth.com/@prathamkashyap/)** | `prathamkashyap` | ✅ `success` | 🟢 `live` | `public_api` | **4,370** pts, **178** solved |
-| **[GeeksforGeeks](https://www.geeksforgeeks.org/profile/prathamkashyap)** | `prathamkashyap` | ✅ `success` | 📸 `snapshot` | `screenshot_snapshot` | Score **424**, **98** solved, 28d streak |
+| **[LeetCode](https://leetcode.com/u/prathamkashyap/)** | `prathamkashyap` | ✅ `success` | 🟢 `live` | `graphql_api` | **542** solved, 89.6% AC, 118d streak |
+| **[Codeforces](https://codeforces.com/profile/prathamkashyap)** | `prathamkashyap` | ✅ `success` | 🟢 `live` | `api` | Rating **815** (newbie), 408 solved |
+| **[CodeChef](https://www.codechef.com/users/prathamkashyap)** | `prathamkashyap` | ✅ `success` | 🟢 `live` | `embedded_state` | Rating **922**, Gold League, DSA **1067**, 651 solved |
+| **[HackerRank](https://www.hackerrank.com/profile/prathamkashyap)** | `prathamkashyap` | ✅ `success` | 🟢 `live` | `public_rest_api` | Problem Solving **6★**, **26** total stars, **401** solved |
+| **[HackerEarth](https://www.hackerearth.com/@prathamkashyap/)** | `prathamkashyap` | ✅ `success` | 🟢 `live` | `public_api` | **5,380** pts, **223** solved |
+| **[GeeksforGeeks](https://www.geeksforgeeks.org/profile/prathamkashyap)** | `prathamkashyap` | ✅ `success` | 🟢 `live` | `embedded_state_and_api` | Score **618**, **150** solved, 45d streak |
 
 ---
 
@@ -33,76 +33,98 @@ These metrics represent verified activity across official APIs, public GraphQL e
 ### LeetCode
 
 - **Profile**: [prathamkashyap](https://leetcode.com/u/prathamkashyap/)
-- **Source**: `screenshot_snapshot` (`screenshot_snapshot`)
-- **Retrieval Method**: `screenshot_snapshot`
-- **Last Verified**: `2026-10-07`
+- **Source**: `public_graphql` (`live`)
+- **Retrieval Method**: `graphql_api`
+- **Last Verified**: `2026-10-24T10:24:33.758271+00:00`
 
 #### 🧩 Problem Solving Breakdown
 
 | Category | Solved |
 | :--- | :---: |
-| 🟢 **Easy** | `171` |
-| 🟡 **Medium** | `279` |
-| 🔴 **Hard** | `72` |
-| 🏆 **Total Solved** | **`522`** |
+| 🟢 **Easy** | `176` |
+| 🟡 **Medium** | `290` |
+| 🔴 **Hard** | `76` |
+| 🏆 **Total Solved** | **`542`** |
 
 #### 📈 Profile Metrics
 
-- **Global Rank**: `#—`
-- **Submissions**: `858` (— accepted)
-- **Acceptance Rate**: `87.8%`
-- **Current Streak**: `— days`
-- **Total Active Days**: `— days`
-- **Active Badge**: `—`
+- **Global Rank**: `#183,108`
+- **Submissions**: `1034` (926 accepted)
+- **Acceptance Rate**: `89.6%`
+- **Current Streak**: `118 days`
+- **Total Active Days**: `122 days`
+- **Active Badge**: `100 Days Badge 2026`
+
+#### 💻 Language Breakdown
+
+| Language | Problems Solved |
+| :--- | :---: |
+| C++ | `521` |
+| Java | `98` |
+| Python3 | `98` |
+| Pandas | `15` |
+
+#### 🎖️ Earned Badges
+
+- 🏅 100 Days Badge 2026
+- 🏅 50 Days Badge 2026
+- 🏅 100 Days Badge 2025
+- 🏅 50 Days Badge 2025
+- 🏅 Sep LeetCoding Challenge
+- 🏅 Aug LeetCoding Challenge
+- 🏅 Jul LeetCoding Challenge
+- 🏅 Sep LeetCoding Challenge
+- 🏅 LeetCode 75
+- 🏅 Top Interview 150
 
 ### Codeforces
 
 - **Profile**: [prathamkashyap](https://codeforces.com/profile/prathamkashyap)
 - **Source**: `official_api` (`live`)
 - **Retrieval Method**: `api`
-- **Last Verified**: `2026-10-08T13:28:25.309142+00:00`
+- **Last Verified**: `2026-10-24T10:24:36.540046+00:00`
 
 #### ⚡ Competitive Rating & Solves
 
 - **Current Rating**: `815` (newbie)
 - **Maximum Rating**: `815` (newbie)
-- **Unique Problems Solved**: `376`
+- **Unique Problems Solved**: `408`
 
 ### CodeChef
 
 - **Profile**: [prathamkashyap](https://www.codechef.com/users/prathamkashyap)
 - **Source**: `public_profile` (`live`)
 - **Retrieval Method**: `embedded_state`
-- **Last Verified**: `2026-10-08T13:28:25.809899+00:00`
+- **Last Verified**: `2026-10-24T10:24:36.873631+00:00`
 
 #### 👨‍🍳 Contest Ratings & Solves
 
 - **Current Rating**: `922` (★ `1` Stars)
 - **Peak Rating**: `922`
-- **Current League**: `Diamond League`
+- **Current League**: `Gold League`
 - **Global Rank**: `#17,165`
 - **DSA Monday Rating**: `1067` (Rank `#2341`)
-- **Total Problems Solved**: `631`
+- **Total Problems Solved**: `651`
 
 ### HackerRank
 
 - **Profile**: [prathamkashyap](https://www.hackerrank.com/profile/prathamkashyap)
 - **Source**: `public_rest_api` (`live`)
 - **Retrieval Method**: `public_rest_api`
-- **Last Verified**: `2026-10-08T13:28:27.996811+00:00`
+- **Last Verified**: `2026-10-24T10:24:38.680563+00:00`
 
 #### 🎖️ Verified Skill Badges
 
 | Skill Track | Star Level | Solved | Points | Rank |
 | :--- | :---: | :---: | :---: | :---: |
-| **Problem Solving** | ★★★★★★ (6 Stars) | `231` | 9,636.56 | #1,871 |
-| **C++** | ★★★★★ (5 Stars) | `18` | 425.0 | #65,859 |
-| **Java** | ★★★★★ (5 Stars) | `22` | 258.0 | #231,773 |
-| **Python** | ★★★★★ (5 Stars) | `26` | 405.0 | #351,747 |
+| **Problem Solving** | ★★★★★★ (6 Stars) | `276` | 14,014.0 | #1,295 |
+| **C++** | ★★★★★ (5 Stars) | `18` | 425.0 | #65,982 |
+| **Java** | ★★★★★ (5 Stars) | `22` | 258.0 | #232,753 |
+| **Python** | ★★★★★ (5 Stars) | `26` | 405.0 | #352,943 |
 | **Sql** | ★★★★★ (5 Stars) | `58` | 1,130.0 | #1 |
 
 - **Total Stars Earned**: `26`
-- **Total Challenges Solved**: `356`
+- **Total Challenges Solved**: `401`
 
 #### 📜 Verified Skills
 
@@ -113,53 +135,55 @@ These metrics represent verified activity across official APIs, public GraphQL e
 - **Profile**: [prathamkashyap](https://www.hackerearth.com/@prathamkashyap/)
 - **Source**: `public_api` (`live`)
 - **Retrieval Method**: `public_api`
-- **Last Verified**: `2026-10-08T13:28:28.868594+00:00`
+- **Last Verified**: `2026-10-24T10:24:39.127669+00:00`
 
 #### 🚀 Competitive Practice & Rankings
 
-- **Total Points**: `4,370`
-- **Problems Solved**: `178`
-- **Solutions Submitted**: `217`
+- **Total Points**: `5,380`
+- **Problems Solved**: `223`
+- **Solutions Submitted**: `265`
 
 #### 🎖️ Badges & Achievements
 
-- 🏅 Data Structures - 1 Star
-- 🏅 Data Structures - 2 Stars
 - 🏅 Algorithms - 1 Star
 - 🏅 Algorithms - 2 Stars
-- 🏅 Basic Programming - 1 Star
-- 🏅 Basic Programming - 2 Stars
-- 🏅 Basic Programming - 3 Stars
-- 🏅 Basic Programming - 4 Stars
-- 🏅 Basic Programming - 5 Stars
+- 🏅 Algorithms - 3 Stars
+- 🏅 Math - 1 Star
+- 🏅 Data Structures - 1 Star
+- 🏅 Data Structures - 2 Stars
 - 🏅 Novice
 - 🏅 Amateur
 - 🏅 Explorer
 - 🏅 Elite
 - 🏅 C++ language
+- 🏅 Basic Programming - 1 Star
+- 🏅 Basic Programming - 2 Stars
+- 🏅 Basic Programming - 3 Stars
+- 🏅 Basic Programming - 4 Stars
+- 🏅 Basic Programming - 5 Stars
 
 ### GeeksforGeeks
 
 - **Profile**: [prathamkashyap](https://www.geeksforgeeks.org/profile/prathamkashyap)
-- **Source**: `screenshot_snapshot` (`screenshot_snapshot`)
-- **Retrieval Method**: `screenshot_snapshot`
-- **Last Verified**: `2026-10-07`
+- **Source**: `public_profile` (`live`)
+- **Retrieval Method**: `embedded_state_and_api`
+- **Last Verified**: `2026-10-24T10:24:41.977406+00:00`
 
 #### 🎯 Problem Solving & Practice
 
-- **Coding Score**: `424`
-- **Total Problems Solved**: `98`
-- **POTDs Solved / Streak**: `28` (28 day longest streak)
-- **Current Year Submissions (2026)**: `96` (— active days)
+- **Coding Score**: `618`
+- **Total Problems Solved**: `150`
+- **POTDs Solved / Streak**: `45` (45 day longest streak)
+- **Current Year Submissions (2026)**: `147` (45 active days)
 
 #### 🧩 Difficulty Breakdown
 
 | Difficulty | Solved |
 | :--- | :---: |
-| 🟢 **Basic** | `—` |
-| 🟢 **Easy** | `—` |
-| 🟡 **Medium** | `—` |
-| 🔴 **Hard** | `—` |
+| 🟢 **Basic** | `8` |
+| 🟢 **Easy** | `25` |
+| 🟡 **Medium** | `95` |
+| 🔴 **Hard** | `22` |
 
 ---
 
