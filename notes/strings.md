@@ -1,8 +1,10 @@
-# Strings
+# 🔗 Strings Algorithms 🎯
 
 String algorithms and hashing for pattern matching and string problems.
 
-## Rolling Hash
+---
+
+## 🔄 Rolling Hash
 
 ```cpp
 const int MOD = 1e9 + 7;
@@ -18,7 +20,9 @@ for (int i = 0; i < n; i++) {
 long long sub_hash = (pref[r+1] - pref[l] * pow(BASE, r-l+1)) % MOD;
 ```
 
-## KMP (Knuth-Morris-Pratt)
+---
+
+## 🔍 KMP (Knuth-Morris-Pratt)
 
 Computes prefix function for pattern matching in O(n + m).
 
@@ -36,7 +40,9 @@ vector<int> prefix_function(string s) {
 }
 ```
 
-## Z-Algorithm
+---
+
+## 📊 Z-Algorithm
 
 Computes Z-array for pattern matching in O(n).
 
@@ -57,7 +63,9 @@ vector<int> z_function(string s) {
 }
 ```
 
-## Trie
+---
+
+## 🌳 Trie
 
 Prefix tree for strings, O(L) insert/search.
 
@@ -65,6 +73,7 @@ Prefix tree for strings, O(L) insert/search.
 struct TrieNode {
     TrieNode* children[26];
     bool is_end;
+    
     TrieNode() {
         memset(children, 0, sizeof(children));
         is_end = false;
@@ -84,12 +93,25 @@ void insert(TrieNode* root, string s) {
 }
 ```
 
-## When to Use
+---
 
-- **Rolling hash**: Substring comparison, pattern matching, Rabin-Karp
-- **KMP**: Pattern matching with prefix function
-- **Z-algorithm**: Pattern matching, substring search
-- **Trie**: Dictionary, prefix matching, counting distinct substrings
+## 🎯 When to Use
+
+| 🎯 Problem | 🧩 Algorithm | ⏱️ Complexity |
+| :--- | :--- | :--- |
+| Substring comparison | Rolling hash | O(L) hash, O(1) compare |
+| Pattern matching | KMP | O(N + M) |
+| Pattern matching | Z-algorithm | O(N) |
+| Dictionary / prefix matching | Trie | O(L) insert/search |
+
+---
+
+## 💡 Quick Tips
+
+- Use rolling hash for O(1) substring comparison
+- KMP is useful for single pattern search
+- Trie is great for dictionary and prefix operations
+- Always use modulo with rolling hash to avoid overflow
 
 ---
 

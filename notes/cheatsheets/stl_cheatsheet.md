@@ -1,8 +1,10 @@
-# STL Cheatsheet
+# 🧩 STL Cheatsheet ⚡
 
 Useful STL containers and algorithms I use in competitive programming.
 
-## Priority Queue
+---
+
+## 🎯 Priority Queue
 
 ```cpp
 #include <queue>
@@ -14,7 +16,9 @@ pq.top();
 pq.size();
 ```
 
-## Set / Multiset
+---
+
+## 📦 Set / Multiset
 
 ```cpp
 #include <set>
@@ -28,7 +32,9 @@ s.upper_bound(x); // first > x
 s.count(x); // 0 or 1 for set, count for multiset
 ```
 
-## Map / Unordered Map
+---
+
+## 🗺️ Map / Unordered Map
 
 ```cpp
 #include <map>
@@ -40,7 +46,9 @@ m.find(key);
 m.count(key);
 ```
 
-## Sort and Binary Search
+---
+
+## 🔀 Sort and Binary Search
 
 ```cpp
 #include <algorithm>
@@ -53,7 +61,9 @@ upper_bound(v.begin(), v.end(), x); // first > x
 binary_search(v.begin(), v.end(), x); // bool: exists?
 ```
 
-## String Streams
+---
+
+## 📝 String Streams
 
 ```cpp
 #include <sstream>
@@ -64,13 +74,24 @@ ss.str(); // clear
 ss << x << " " << y;
 ```
 
-## Partial Sum
+---
+
+## 📊 Partial Sum
 
 ```cpp
 #include <numeric>
 partial_sum(v.begin(), v.end(), v.begin());
 partial_sum(v.begin(), v.end(), v.begin(), 0); // with initial value
 ```
+
+---
+
+## 💡 Quick Tips
+
+- Use `unordered_map` for O(1) average lookups when order doesn't matter
+- Use `lower_bound` / `upper_bound` on sorted containers for binary search
+- `priority_queue` is max-heap by default, use `greater<int>` for min-heap
+- String streams are useful for parsing space-separated input
 
 ---
 

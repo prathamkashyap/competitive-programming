@@ -1,8 +1,10 @@
-# Combinatorics
+# 🧮 Combinatorics 🔢
 
 Counting formulas and modular arithmetic I use for contest problems.
 
-## nCr Modulo
+---
+
+## 🎲 nCr Modulo
 
 Precompute factorials and inverse factorials for O(1) nCr queries.
 
@@ -39,7 +41,9 @@ long long nCr(int n, int r) {
 }
 ```
 
-## Catalan Numbers
+---
+
+## 🌟 Catalan Numbers
 
 C_n = (2n choose n) / (n+1) = number of valid parenthesis sequences, BSTs with n nodes.
 
@@ -49,16 +53,39 @@ long long catalan(int n) {
 }
 ```
 
-## Stars and Bars
+---
+
+## ⭐ Stars and Bars
 
 Number of ways to distribute n identical items into k distinct boxes:
-- Non-negative: C(n + k - 1, k - 1)
-- Positive: C(n - 1, k - 1)
 
-## Inclusion-Exclusion
+- **Non-negative**: C(n + k - 1, k - 1)
+- **Positive**: C(n - 1, k - 1)
+
+---
+
+## 🔄 Inclusion-Exclusion
 
 |A ∪ B| = |A| + |B| - |A ∩ B|
 |A ∪ B ∪ C| = |A| + |B| + |C| - |A∩B| - |A∩C| - |B∩C| + |A∩B∩C|
+
+---
+
+## 💡 Quick Tips
+
+- Precompute factorials for multiple nCr queries
+- Use Fermat's little theorem for modular inverse (MOD must be prime)
+- Stars and bars is useful for distribution problems
+- Inclusion-exclusion for counting union of sets
+
+---
+
+## 🎯 Common Problems
+
+- Count ways to distribute items → Stars and bars
+- Count valid sequences → Catalan numbers
+- Count combinations → nCr with modular arithmetic
+- Count union of sets → Inclusion-exclusion
 
 ---
 
