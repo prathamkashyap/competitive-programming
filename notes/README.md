@@ -17,7 +17,7 @@ My personal collection of algorithmic theory and cheat sheets that I use for con
 || [🌲 Trees Advanced](trees_advanced.md) | Tree queries, LCA, binary lifting | LCA with binary lifting, subtree queries, Euler tour ||
 || [💡 Dynamic Programming](dynamic_programming.md) | DP states, transitions, optimizations, patterns | 0/1 Knapsack, LIS ($O(N \log N)$), LCS, Grid DP, Bitmask DP, Space Optimization ||
 || [🎯 Greedy & Binary Search](greedy_and_search.md) | Proof patterns and monotonic search | Exchange arguments, interval scheduling, two pointers, answer-space search ||
-|| [� Strings](strings.md) | String algorithms and hashing | KMP, Z-algorithm, rolling hash, suffix arrays ||
+|| [🔗 Strings](strings.md) | String algorithms and hashing | KMP, Z-algorithm, rolling hash, suffix arrays ||
 || [🧮 Combinatorics](combinatorics.md) | Counting formulas and modular counting | nCr, Catalan numbers, stars-and-bars, inclusion-exclusion ||
 
 ### Cheat Sheets
