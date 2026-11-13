@@ -1,12 +1,12 @@
-# ⚠️ Common Pitfalls 🚨
+# Common Pitfalls
 
 Practical mistakes that cost contests - off-by-one errors, overflow issues, recursion depth, and other gotchas I've learned the hard way.
 
 ---
 
-## 📋 Available Pitfall Notes
+## Available Pitfall Notes
 
-| 🎯 Note | 📖 Description | ⚠️ Focus |
+| Note | Description | Focus |
 | :--- | :--- | :--- |
 | [Binary Search Invariants](binary-search-invariants.md) | Common mistakes in binary search implementation | Loop conditions, monotonicity, search bounds |
 | [Complexity Mistakes](complexity-mistakes.md) | Misjudging complexity and time limits | Wrong complexity, hidden constants, optimization |
@@ -18,22 +18,22 @@ Practical mistakes that cost contests - off-by-one errors, overflow issues, recu
 
 ---
 
-## 🧠 How to Use
+## How to Use
 
-### 📋 Before Coding
+### Before Coding
 Review pitfalls relevant to your approach - save time by avoiding known mistakes
 
-### 🐛 When Debugging
+### When Debugging
 Check if your bug matches a known pitfall - common patterns repeat
 
-### ✅ For Review
+### For Review
 Use as a checklist of common mistakes before submitting
 
 ---
 
-## 💡 Quick Reference
+## Quick Reference
 
-| ⚠️ Issue | 🔍 Check | 💡 Fix |
+| Issue | Check | Fix |
 | :--- | :--- | :--- |
 | Overflow | Large multiplications? | Use `long long` or modular arithmetic |
 | Off-by-one | Loop bounds? | Use `<` vs `<=` carefully |
@@ -43,11 +43,11 @@ Use as a checklist of common mistakes before submitting
 
 ---
 
-## 📚 Related
+## Related
 
-- [Complexity Cheatsheet](../cheatsheets/complexity_cheatsheet.md) ⏱️
-- [Implementation Tricks](../cheatsheets/implementation_tricks.md) 🔧
-- [../complexity_and_limits.md](../complexity_and_limits.md) 📊
+- [Complexity Cheatsheet](../cheatsheets/complexity_cheatsheet.md)
+- [Implementation Tricks](../cheatsheets/implementation_tricks.md)
+- [../complexity_and_limits.md](../complexity_and_limits.md)
 
 ---
 

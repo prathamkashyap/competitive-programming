@@ -1,4 +1,4 @@
-# 🎯 Codeforces 1600 Rating Problems
+# Codeforces 1600 Rating Problems
 
 This directory is dedicated to Codeforces problems rated **1600** (Expert level).
 

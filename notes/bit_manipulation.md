@@ -1,4 +1,4 @@
-# 💻 Bit Manipulation & Bitmasking Hacks
+# Bit Manipulation & Bitmasking Hacks
 
 ## 1. Essential Bit Operations
 

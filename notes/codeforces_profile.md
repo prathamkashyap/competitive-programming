@@ -1,4 +1,4 @@
-# 📊 Codeforces Practice Profile
+# Codeforces Practice Profile
 
 This note is derived from the C++ solutions currently stored under
 `codeforces/`. The repository contains **322 files**; **315** filenames matched

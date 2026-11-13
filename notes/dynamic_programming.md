@@ -1,4 +1,4 @@
-# 💡 Dynamic Programming Patterns & Optimizations
+# Dynamic Programming Patterns & Optimizations
 
 ## 1. Classical DP Patterns
 

@@ -1,4 +1,4 @@
-# ⏱️ Time Complexity, Space Complexity & Resource Limits
+# Time Complexity, Space Complexity & Resource Limits
 
 ## 1. Rule of Thumb for Time Limits
 
@@ -29,7 +29,7 @@ Modern CPUs execute approximately **$10^8$ basic operations per second** in C++.
 | `unsigned long long`| 64 | $0$ to $1.8 \cdot 10^{19}$ | $2^{64}-1 \approx 1.84 \times 10^{19}$ |
 | `__int128` (GCC) | 128 | $\approx \pm 1.7 \cdot 10^{38}$ | Safe for multiplying two `long long` values |
 
-> ⚠️ **Common Bug**: `int a = 1e9, b = 1e9; long long c = a * b;` will overflow before assigning because `a * b` is computed as a 32-bit integer. Always cast: `long long c = (long long)a * b;` or `1LL * a * b`.
+> **Common Bug**: `int a = 1e9, b = 1e9; long long c = a * b;` will overflow before assigning because `a * b` is computed as a 32-bit integer. Always cast: `long long c = (long long)a * b;` or `1LL * a * b`.
 
 ---
 

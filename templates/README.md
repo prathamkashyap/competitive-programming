@@ -1,14 +1,14 @@
-# 🛠️ Templates ⚡
+# Templates
 
 My collection of reusable competitive programming snippets, data structures, and language boilerplate that I copy-paste into contests. Each template is syntax-checked in this repository.
 
 ---
 
-## 📋 Available Templates
+## Available Templates
 
-### 🔷 C++ Templates (`cpp/`)
+### C++ Templates (`cpp/`)
 
-| 🎯 Template File | 🧩 Data Structure / Algorithm | ⏱️ Time Complexity | 💾 Space Complexity | 📖 Description |
+| Template File | Data Structure / Algorithm | Time Complexity | Space Complexity | Description |
 | :--- | :--- | :---: | :---: | :--- |
 | [`template.cpp`](cpp/template.cpp) | **CP Boilerplate** | $O(1)$ | $O(1)$ | Fast I/O, `ll` aliases, pbds, modular exponentiation, GCD |
 | [`dsu.cpp`](cpp/dsu.cpp) | **Disjoint Set Union** | $O(\alpha(N)) \approx O(1)$ | $O(N)$ | DSU with Path Compression & Union by Size/Rank |
@@ -26,25 +26,25 @@ My collection of reusable competitive programming snippets, data structures, and
 | [`kmp.cpp`](cpp/kmp.cpp) | **Knuth-Morris-Pratt** | $O(N + M)$ build/search | $O(M)$ | Pattern matching with prefix function |
 | [`pbds_ordered_set.cpp`](cpp/pbds_ordered_set.cpp) | **Ordered Set (PBDS)** | $O(\log N)$ insert/erase/order statistics | $O(N)$ | Policy-based ordered_set with order_of_key and find_by_order |
 
-### 🐍 Python Templates (`python/`)
+### Python Templates (`python/`)
 
-| 🎯 Template File | 📖 Description | ✨ Features |
+| Template File | Description | Features |
 | :--- | :--- | :--- |
 | [`template.py`](python/template.py) | **Python CP Boilerplate** | `sys.stdin.readline`, boosted recursion limit (`sys.setrecursionlimit`), modular arithmetic helpers |
 
-### ☕ Java Templates (`java/`)
+### Java Templates (`java/`)
 
-| 🎯 Template File | 📖 Description | ✨ Features |
+| Template File | Description | Features |
 | :--- | :--- | :--- |
 | [`Template.java`](java/Template.java) | **Java CP Boilerplate** | Ultra-fast `BufferedReader` + `StringTokenizer` custom `FastScanner`, `PrintWriter` |
 
 ---
 
-## ⚡ How to Use
+## How to Use
 
 Simply include or paste the necessary class/template into your solution file, or link them using standard `#include` in your local environment.
 
-### 🎯 Quick Tips
+### Quick Tips
 
 - **Fast I/O**: Always use `ios_base::sync_with_stdio(false); cin.tie(nullptr);` for C++
 - **Modular Arithmetic**: Precompute factorials and inverse factorials for multiple nCr queries
@@ -54,28 +54,28 @@ Simply include or paste the necessary class/template into your solution file, or
 
 ---
 
-## 🧠 Template Selection Guide
+## Template Selection Guide
 
-### 🎮 For Graph Problems
+### For Graph Problems
 - **Unweighted shortest path**: Use [`graph_traversal.cpp`](cpp/graph_traversal.cpp) for BFS
 - **Weighted shortest path**: Use [`graph_traversal.cpp`](cpp/graph_traversal.cpp) for Dijkstra
 - **Minimum spanning tree**: Add Kruskal with DSU from [`dsu.cpp`](cpp/dsu.cpp)
 
-### 🔢 For Number Theory
+### For Number Theory
 - **Modular arithmetic**: Use [`modular_arithmetic.cpp`](cpp/modular_arithmetic.cpp) for nCr and modular inverse
 - **Prime operations**: Use [`sieve_prime.cpp`](cpp/sieve_prime.cpp) for factorization and prime testing
 
-### 📊 For Range Queries
+### For Range Queries
 - **Point updates + range queries**: Use [`segment_tree.cpp`](cpp/segment_tree.cpp) or [`fenwick_tree.cpp`](cpp/fenwick_tree.cpp)
 - **Static array RMQ**: Use [`sparse_table.cpp`](cpp/sparse_table.cpp) for O(1) queries
 - **Frequency counting**: Use [`sliding_window.cpp`](cpp/sliding_window.cpp) for at-most-K problems
 
-### 🔗 For String Problems
+### For String Problems
 - **Pattern matching**: Use [`kmp.cpp`](cpp/kmp.cpp) for single pattern search
 - **String comparison**: Use [`string_hash.cpp`](cpp/string_hash.cpp) for rolling hash
 - **Prefix operations**: Use [`trie.cpp`](cpp/trie.cpp) for dictionary and prefix matching
 
-### 🌲 For Tree Problems
+### For Tree Problems
 - **LCA queries**: Use [`lca.cpp`](cpp/lca.cpp) with binary lifting
 - **Subtree queries**: Use Euler tour technique with prefix sums
 

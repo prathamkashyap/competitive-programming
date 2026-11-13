@@ -1,12 +1,12 @@
-# 🔧 Repository Automation Scripts ⚡
+# Repository Automation Scripts
 
 This directory contains scripts for generating statistics, validating code, and fetching external platform data.
 
 ---
 
-## 📋 Available Scripts
+## Available Scripts
 
-### 📊 generate_stats.py
+### generate_stats.py
 
 Scans the repository and generates local statistics from the filesystem.
 
@@ -27,7 +27,7 @@ python3 scripts/generate_stats.py
 
 ---
 
-### 🌐 external_stats.py
+### external_stats.py
 
 Fetches live statistics from external competitive programming platforms.
 
@@ -60,7 +60,7 @@ See [docs/STATS_METHODOLOGY.md](../docs/STATS_METHODOLOGY.md) for detailed metho
 
 ---
 
-### ✅ validate_cpp.py
+### validate_cpp.py
 
 Validates that all C++ solution files compile correctly.
 
@@ -82,11 +82,11 @@ python3 scripts/validate_cpp.py
 
 ---
 
-## 🤖 GitHub Actions
+## GitHub Actions
 
 The repository uses two GitHub Actions workflows:
 
-### .github/workflows/cpp-validation.yml ✅
+### .github/workflows/cpp-validation.yml
 
 Runs on push and pull request to validate C++ compilation.
 
@@ -101,7 +101,7 @@ Runs on push and pull request to validate C++ compilation.
 3. Run statistics generator
 4. Run C++ validation
 
-### .github/workflows/update-external-stats.yml 📊
+### .github/workflows/update-external-stats.yml
 
 Runs daily at 00:00 UTC and on manual trigger to update external platform statistics.
 
@@ -119,9 +119,9 @@ Runs daily at 00:00 UTC and on manual trigger to update external platform statis
 
 ---
 
-## 🧠 Quick Reference
+## Quick Reference
 
-| 🎯 Script | 📖 Purpose | ⏱️ Runtime |
+| Script | Purpose | Runtime |
 | :--- | :--- | :--- |
 | `generate_stats.py` | Local repository statistics | ~1s |
 | `external_stats.py` | Fetch external platform stats | ~10-30s |
@@ -129,7 +129,7 @@ Runs daily at 00:00 UTC and on manual trigger to update external platform statis
 
 ---
 
-## 💡 Tips
+## Tips
 
 - Run `generate_stats.py` after adding new solutions to update counts
 - Run `external_stats.py` manually if you need fresh stats before the daily run

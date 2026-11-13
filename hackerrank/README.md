@@ -1,22 +1,22 @@
-# 🎓 HackerRank Solutions 🚀
+# HackerRank Solutions
 
 My HackerRank problem solutions.
 
 ---
 
-## 🧑‍💻 Profile
+## Profile
 
-- [HackerRank Profile](https://www.hackerrank.com/profile/prathamkashyap) 🎓
+- [HackerRank Profile](https://www.hackerrank.com/profile/prathamkashyap)
 
 ---
 
-## 📊 Statistics
+## Statistics
 
 For live statistics and solved counts, see the [interactive dashboard](../docs/dashboard/index.html) or [external stats](../docs/generated/external-stats.md).
 
 ---
 
-## 💡 Quick Tips
+## Quick Tips
 
 - HackerRank has strict output formatting
 - Match expected output exactly (no extra spaces/newlines)

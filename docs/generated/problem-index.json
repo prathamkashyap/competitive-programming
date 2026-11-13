@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-24T10:27:31.624306+00:00",
-  "total_problems": 426,
+  "generated_at": "2026-11-17T12:55:26.453072+00:00",
+  "total_problems": 463,
   "problems": [
     {
       "platform": "codeforces",
@@ -2382,6 +2382,60 @@
     },
     {
       "platform": "codeforces",
+      "path": "codeforces/1600/1336A_LinovaandKingdom.cpp",
+      "filename": "1336A_LinovaandKingdom.cpp",
+      "language": "cpp",
+      "rating": 1600,
+      "code": "1336A",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1600/1349A_OracandLCM.cpp",
+      "filename": "1349A_OracandLCM.cpp",
+      "language": "cpp",
+      "rating": 1600,
+      "code": "1349A",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1600/1352G_SpecialPermutation.cpp",
+      "filename": "1352G_SpecialPermutation.cpp",
+      "language": "cpp",
+      "rating": 1600,
+      "code": "1352G",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1600/1353D_ConstructingtheArray.cpp",
+      "filename": "1353D_ConstructingtheArray.cpp",
+      "language": "cpp",
+      "rating": 1600,
+      "code": "1353D",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1600/1363C_GameOnLeaves.cpp",
+      "filename": "1363C_GameOnLeaves.cpp",
+      "language": "cpp",
+      "rating": 1600,
+      "code": "1363C",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1600/1389B_ArrayWalk.cpp",
+      "filename": "1389B_ArrayWalk.cpp",
+      "language": "cpp",
+      "rating": 1600,
+      "code": "1389B",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
       "path": "codeforces/1600/1398C_GoodSubarrays.cpp",
       "filename": "1398C_GoodSubarrays.cpp",
       "language": "cpp",
@@ -2391,10 +2445,55 @@
     },
     {
       "platform": "codeforces",
+      "path": "codeforces/1600/1458A_RowGCD.cpp",
+      "filename": "1458A_RowGCD.cpp",
+      "language": "cpp",
+      "rating": 1600,
+      "code": "1458A",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
       "path": "codeforces/1600/1526C2_Potions(HardVersion).cpp",
       "filename": "1526C2_Potions(HardVersion).cpp",
       "language": "cpp",
       "rating": 1600,
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1600/1528A_Parsa'sHumongousTree.cpp",
+      "filename": "1528A_Parsa'sHumongousTree.cpp",
+      "language": "cpp",
+      "rating": 1600,
+      "code": "1528A",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1600/1920C_PartitioningtheArray.cpp",
+      "filename": "1920C_PartitioningtheArray.cpp",
+      "language": "cpp",
+      "rating": 1600,
+      "code": "1920C",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1600/1B_Spreadsheets.cpp",
+      "filename": "1B_Spreadsheets.cpp",
+      "language": "cpp",
+      "rating": 1600,
+      "code": "1B",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1600/235A_LCMChallenge.cpp",
+      "filename": "235A_LCMChallenge.cpp",
+      "language": "cpp",
+      "rating": 1600,
+      "code": "235A",
       "tags": []
     },
     {
@@ -2422,6 +2521,60 @@
       "language": "cpp",
       "rating": 1600,
       "code": "431C",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1600/510C_FoxAndNames.cpp",
+      "filename": "510C_FoxAndNames.cpp",
+      "language": "cpp",
+      "rating": 1600,
+      "code": "510C",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1600/706C_Hardproblem.cpp",
+      "filename": "706C_Hardproblem.cpp",
+      "language": "cpp",
+      "rating": 1600,
+      "code": "706C",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1700/1037D_ValidBFS?.cpp",
+      "filename": "1037D_ValidBFS?.cpp",
+      "language": "cpp",
+      "rating": 1700,
+      "code": "1037D",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1700/118D_Caesar'sLegions.cpp",
+      "filename": "118D_Caesar'sLegions.cpp",
+      "language": "cpp",
+      "rating": 1700,
+      "code": "118D",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1700/126B_Password.cpp",
+      "filename": "126B_Password.cpp",
+      "language": "cpp",
+      "rating": 1700,
+      "code": "126B",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1700/1365D_SolveTheMaze.cpp",
+      "filename": "1365D_SolveTheMaze.cpp",
+      "language": "cpp",
+      "rating": 1700,
+      "code": "1365D",
       "tags": []
     },
     {
@@ -2462,11 +2615,172 @@
     },
     {
       "platform": "codeforces",
+      "path": "codeforces/1700/977F_ConsecutiveSubsequence.cpp",
+      "filename": "977F_ConsecutiveSubsequence.cpp",
+      "language": "cpp",
+      "rating": 1700,
+      "code": "977F",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1800/2222D_PermutationConstruction.cpp",
+      "filename": "2222D_PermutationConstruction.cpp",
+      "language": "cpp",
+      "rating": 1800,
+      "code": "2222D",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1800/2253D_HypercarpandInterdimensional Jumps.cpp",
+      "filename": "2253D_HypercarpandInterdimensional Jumps.cpp",
+      "language": "cpp",
+      "rating": 1800,
+      "code": "2253D",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1800/2259F_BinaryBubbleSortInversions.cpp",
+      "filename": "2259F_BinaryBubbleSortInversions.cpp",
+      "language": "cpp",
+      "rating": 1800,
+      "code": "2259F",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1800/2261E_WhatDoestheCowSay?.cpp",
+      "filename": "2261E_WhatDoestheCowSay?.cpp",
+      "language": "cpp",
+      "rating": 1800,
+      "code": "2261E",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1800/2262A2_FloorofMEX(HardVersion).cpp",
+      "filename": "2262A2_FloorofMEX(HardVersion).cpp",
+      "language": "cpp",
+      "rating": 1800,
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1800/2275F_TeaBlend.cpp",
+      "filename": "2275F_TeaBlend.cpp",
+      "language": "cpp",
+      "rating": 1800,
+      "code": "2275F",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1800/2276E_GoodSubstrings.cpp",
+      "filename": "2276E_GoodSubstrings.cpp",
+      "language": "cpp",
+      "rating": 1800,
+      "code": "2276E",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
       "path": "codeforces/1800/434A_Ryouko'sMemoryNote.cpp",
       "filename": "434A_Ryouko'sMemoryNote.cpp",
       "language": "cpp",
       "rating": 1800,
       "code": "434A",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1900/2226D_ReservedReversals.cpp",
+      "filename": "2226D_ReservedReversals.cpp",
+      "language": "cpp",
+      "rating": 1900,
+      "code": "2226D",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1900/2228D_Sanae,CrossandColor.cpp",
+      "filename": "2228D_Sanae,CrossandColor.cpp",
+      "language": "cpp",
+      "rating": 1900,
+      "code": "2228D",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1900/2231D_MaximumPrefixSums.cpp",
+      "filename": "2231D_MaximumPrefixSums.cpp",
+      "language": "cpp",
+      "rating": 1900,
+      "code": "2231D",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1900/2233D_GoodsontheShelf.cpp",
+      "filename": "2233D_GoodsontheShelf.cpp",
+      "language": "cpp",
+      "rating": 1900,
+      "code": "2233D",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1900/2246D_diss_quackandArrayGame.cpp",
+      "filename": "2246D_diss_quackandArrayGame.cpp",
+      "language": "cpp",
+      "rating": 1900,
+      "code": "2246D",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1900/2254F_Whiplash.cpp",
+      "filename": "2254F_Whiplash.cpp",
+      "language": "cpp",
+      "rating": 1900,
+      "code": "2254F",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1900/2259G_IndexRemoval.cpp",
+      "filename": "2259G_IndexRemoval.cpp",
+      "language": "cpp",
+      "rating": 1900,
+      "code": "2259G",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1900/2264D_Dr.Agos'sDarkMode.cpp",
+      "filename": "2264D_Dr.Agos'sDarkMode.cpp",
+      "language": "cpp",
+      "rating": 1900,
+      "code": "2264D",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1900/2273B_RobotChampionship.cpp",
+      "filename": "2273B_RobotChampionship.cpp",
+      "language": "cpp",
+      "rating": 1900,
+      "code": "2273B",
+      "tags": []
+    },
+    {
+      "platform": "codeforces",
+      "path": "codeforces/1900/2275G_CopperSquander.cpp",
+      "filename": "2275G_CopperSquander.cpp",
+      "language": "cpp",
+      "rating": 1900,
+      "code": "2275G",
       "tags": []
     },
     {
@@ -3792,6 +4106,20 @@
       "platform": "codeforces",
       "path": "codeforces/unrated_questions/A_YouDelete,IDelete.cpp",
       "filename": "A_YouDelete,IDelete.cpp",
+      "language": "cpp",
+      "tags": []
+    },
+    {
+      "platform": "hackerrank",
+      "path": "hackerrank/bfs_shortest_reach.cpp",
+      "filename": "bfs_shortest_reach.cpp",
+      "language": "cpp",
+      "tags": []
+    },
+    {
+      "platform": "hackerrank",
+      "path": "hackerrank/journey_to_the_moon.cpp",
+      "filename": "journey_to_the_moon.cpp",
       "language": "cpp",
       "tags": []
     }

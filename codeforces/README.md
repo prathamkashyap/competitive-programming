@@ -1,14 +1,14 @@
-# 🎮 Codeforces Solutions 🚀
+# Codeforces Solutions
 
 My Codeforces problem solutions organized by difficulty rating.
 
 ---
 
-## 📂 Organization
+## Organization
 
 Solutions are organized by rating band:
 
-| 🎯 Rating | 📖 Description |
+| Rating | Description |
 | :--- | :--- |
 | `800/` | Fundamental problems |
 | `900/` | Easy problems |
@@ -18,19 +18,19 @@ Solutions are organized by rating band:
 
 ---
 
-## 📊 Statistics
+## Statistics
 
 For exact counts and complete problem index, see the [interactive dashboard](../docs/dashboard/index.html) or [generated statistics](../docs/generated/stats.md).
 
 ---
 
-## 🧑‍💻 Profile
+## Profile
 
-- [Codeforces Profile](https://codeforces.com/profile/prathamkashyap) 🎮
+- [Codeforces Profile](https://codeforces.com/profile/prathamkashyap)
 
 ---
 
-## ⚙️ Compilation
+## Compilation
 
 All solutions use C++20 and can be compiled with:
 
@@ -40,7 +40,7 @@ g++ -std=c++20 -O2 -Wall -Wextra solution.cpp -o solution
 
 ---
 
-## 💡 Quick Tips
+## Quick Tips
 
 - Read problem statement carefully
 - Check constraints before choosing algorithm

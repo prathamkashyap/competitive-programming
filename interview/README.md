@@ -1,16 +1,16 @@
-# 💼 Interview Preparation 🎯
+# Interview Preparation
 
 My interview preparation material and solutions.
 
 ---
 
-## 📂 Contents
+## Contents
 
 This folder contains solutions and notes for technical interview preparation, focusing on data structures, algorithms, and problem-solving patterns commonly asked in interviews.
 
 ---
 
-## 🎯 Focus Areas
+## Focus Areas
 
 - **Data Structures**: Arrays, linked lists, trees, graphs, hash maps
 - **Algorithms**: Sorting, searching, dynamic programming, greedy
@@ -19,15 +19,15 @@ This folder contains solutions and notes for technical interview preparation, fo
 
 ---
 
-## 📚 Related Resources
+## Related Resources
 
-- [../templates/](../templates/) - Reusable data structures and algorithms 🛠️
-- [../patterns/](../patterns/) - Algorithmic pattern documentation 🧩
-- [../notes/](../notes/) - Theoretical reference material 📝
+- [../templates/](../templates/) - Reusable data structures and algorithms
+- [../patterns/](../patterns/) - Algorithmic pattern documentation
+- [../notes/](../notes/) - Theoretical reference material
 
 ---
 
-## 💡 Tips
+## Tips
 
 - Practice explaining your thought process aloud
 - Time yourself to simulate interview conditions

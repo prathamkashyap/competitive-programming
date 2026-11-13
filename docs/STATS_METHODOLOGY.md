@@ -25,7 +25,7 @@ This will:
 
 ### Codeforces
 
-**Status**: 🟢 Live (Official API)
+**Status**: Live (Official API)
 
 **Method**: Official Codeforces API
 
@@ -55,7 +55,7 @@ url = "https://codeforces.com/api/user.status?handle=prathamkashyap"
 
 ### LeetCode
 
-**Status**: 🟢 Live (Public GraphQL API with browser fallback)
+**Status**: Live (Public GraphQL API with browser fallback)
 
 **Method**: Public GraphQL API (primary), browser rendering (fallback)
 
@@ -102,7 +102,7 @@ query userPublicProfile($username: String!) {
 
 ### CodeChef
 
-**Status**: 🟢 Live (Embedded structured state with browser fallback)
+**Status**: Live (Embedded structured state with browser fallback)
 
 **Method**: HTML parsing of embedded Drupal.settings JSON (primary), browser rendering (fallback)
 
@@ -133,7 +133,7 @@ current_rating = ratings[-1]["rating"]
 
 ### HackerRank
 
-**Status**: 🟢 Live (Public REST API)
+**Status**: Live (Public REST API)
 
 **Method**: Public REST API endpoints
 
@@ -164,7 +164,7 @@ headers = {
 
 ### HackerEarth
 
-**Status**: 🟢 Live (Public API with browser rendering supplement)
+**Status**: Live (Public API with browser rendering supplement)
 
 **Method**: Public JSON API (primary), browser rendering (supplementary)
 
@@ -192,7 +192,7 @@ headers = {
 
 ### GeeksforGeeks
 
-**Status**: 🟢 Live (Embedded state with API supplement)
+**Status**: Live (Embedded state with API supplement)
 
 **Method**: Embedded structured data (primary), API supplement (partial)
 
@@ -238,14 +238,14 @@ If live retrieval fails (UNAVAILABLE or FAILED status):
 
 ## Live vs Snapshot Philosophy
 
-### Live Data (🟢)
+### Live Data ()
 
 - Fetched directly from public APIs, GraphQL endpoints, or structured profiles
 - Represents current platform state
 - Includes exact timestamp of retrieval
 - Preferred when available and reliable
 
-### Snapshot Data (📸)
+### Snapshot Data ()
 
 - Used when live endpoints are unavailable, shielded, or unreliable
 - Based on verified screenshots or historical captures
@@ -302,7 +302,7 @@ Human-readable Markdown with:
 - Platform summary table
 - Detailed platform profiles
 - Methodology notes
-- Status badges (🟢 live, 📸 snapshot)
+- Status badges (live, snapshot)
 
 ### README.md Updates
 

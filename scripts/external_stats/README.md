@@ -46,9 +46,9 @@ If you update a profile URL in a README, the system will automatically discover 
 
 | Platform | Status | Source | Retrieval Method | Notes |
 |----------|--------|--------|------------------|-------|
-| Codeforces | ✅ Success | Official API | API | Retrieves rating, rank, solved count |
-| CodeChef | ✅ Success | Public Profile | Rendered Profile | Retrieves rating, global rank via browser rendering |
-| HackerRank | ✅ Success | Public Profile | Scrape | Retrieves badges, stars, certifications |
+| Codeforces | Success | Official API | API | Retrieves rating, rank, solved count |
+| CodeChef | Success | Public Profile | Rendered Profile | Retrieves rating, global rank via browser rendering |
+| HackerRank | Success | Public Profile | Scrape | Retrieves badges, stars, certifications |
 | LeetCode | ⊘ Unavailable | Public Profile | Rendered Profile | Could not extract statistics from rendered page |
 | HackerEarth | ⊘ Unavailable | Public Profile | Rendered Profile | Could not extract statistics from rendered page |
 | GeeksforGeeks | ⊘ Unavailable | Public Profile | Rendered Profile | Could not extract statistics from rendered page |

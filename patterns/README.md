@@ -1,20 +1,20 @@
-# 🧩 Algorithmic Patterns 💡
+# Algorithmic Patterns
 
 My documentation on common algorithmic problem-solving patterns for competitive programming and interview preparation.
 
 Each pattern document explains:
-- ✅ When to recognize the pattern
-- 🧠 Core idea and invariant
-- ⏱️ Common complexity
-- 🔄 Common variations
-- ⚠️ Common pitfalls
-- 🎮 Representative problems from this repository
+- When to recognize the pattern
+- Core idea and invariant
+- Common complexity
+- Common variations
+- Common pitfalls
+- Representative problems from this repository
 
 ---
 
-## 📚 Available Patterns
+## Available Patterns
 
-| 🎯 Pattern | 📖 Description | 💡 Key Topics |
+| Pattern | Description | Key Topics |
 | :--- | :--- | :--- |
 | [Arrays](arrays.md) | Prefix sums, two pointers, array transformations | Range queries, sliding window, frequency counting |
 | [Two Pointers](two-pointers.md) | Opposite and same-direction pointer techniques | Slow-fast pointers, meeting pointers, window expansion |
@@ -29,29 +29,29 @@ Each pattern document explains:
 
 ---
 
-## 🎯 How to Use
+## How to Use
 
-### 1️⃣ Problem Identification
+### 1Problem Identification
 Match problem shape to pattern by reading constraints and asking:
 - Is the answer monotonic? → Binary search
 - Can I maintain a window? → Sliding window
 - Is there optimal substructure? → DP
 - Can I sort to simplify? → Greedy
 
-### 2️⃣ Pattern Reference
+### 2Pattern Reference
 Read the pattern document for core idea and implementation details
 
-### 3️⃣ Template Usage
+### 3Template Usage
 Copy templates from [templates/](../templates/) for data structures
 
-### 4️⃣ Pitfall Avoidance
+### 4Pitfall Avoidance
 Review [notes/pitfalls/](../notes/pitfalls/) for common mistakes
 
 ---
 
-## 🧠 Quick Reference
+## Quick Reference
 
-| 🎯 Problem Type | 🧩 Pattern | 🛠️ Template |
+| Problem Type | Pattern | Template |
 | :--- | :--- | :--- |
 | Range sum queries | Prefix sums | [`prefix_sums.cpp`](../templates/cpp/prefix_sums.cpp) |
 | At-most-K distinct | Sliding window | [`sliding_window.cpp`](../templates/cpp/sliding_window.cpp) |
@@ -61,7 +61,7 @@ Review [notes/pitfalls/](../notes/pitfalls/) for common mistakes
 
 ---
 
-## 📖 Related
+## Related
 
 - [../docs/patterns.md](../docs/patterns.md) - Top-level pattern index
 - [../docs/roadmap.md](../docs/roadmap.md) - Progressive learning path

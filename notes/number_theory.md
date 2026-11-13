@@ -1,4 +1,4 @@
-# 🔢 Number Theory & Modular Arithmetic
+# Number Theory & Modular Arithmetic
 
 ## 1. Modular Arithmetic Axioms
 

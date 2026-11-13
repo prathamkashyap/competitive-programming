@@ -1,10 +1,10 @@
-# 🌲 Trees Advanced 🧠
+# Trees Advanced
 
 Advanced tree queries and algorithms I use for tree problems.
 
 ---
 
-## 🔍 LCA (Lowest Common Ancestor)
+## LCA (Lowest Common Ancestor)
 
 Binary lifting preprocess in O(n log n), queries in O(log n).
 
@@ -44,7 +44,7 @@ int lca(int u, int v) {
 
 ---
 
-## 📊 Subtree Queries
+## Subtree Queries
 
 Euler tour flattens tree to array for subtree range queries.
 
@@ -67,7 +67,7 @@ void dfs_euler(int u, int p) {
 
 ---
 
-## 🦘 Binary Lifting
+## Binary Lifting
 
 Jump 2^k ancestors for fast LCA and path queries.
 
@@ -82,9 +82,9 @@ int jump(int u, int k) {
 
 ---
 
-## 🎯 When to Use
+## When to Use
 
-| 🎯 Problem | 🧩 Algorithm | ⏱️ Complexity |
+| Problem | Algorithm | Complexity |
 | :--- | :--- | :--- |
 | Common ancestor queries | LCA (binary lifting) | O(n log n) preprocess, O(log n) query |
 | Subtree queries | Euler tour + prefix sums | O(n) preprocess, O(1) query |
@@ -93,7 +93,7 @@ int jump(int u, int k) {
 
 ---
 
-## 💡 Quick Tips
+## Quick Tips
 
 - Use binary lifting for any ancestor-related queries
 - Euler tour transforms subtree queries to range queries
@@ -102,10 +102,10 @@ int jump(int u, int k) {
 
 ---
 
-## 📚 Related
+## Related
 
-- Template: [`lca.cpp`](../templates/cpp/lca.cpp) 🌲
-- Basic trees: [graphs_and_trees.md](graphs_and_trees.md) 📖
+- Template: [`lca.cpp`](../templates/cpp/lca.cpp)
+- Basic trees: [graphs_and_trees.md](graphs_and_trees.md)
 
 ---
 

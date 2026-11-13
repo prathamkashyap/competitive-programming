@@ -1,10 +1,10 @@
-# 🔗 Strings Algorithms 🎯
+# Strings Algorithms
 
 String algorithms and hashing for pattern matching and string problems.
 
 ---
 
-## 🔄 Rolling Hash
+## Rolling Hash
 
 ```cpp
 const int MOD = 1e9 + 7;
@@ -22,7 +22,7 @@ long long sub_hash = (pref[r+1] - pref[l] * pow(BASE, r-l+1)) % MOD;
 
 ---
 
-## 🔍 KMP (Knuth-Morris-Pratt)
+## KMP (Knuth-Morris-Pratt)
 
 Computes prefix function for pattern matching in O(n + m).
 
@@ -42,7 +42,7 @@ vector<int> prefix_function(string s) {
 
 ---
 
-## 📊 Z-Algorithm
+## Z-Algorithm
 
 Computes Z-array for pattern matching in O(n).
 
@@ -65,7 +65,7 @@ vector<int> z_function(string s) {
 
 ---
 
-## 🌳 Trie
+## Trie
 
 Prefix tree for strings, O(L) insert/search.
 
@@ -95,9 +95,9 @@ void insert(TrieNode* root, string s) {
 
 ---
 
-## 🎯 When to Use
+## When to Use
 
-| 🎯 Problem | 🧩 Algorithm | ⏱️ Complexity |
+| Problem | Algorithm | Complexity |
 | :--- | :--- | :--- |
 | Substring comparison | Rolling hash | O(L) hash, O(1) compare |
 | Pattern matching | KMP | O(N + M) |
@@ -106,7 +106,7 @@ void insert(TrieNode* root, string s) {
 
 ---
 
-## 💡 Quick Tips
+## Quick Tips
 
 - Use rolling hash for O(1) substring comparison
 - KMP is useful for single pattern search

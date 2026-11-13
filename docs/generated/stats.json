@@ -1,21 +1,31 @@
 {
-  "total_files": 437,
+  "total_files": 480,
   "by_language": {
-    "C++": 433,
+    "C++": 476,
     "Java": 2,
     "Python": 2
   },
   "by_platform": {
-    "codeforces": 426
+    "codeforces": 461,
+    "hackerrank": 2
   },
   "by_category": {
-    "solution": 426,
-    "template": 11
+    "solution": 463,
+    "template": 17
   },
   "by_extension": {
-    ".cpp": 433,
+    ".cpp": 476,
     ".java": 2,
     ".py": 2
+  },
+  "codeforces_by_rating": {
+    "1600-1799": 27,
+    "800-999": 120,
+    "1800-1999": 18,
+    "1200-1399": 119,
+    "1400-1599": 63,
+    "1000-1199": 83,
+    "2000+": 1
   },
   "solutions": [
     {
@@ -1344,12 +1354,67 @@
       "extension": ".cpp"
     },
     {
+      "path": "codeforces/1600/1336A_LinovaandKingdom.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1600/1349A_OracandLCM.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1600/1352G_SpecialPermutation.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1600/1353D_ConstructingtheArray.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1600/1363C_GameOnLeaves.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1600/1389B_ArrayWalk.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
       "path": "codeforces/1600/1398C_GoodSubarrays.cpp",
       "language": "C++",
       "extension": ".cpp"
     },
     {
+      "path": "codeforces/1600/1458A_RowGCD.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
       "path": "codeforces/1600/1526C2_Potions(HardVersion).cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1600/1528A_Parsa'sHumongousTree.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1600/1920C_PartitioningtheArray.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1600/1B_Spreadsheets.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1600/235A_LCMChallenge.cpp",
       "language": "C++",
       "extension": ".cpp"
     },
@@ -1365,6 +1430,36 @@
     },
     {
       "path": "codeforces/1600/431C_k-Tree.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1600/510C_FoxAndNames.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1600/706C_Hardproblem.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1700/1037D_ValidBFS?.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1700/118D_Caesar'sLegions.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1700/126B_Password.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1700/1365D_SolveTheMaze.cpp",
       "language": "C++",
       "extension": ".cpp"
     },
@@ -1389,7 +1484,97 @@
       "extension": ".cpp"
     },
     {
+      "path": "codeforces/1700/977F_ConsecutiveSubsequence.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1800/2222D_PermutationConstruction.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1800/2253D_HypercarpandInterdimensional Jumps.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1800/2259F_BinaryBubbleSortInversions.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1800/2261E_WhatDoestheCowSay?.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1800/2262A2_FloorofMEX(HardVersion).cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1800/2275F_TeaBlend.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1800/2276E_GoodSubstrings.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
       "path": "codeforces/1800/434A_Ryouko'sMemoryNote.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1900/2226D_ReservedReversals.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1900/2228D_Sanae,CrossandColor.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1900/2231D_MaximumPrefixSums.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1900/2233D_GoodsontheShelf.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1900/2246D_diss_quackandArrayGame.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1900/2254F_Whiplash.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1900/2259G_IndexRemoval.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1900/2264D_Dr.Agos'sDarkMode.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1900/2273B_RobotChampionship.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "codeforces/1900/2275G_CopperSquander.cpp",
       "language": "C++",
       "extension": ".cpp"
     },
@@ -2147,6 +2332,16 @@
       "path": "codeforces/unrated_questions/A_YouDelete,IDelete.cpp",
       "language": "C++",
       "extension": ".cpp"
+    },
+    {
+      "path": "hackerrank/bfs_shortest_reach.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "hackerrank/journey_to_the_moon.cpp",
+      "language": "C++",
+      "extension": ".cpp"
     }
   ],
   "templates": [
@@ -2166,7 +2361,22 @@
       "extension": ".cpp"
     },
     {
+      "path": "templates/cpp/kmp.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "templates/cpp/lca.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
       "path": "templates/cpp/modular_arithmetic.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "templates/cpp/pbds_ordered_set.cpp",
       "language": "C++",
       "extension": ".cpp"
     },
@@ -2191,7 +2401,22 @@
       "extension": ".cpp"
     },
     {
+      "path": "templates/cpp/sparse_table.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "templates/cpp/string_hash.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
       "path": "templates/cpp/template.cpp",
+      "language": "C++",
+      "extension": ".cpp"
+    },
+    {
+      "path": "templates/cpp/trie.cpp",
       "language": "C++",
       "extension": ".cpp"
     },
@@ -2206,5 +2431,6 @@
       "extension": ".py"
     }
   ],
-  "notes": []
+  "notes": [],
+  "generated_at": "2026-11-17T12:55:26.284427+00:00"
 }

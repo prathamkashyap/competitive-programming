@@ -135,13 +135,23 @@ def _fetch_codechef_html(profile_url: str, metrics: Dict[str, Any], errors: List
         if m_league:
             metrics["league"] = m_league.group(1)
 
-        # 5. Fallback for rating if Drupal.settings didn't yield it
+        # 5. Badges (e.g. "Daily Streak - Diamond Badge", "Problem Solver - Gold Badge")
+        badge_alts = re.findall(r"alt=[\"']([^\"']*\bBadge\b[^\"']*)[\"']", html, re.IGNORECASE)
+        if badge_alts:
+            unique_badges = list(dict.fromkeys(badge_alts))
+            # Surface the highest-tier badge (Diamond) first
+            unique_badges.sort(key=lambda b: (0 if "Diamond" in b else 1, b))
+            metrics["badges"] = unique_badges
+            if any("Diamond" in b for b in badge_alts):
+                metrics["diamond_badge"] = True
+
+        # 6. Fallback for rating if Drupal.settings didn't yield it
         if "rating" not in metrics:
             m_rating = re.search(r'class="rating"[^>]*>(\d+)', html)
             if m_rating:
                 metrics["rating"] = int(m_rating.group(1))
 
-        # 6. Fallback for highest rating
+        # 7. Fallback for highest rating
         if "max_rating" not in metrics:
             m_max = re.search(r"Highest Rating\s*(\d+)", html, re.IGNORECASE)
             if m_max:

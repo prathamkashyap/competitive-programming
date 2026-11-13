@@ -1,22 +1,22 @@
-# 🌍 HackerEarth Solutions 🚀
+# HackerEarth Solutions
 
 My HackerEarth problem solutions.
 
 ---
 
-## 🧑‍💻 Profile
+## Profile
 
-- [HackerEarth Profile](https://www.hackerearth.com/@prathamkashyap/) 🌍
+- [HackerEarth Profile](https://www.hackerearth.com/@prathamkashyap/)
 
 ---
 
-## 📊 Statistics
+## Statistics
 
 For live statistics and solved counts, see the [interactive dashboard](../docs/dashboard/index.html) or [external stats](../docs/generated/external-stats.md).
 
 ---
 
-## 💡 Quick Tips
+## Quick Tips
 
 - Read input format carefully - HackerEarth varies by problem
 - Check constraints before choosing algorithm

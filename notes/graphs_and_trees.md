@@ -1,4 +1,4 @@
-# 🌲 Graph Theory & Tree Algorithms
+# Graph Theory & Tree Algorithms
 
 ## 1. Algorithm Selection Guide
 

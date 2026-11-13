@@ -1,10 +1,10 @@
-# ⚡ Complexity Cheatsheet 🧠
+# Complexity Cheatsheet
 
 Quick reference for complexity analysis and time limit heuristics I use in contests.
 
 ---
 
-## ⏱️ Operations per Second
+## Operations per Second
 
 - **$10^8$ operations** - Safe for 1 second on most judges
 - **$10^7$ operations** - Safer margin for Python or complex operations
@@ -12,7 +12,7 @@ Quick reference for complexity analysis and time limit heuristics I use in conte
 
 ---
 
-## 📊 Common Complexity Classes
+## Common Complexity Classes
 
 | n | log n | n log n | n² | n³ | 2ⁿ |
 |---|-------|---------|-----|-----|-----|
@@ -23,7 +23,7 @@ Quick reference for complexity analysis and time limit heuristics I use in conte
 
 ---
 
-## ⏰ Time Limit Heuristics
+##  Time Limit Heuristics
 
 - **1 second** (TL=1s): ~10⁸ simple operations in C++, ~10⁷ in Python
 - **2 seconds** (TL=2s): ~2× above
@@ -31,7 +31,7 @@ Quick reference for complexity analysis and time limit heuristics I use in conte
 
 ---
 
-## 🔢 Data Type Limits
+## Data Type Limits
 
 | Type | Range | Max Value |
 |------|-------|-----------|
@@ -46,7 +46,7 @@ Quick reference for complexity analysis and time limit heuristics I use in conte
 
 ---
 
-## 💾 Memory Limits
+## Memory Limits
 
 - **256 MB** - ~6×10⁷ integers, ~10⁸ long longs
 - **512 MB** - ~1.2×10⁸ integers, ~2×10⁸ long longs
@@ -54,7 +54,7 @@ Quick reference for complexity analysis and time limit heuristics I use in conte
 
 ---
 
-## 🔄 Common Constant Factors
+## Common Constant Factors
 
 - **Sorting**: n log n with log₂(n) ~ 20 for n=10⁶
 - **DFS/BFS**: O(V + E), each node/edge visited once
@@ -63,7 +63,7 @@ Quick reference for complexity analysis and time limit heuristics I use in conte
 
 ---
 
-## ⚠️ Hidden Constants
+## Hidden Constants
 
 - **Modular operations**: division and modulo are slower than addition
 - **String operations**: substring comparison is O(length)
@@ -72,7 +72,7 @@ Quick reference for complexity analysis and time limit heuristics I use in conte
 
 ---
 
-## 💡 Quick Tips
+## Quick Tips
 
 - Always read constraints first
 - Estimate operations before coding
